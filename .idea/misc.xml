@@ -3,13 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/androidProject/MedicReminder/app/src/main/res/drawable/button_background.xml" value="0.1005" />
-        <entry key="..\:/androidProject/MedicReminder/app/src/main/res/drawable/icon_medi.xml" value="0.1005" />
-        <entry key="..\:/androidProject/MedicReminder/app/src/main/res/drawable/register_background.xml" value="0.25" />
-        <entry key="..\:/androidProject/MedicReminder/app/src/main/res/layout/activity_register_acivity.xml" value="0.16032608695652173" />
-        <entry key="..\:/androidProject/MedicReminder/app/src/main/res/layout/fragment_add_medication.xml" value="0.16032608695652173" />
-        <entry key="..\:/androidProject/MedicReminder/app/src/main/res/layout/fragment_collection_object.xml" value="0.16032608695652173" />
-        <entry key="..\:/androidProject/MedicReminder/app/src/main/res/layout/fragment_home.xml" value="0.16032608695652173" />
+        <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder2/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/fragment_add_medication.xml" value="0.175" />
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/fragment_home.xml" value="0.1" />
