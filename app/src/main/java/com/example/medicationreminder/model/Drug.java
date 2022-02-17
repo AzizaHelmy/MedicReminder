@@ -19,7 +19,6 @@ public class Drug {
     private String mesaure;
     private double dose;
     private int drugDuration;
-    @Ignore
     private ArrayList<String>days;
     @Ignore
     private ArrayList<Time> dates;

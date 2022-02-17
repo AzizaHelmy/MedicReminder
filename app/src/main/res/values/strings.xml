@@ -9,6 +9,7 @@
     <string name="last_name_hint">Last Name</string>
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
+    <string name="addbutt">addButt</string>
 
 
 </resources>
