@@ -1,9 +1,16 @@
 package com.example.medicationreminder.model;
 
-import java.util.ArrayList;
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
+import java.util.ArrayList;
+@Entity(tableName = "medications")
 public class Drug {
     private String drugAdder;
+    @PrimaryKey
+    @NonNull
     private  String medicine_Name;
     private boolean isRemindered;
     private String medicineType;
@@ -12,7 +19,9 @@ public class Drug {
     private String mesaure;
     private double dose;
     private int drugDuration;
+    @Ignore
     private ArrayList<String>days;
+    @Ignore
     private ArrayList<Time> dates;
     private String instructions;
     private String status;

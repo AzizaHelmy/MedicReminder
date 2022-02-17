@@ -2,8 +2,10 @@ package com.example.medicationreminder.db;
 
 import android.content.Context;
 
-public class ConcereteLocalSource implements com.example.myapplication.LocalSource {
-    com.example.myapplication.DrugDao drugDao;
+import com.example.medicationreminder.model.Drug;
+
+public class ConcereteLocalSource implements LocalSource {
+    DrugDao drugDao;
     private static ConcereteLocalSource concreteLocalSource = null;
 
     private ConcereteLocalSource(Context context) {
