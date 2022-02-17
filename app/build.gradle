@@ -4,7 +4,9 @@ plugins {
 
 android {
     compileSdk 32
-
+    buildFeatures {
+        viewBinding true
+    }
     defaultConfig {
         applicationId "com.example.medicationreminder"
         minSdk 21
@@ -39,6 +41,9 @@ dependencies {
     //Navigation
     implementation "androidx.navigation:navigation-fragment:2.4.1"
     implementation "androidx.navigation:navigation-ui:2.4.1"
+    //MySection Libirary
+    //implementation 'com.github.luizgrp:SectionedRecyclerViewAdapter:v3.2.0'
+    //implementation 'com.afollestad:sectioned-recyclerview:0.2.3'
 
 
 }
