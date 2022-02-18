@@ -13,18 +13,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.medicationreminder.R;
-import com.example.medicationreminder.medications.model.ItemModel;
-import com.example.medicationreminder.medications.model.MedicsModel;
 import com.example.medicationreminder.medications.view.MedicsOnClick;
+import com.example.medicationreminder.model.Drug;
 
 import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MedicsTypeViewHolder> {
     Context context;
-    List<ItemModel> medics;
+    List<Drug> medics;
     MedicsOnClick onClick;
 
-    public ItemAdapter(Context context, List<ItemModel> medics,MedicsOnClick onClick) {
+    public ItemAdapter(Context context, List<Drug> medics, MedicsOnClick onClick) {
         this.context = context;
         this.medics = medics;
         this.onClick=onClick;
@@ -40,12 +39,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MedicsTypeView
 
     @Override
     public void onBindViewHolder(@NonNull MedicsTypeViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        ItemModel model = medics.get(position);
+        Drug model = medics.get(position);
         holder.tvMedicName.setText(model.getMedicName());
-        holder.tvMedicAdder.setText(model.getMedicAdder());
-        holder.tvMedicLeft.setText(model.getMedicLeft());
-        holder.tvMedicStrength.setText(model.getMedicStrength());
-        holder.imgMedic.setImageResource(model.getMedicImg());
+        holder.tvMedicAdder.setText(model.getDrugAdder());
+        holder.tvMedicLeft.setText(model.getLeftDrug()+"");
+        holder.tvMedicStrength.setText(model.getStrength()+"");
+        holder.imgMedic.setImageResource(model.getIcon());
     }
 
     @Override
@@ -56,7 +55,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MedicsTypeView
     //===============================================
     public class MedicsTypeViewHolder extends RecyclerView.ViewHolder {
         TextView tvMedicName, tvMedicStrength, tvMedicLeft, tvMedicAdder;
-        Button buttSuspend;
         ImageView imgMedic;
 
 

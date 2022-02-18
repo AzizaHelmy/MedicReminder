@@ -2,9 +2,11 @@ package com.example.medicationreminder.home.view;
 
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
@@ -37,7 +39,13 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+       OnBackPressedCallback pressedCallback = new OnBackPressedCallback(true) {
+          @Override
+          public void handleOnBackPressed() {
+             requireActivity().finish();
+          }
+       };
+       requireActivity().getOnBackPressedDispatcher().addCallback(this, pressedCallback);
     }
 
     @Override

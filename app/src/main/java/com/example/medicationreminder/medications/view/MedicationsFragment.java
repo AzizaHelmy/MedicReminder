@@ -12,24 +12,23 @@ import android.widget.Button;
 
 import com.example.medicationreminder.BaseFragment;
 import com.example.medicationreminder.R;
-import com.example.medicationreminder.medications.model.ItemModel;
+
 import com.example.medicationreminder.medications.model.MedicsModel;
 import com.example.medicationreminder.medications.view.adapter.MedicsAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import com.example.medicationreminder.model.Drug;
 
-import com.example.medicationreminder.medications.view.adapter.MedicsAdapter;
-
-public class MedicationsFragment extends BaseFragment implements MedicsOnClick {
+public class MedicationsFragment extends BaseFragment implements MedicsOnClick ,MedicsInterface{
     Button buttAdd;
     RecyclerView rvMedics;
     MedicsAdapter adapterMedics;
     List<MedicsModel> list = new ArrayList<>();
-    ItemModel subItem;
+    Drug subItem;
     MedicsModel item;
-    List<ItemModel> subItemList;
+    List<Drug> subItemList;
     List<MedicsModel> itemList;
 
     public MedicationsFragment() {
@@ -63,11 +62,11 @@ public class MedicationsFragment extends BaseFragment implements MedicsOnClick {
         return itemList;
     }
 
-    private List<ItemModel> buildSubItemList() {
+    private List<Drug> buildSubItemList() {
         subItemList = new ArrayList<>();
         for (int i = 1; i <= 2; i++) {
-            subItem = new ItemModel(R.drawable.img_medicine, "panadol", "1000 gm", "2 left", "Added by Asmaa");
-            subItemList.add(new ItemModel(R.drawable.pill, "Tusskan", "500 gm", "1 left", " Added by Azza"));
+            subItem = new Drug(R.drawable.img_medicine, "panadol", "1000 gm", "2 left", "Added by Asmaa");
+            subItemList.add(new Drug(R.drawable.pill, "Tusskan", "500 gm", "1 left", " Added by Azza"));
            // subItemList.add(new ItemModel(R.drawable.pillsbottle, "kohol", "500 gm", "0 left", "Added by salma"));
             subItemList.add(subItem);
         }
@@ -100,9 +99,14 @@ public class MedicationsFragment extends BaseFragment implements MedicsOnClick {
     }
 
     @Override
-    public void ItemOnClick(ItemModel model) {
+    public void ItemOnClick(Drug model) {
         subItemList.remove(model);
         adapterMedics.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showMedics(List<MedicsModel> movies) {
+
     }
 }
 

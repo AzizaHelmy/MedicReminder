@@ -2,7 +2,11 @@ package com.example.medicationreminder.db;
 
 import android.content.Context;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.medicationreminder.model.Drug;
+
+import java.util.List;
 
 public class ConcereteLocalSource implements LocalSource {
     DrugDao drugDao;
@@ -10,7 +14,6 @@ public class ConcereteLocalSource implements LocalSource {
 
     private ConcereteLocalSource(Context context) {
         AppDataBase db = AppDataBase.getInstance(context.getApplicationContext());
-
     }
 
     public static ConcereteLocalSource getInstance(Context context) {
@@ -28,5 +31,10 @@ public class ConcereteLocalSource implements LocalSource {
                 drugDao.insertDrug(drug);
             }
         }).start();
+    }
+
+    @Override
+    public LiveData<List<Drug>> getActiveDrugs(String status) {
+        return null;
     }
 }

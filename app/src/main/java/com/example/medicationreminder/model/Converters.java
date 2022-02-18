@@ -14,16 +14,57 @@ import java.util.List;
 public class Converters {
 
     @TypeConverter
-    public static List<String> stringToList(String value) {
-        Type listType = new TypeToken<ArrayList<String>>() {}.getType();
+    public static ArrayList<Time> stringToTimeList(String value) {
+        Type listType = new TypeToken<ArrayList<String>>() {
+        }.getType();
         return new Gson().fromJson(value, listType);
     }
 
     @TypeConverter
-    public static String ListToString(List<String> list) {
+    public static String timeListToString(ArrayList<Time> list) {
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        return json;
+    }
+    @TypeConverter
+    public static ArrayList<Drug> stringToDrugList(String value) {
+        Type listType = new TypeToken<ArrayList<String>>() {
+        }.getType();
+        return new Gson().fromJson(value, listType);
+    }
+
+    @TypeConverter
+    public static String drugListToString(ArrayList<Drug> list) {
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        return json;
+    }
+    @TypeConverter
+    public static ArrayList<HealthTaker> stringToHealthTakerList(String value) {
+        Type listType = new TypeToken<ArrayList<String>>() {
+        }.getType();
+        return new Gson().fromJson(value, listType);
+    }
+
+    @TypeConverter
+    public static String HealthTakerListToString(ArrayList<HealthTaker> list) {
         Gson gson = new Gson();
         String json = gson.toJson(list);
         return json;
     }
 
+
+    @TypeConverter
+    public static ArrayList<String> stringToList(String value) {
+        Type listType = new TypeToken<ArrayList<String>>() {
+        }.getType();
+        return new Gson().fromJson(value, listType);
+    }
+
+    @TypeConverter
+    public static String ListToString(ArrayList<String> list) {
+        Gson gson = new Gson();
+        String json = gson.toJson(list);
+        return json;
+    }
 }
