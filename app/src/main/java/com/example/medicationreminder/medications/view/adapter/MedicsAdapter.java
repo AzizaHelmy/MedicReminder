@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.medicationreminder.R;
-import com.example.medicationreminder.medications.model.ItemModel;
 import com.example.medicationreminder.medications.model.MedicsModel;
 import com.example.medicationreminder.medications.view.MedicsOnClick;
+import com.example.medicationreminder.model.Drug;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,9 +58,9 @@ public class MedicsAdapter extends RecyclerView.Adapter<MedicsAdapter.MedicsView
     }
 
     @Override
-    public void ItemOnClick(ItemModel medic) {
+    public void ItemOnClick(Drug medic) {
         medics.remove(medic);
-       notifyDataSetChanged();
+        notifyDataSetChanged();
     }
 
     //====================================================================

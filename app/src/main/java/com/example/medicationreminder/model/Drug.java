@@ -11,16 +11,15 @@ public class Drug {
     private String drugAdder;
     @PrimaryKey
     @NonNull
-    private  String medicine_Name;
+    private  String medicName;
     private boolean isRemindered;
     private String medicineType;
-    private String icon;
+    private int icon;
     private int strength;
     private String mesaure;
     private double dose;
     private int drugDuration;
     private ArrayList<String>days;
-    @Ignore
     private ArrayList<Time> dates;
     private String instructions;
     private String status;
@@ -29,9 +28,9 @@ public class Drug {
     private int leftDrug;
     private String RefilTime;
 
-    public Drug(String drugAdder, String medicine_Name, String medicineType, String icon, int strength, String mesaure, int drugAmount) {
+    public Drug(String drugAdder, String medicine_Name, String medicineType, int icon, int strength, String mesaure, int drugAmount) {
         this.drugAdder = drugAdder;
-        this.medicine_Name = medicine_Name;
+        this.medicName = medicine_Name;
         this.medicineType = medicineType;
         this.icon = icon;
         this.strength = strength;
@@ -42,9 +41,9 @@ public class Drug {
     public Drug() {
     }
 
-    public Drug(String drugAdder, String medicine_Name, boolean isRemindered, String medicineType, String icon, int strength, String mesaure, double dose, int drugDuration, ArrayList<String> days, ArrayList<Time> dates, String instructions, String status, int drugAmount, boolean isRefillReminder, int leftDrug, String refilTime) {
+    public Drug(String drugAdder, String medicine_Name, boolean isRemindered, String medicineType, int icon, int strength, String mesaure, double dose, int drugDuration, ArrayList<String> days, ArrayList<Time> dates, String instructions, String status, int drugAmount, boolean isRefillReminder, int leftDrug, String refilTime) {
         this.drugAdder = drugAdder;
-        this.medicine_Name = medicine_Name;
+        this.medicName = medicine_Name;
         this.isRemindered = isRemindered;
         this.medicineType = medicineType;
         this.icon = icon;
@@ -62,6 +61,11 @@ public class Drug {
         RefilTime = refilTime;
     }
 
+    public Drug(int img, String drugName, String stregnth, String drugAmount, String added_by_asmaa) {
+        this.icon=img;
+
+    }
+
     public String getDrugAdder() {
         return drugAdder;
     }
@@ -70,12 +74,12 @@ public class Drug {
         this.drugAdder = drugAdder;
     }
 
-    public String getMedicine_Name() {
-        return medicine_Name;
+    public String getMedicName() {
+        return medicName;
     }
 
-    public void setMedicine_Name(String medicine_Name) {
-        this.medicine_Name = medicine_Name;
+    public void setMedicName(String medicName) {
+        this.medicName = medicName;
     }
 
     public boolean isRemindered() {
@@ -94,11 +98,11 @@ public class Drug {
         this.medicineType = medicineType;
     }
 
-    public String getIcon() {
+    public int getIcon() {
         return icon;
     }
 
-    public void setIcon(String icon) {
+    public void setIcon(int icon) {
         this.icon = icon;
     }
 
