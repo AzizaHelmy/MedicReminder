@@ -12,4 +12,10 @@
     <string name="addbutt">addButt</string>
 
 
+    <string name="registerbtn">Register</string>
+    <string name="confirmPassword">Confirm password</string>
+
+
+
+
 </resources>

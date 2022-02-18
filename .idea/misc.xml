@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/androidProject/MedicReminder/app/src/main/res/layout/activity_register_acivity.xml" value="0.1" />
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/active_item_rv.xml" value="0.20416666666666666" />
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/active_medic_item_rv.xml" value="0.20416666666666666" />
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/active_title_rv.xml" value="0.20416666666666666" />
