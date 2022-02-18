@@ -7,6 +7,6 @@ import com.example.medicationreminder.model.User;
 public interface FirebaseConnectionInterface {
     public void registerNewUser(User user, Activity activity,FirebaseConnectionDelegated firebaseConnectionDelegated);
     boolean   isUserSignIn();
-    public  void getUser(String usrId);
-//    public void UpdateUser(FirebaseConnectionDelegated firebaseConnectionDelegated);
+    public  void signIn(User user,FirebaseConnectionDelegated firebaseConnectionDelegated);
+
 }
