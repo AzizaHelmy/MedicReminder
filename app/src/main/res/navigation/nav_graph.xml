@@ -22,6 +22,9 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popUpTo="@id/homeFragment2"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_medicationsFragment_to_displayMedicineFragment"
+            app:destination="@id/displayMedicineFragment" />
     </fragment>
     <fragment
         android:id="@+id/moreFragment"
@@ -40,4 +43,9 @@
             app:popUpTo="@id/homeFragment2"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/displayMedicineFragment"
+        android:name="com.example.medicationreminder.displayMedicineFragment"
+        android:label="fragment_display_medicine"
+        tools:layout="@layout/fragment_display_medicine" />
 </navigation>

@@ -16,6 +16,92 @@
     <string name="confirmPassword">Confirm password</string>
 
 
+    <string name="medicineName">medicament name</string>
+    <string name="medicineNamehint">Write the name of the medical or commercial drug</string>
+    <string name="nextBtn">Next</string>
+    <string name="remindertimes">reminder times</string>
+    <string name="drugQuantaty">What dose did you take / how often did you take it?</string>
+    <string-array name="time">
+        <item>frequency of repetition</item>
+        <item>once a day</item>
+        <item>twice daily</item>
+        <item>Three times a day</item>
+        <item>four times a day</item>
+        <item>five times a day</item>
+        <item>six times a day</item>
+        <item>seven times a day</item>
+        <item>eight times a day</item>
+        <item>nine times a day</item>
+        <item>eleven times a day</item>
+        <item>tweleve times a day</item>
+        <item>every number of hours</item>
+        <item>every 12 hours</item>
+        <item>every 8 hours</item>
+        <item>every 6 hours</item>
+        <item>every 4 hours</item>
+        <item>every 3 hours</item>
+        <item>every 2 hours</item>
+        <item>every hour</item>
+    </string-array>
+    \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+    <string-array name="measure">
+        <item>g</item>
+        <item>mcg</item>
+        <item>mcg/ml</item>
+        <item>mEq</item>
+        <item>mc/ml</item>
+        <item>mc/ml</item>
+    </string-array>
+    \\\\\\\\\\\\\\\\\\\\\
+    <string-array name="amount">
+        <item>Usage(s)</item>
+        <item>tube(s)</item>
+        <item>probe(s)</item>
+        <item>Cartridge(s)</item>
+        <item>vessel(s)</item>
+        <item>cup(s)</item>
+        <item>drop(s)</item>
+        <item>milli</item>
+        <item>syringe(s)</item>
+        <item>nine times a day</item>
+        <item>eleven times a day</item>
+        <item>tweleve times a day</item>
+        <item>every number of hours</item>
+        <item>every 12 hours</item>
+        <item>every 8 hours</item>
+        <item>every 6 hours</item>
+        <item>every 4 hours</item>
+        <item>every 3 hours</item>
+        <item>every 2 hours</item>
+        <item>every hour</item>
+    </string-array>
+    ///////////////////////////////////////
+
+    //////////////////////////////////
+    <string name="scheduling">scheduling</string>
+    <string name="startingdate">starting date :</string>
+    <string name="selectdate">Select date</string>
+    <string name="medicinesymbol">medicine symbol</string>
+    <string name="strength">strength</string>
+    <string name="severityofmedication">severity of medication :</string>
+    <string name="Presstoadjust">Press to adjust</string>
+    <string name="medicine_taken">Should this medicine be taken while eating?</string>
+    <string name="beforeating">before eating</string>
+    <string name="aftereating">after eating</string>
+    <string name="whileeating">while eating</string>
+    <string name="doesnotmatter">does not matter</string>
+    <string name="refillamount">Enter the quantity of medication you have now to receive a reminder to fill the medication</string>
+    <string name="Fillingtheprescription">Filling the prescription></string>
+    <string name="Amountofmedicine">Amount of medicine</string>
+    <string name="Aremindertofillthemedicine">A reminder to fill the medicine</string>
+    <string name="WhenIhaveleft">When I have left</string>
+    <string name="selectamaount">select Amount</string>
+    <string name="atanytime">at any time?</string>
+    <string name="selctTime">select time</string>
+    <string name="moreopitionsBtn">more opitions</string>
+    <string name="suspendBtnDisplay">Suspend</string>
+    <string name="refillBtnDisplay">Refill</string>
+    <string name="Adddose">ADD DOSE</string>
 
 
 </resources>
