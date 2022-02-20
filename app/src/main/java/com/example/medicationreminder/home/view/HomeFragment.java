@@ -58,7 +58,7 @@ public class HomeFragment extends Fragment  implements HomeViewInterface{
                              Bundle savedInstanceState) {
      viewRoot=inflater.inflate(R.layout.fragment_home, container, false);
         homePresenterInterface =new HomePresenter(getActivity(), Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())),this);
-
+        insert();
         Calendar startDate = Calendar.getInstance();
         startDate.add(Calendar.MONTH, -1);
 
@@ -92,20 +92,46 @@ public class HomeFragment extends Fragment  implements HomeViewInterface{
 
     }
 
-  public void list(){
-       List<Medication> listOfData=new ArrayList<>();
-       for(int i=0;i<10;i++){
-           listOfData.add(new Medication("doaa"+i,"de"+i,"solution"+i,R.id.img_medic,200,"mg"+i,2));
-
-
-       }
-      // return listOfData;
-  }
+//  //public void list(){
+//       List<Medication> listOfData=new ArrayList<>();
+//       for(int i=0;i<10;i++){
+//           listOfData.add(new Medication("doaa"+i,"de"+i,"solution"+i,R.id.img_medic,200,"mg"+i,2));
+//
+//
+//       }
+//      // return listOfData;
+//  }
 
     @Override
     public void insert() {
-        for (int i=0;i<10;i++){
-          homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,R.id.img_medic,200,"mg"+i,2));
+        Log.e(TAG, "insert: ");
+
+              int i=0;
+
+
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+              i++;
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+        i++;
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+        i++;
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+        i++;
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+        i++;
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+        i++;
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+        i++;
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+        i++;
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+        i++;
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+
+
+
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
     }
 }
-}
+

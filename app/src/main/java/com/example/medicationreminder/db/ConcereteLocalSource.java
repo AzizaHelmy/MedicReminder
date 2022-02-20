@@ -10,7 +10,7 @@ public class ConcereteLocalSource implements LocalSource {
 
     private ConcereteLocalSource(Context context) {
         AppDataBase db = AppDataBase.getInstance(context.getApplicationContext());
-
+             drugDao= db.drugDao();
     }
 
     public static ConcereteLocalSource getInstance(Context context) {
@@ -29,4 +29,13 @@ public class ConcereteLocalSource implements LocalSource {
             }
         }).start();
     }
+//    @Override
+//    public void (Medication medication) {
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                drugDao.insertDrug(medication);
+//            }
+//        }).start();
+//    }
 }
