@@ -1,5 +1,9 @@
 package com.example.medicationreminder.medications.view;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -13,46 +17,28 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
 
 import com.example.medicationreminder.R;
+import com.example.medicationreminder.addmedication.DialougClass;
+import com.example.medicationreminder.addmedication.StrengthDialog;
+import com.example.medicationreminder.addmedication.refillTimeDialoug;
+import com.example.medicationreminder.databinding.FragmentAddMedicationBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AddMedicationFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class AddMedicationFragment extends Fragment {
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class AddMedicationFragment extends Fragment implements refillTimeDialoug.DialougrefillLisener, DialougClass.DialogClassListener, StrengthDialog.StrengthDialogListener {
+    FragmentAddMedicationBinding binding;
+    int timerHour, timerMinute;
 
     public AddMedicationFragment() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AddMedicationFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AddMedicationFragment newInstance(String param1, String param2) {
-        AddMedicationFragment fragment = new AddMedicationFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,22 +55,177 @@ public class AddMedicationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_medication, container, false);
+        binding = FragmentAddMedicationBinding.inflate(getLayoutInflater(), container, false);
+        binding.afterLayout3.setVisibility(View.GONE);
+        binding.afterLayout4.setVisibility(View.GONE);
+        binding.moreopitions.setVisibility(View.GONE);
+        binding.remindertimesLayout.setVisibility(View.GONE);
+        binding.schedulingLayout.setVisibility(View.GONE);
+        binding.medicinesymbolLayout.setVisibility(View.GONE);
+        binding.strengthLayout.setVisibility(View.GONE);
+        binding.instructionsLayout.setVisibility(View.GONE);
+        binding.refillingLayout.setVisibility(View.GONE);
+        binding.doneBtn.setVisibility(View.GONE);
+
+
+        return binding.getRoot();
 
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-       // Navigation.findNavController(view).navigate(R.id.action_addMedicationFragment_to_medicationsFragment2);
+        //==========================================================================
+        binding.afterLayout1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.afterLayout3.setVisibility(View.VISIBLE);
+                binding.remindertimesLayout.setVisibility(View.VISIBLE);
+                binding.schedulingLayout.setVisibility(View.VISIBLE);
+                binding.afterLayout1.setVisibility(View.GONE);
+                binding.doneBtn.setVisibility(View.GONE);
+
+            }
+        });
+        //=========================================================================
+        binding.afterLayout3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.afterLayout3.setVisibility(View.GONE);
+                binding.afterLayout4.setVisibility(View.VISIBLE);
+                binding.moreopitions.setVisibility(View.VISIBLE);
+                binding.remindertimesLayout.setVisibility(View.VISIBLE);
+                binding.schedulingLayout.setVisibility(View.VISIBLE);
+                binding.medicinesymbolLayout.setVisibility(View.VISIBLE);
+                binding.doneBtn.setVisibility(View.GONE);
+            }
+        });
+        //============================================================================
+        binding.moreopitions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.afterLayout3.setVisibility(View.GONE);
+                binding.afterLayout4.setVisibility(View.GONE);
+                binding.moreopitions.setVisibility(View.GONE);
+                binding.remindertimesLayout.setVisibility(View.VISIBLE);
+                binding.schedulingLayout.setVisibility(View.VISIBLE);
+                binding.medicinesymbolLayout.setVisibility(View.VISIBLE);
+                binding.strengthLayout.setVisibility(View.VISIBLE);
+                binding.instructionsLayout.setVisibility(View.VISIBLE);
+                binding.refillingLayout.setVisibility(View.VISIBLE);
+                binding.doneBtn.setVisibility(View.VISIBLE);
+            }
+        });
+        //=============================================================================
+        binding.timerTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openTimerPickerDialoug();
+            }
+        });
+        //=======================================================================
+        binding.numberTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openNumberPicker();
+            }
+        });
+        //======================================================================
+        binding.selectAmountRefill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openRefillDialoug();
+            }
+        });
+        //========================================================================
+        binding.schedualingTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDatePicker();
+            }
+        });
+        //========================================================================
+        binding.PresstoadjustTxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openStrengthDialoug();
+            }
+        });
+        // Navigation.findNavController(view).navigate(R.id.action_addMedicationFragment_to_medicationsFragment2);
     }
 
+    //======================================================================
     @Override
     public void onDestroy() {
         super.onDestroy();
 
     }
 
+    //=======================================================================
+    public void openTimerPickerDialoug() {
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+                timerHour = hourOfDay;
+                timerMinute = minute;
+                String time = timerHour + ":" + timerMinute;
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+                try {
+                    Date date = simpleDateFormat.parse(time);
+                    SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("hh:mm:aa");
+                    binding.timerTxt.setText(simpleDateFormat1.format(date));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, 12, 0, false);
+        timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        timePickerDialog.updateTime(timerHour, timerMinute);
+        timePickerDialog.show();
+    }
 
+    public void openNumberPicker() {
+        DialougClass dialougClass = new DialougClass();
+        dialougClass.show(getChildFragmentManager(), "NumberDialoug");
+
+    }
+
+    public void openStrengthDialoug() {
+        StrengthDialog strengthDialog = new StrengthDialog();
+        strengthDialog.show(getChildFragmentManager(), "strengthDialoug");
+    }
+
+    //==================================================================
+    public void openRefillDialoug() {
+        refillTimeDialoug refillTimeDialoug = new refillTimeDialoug();
+        refillTimeDialoug.show(getChildFragmentManager(), "refillDialog");
+    }
+
+    public void openDatePicker() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month + 1;
+                String date = day + "/" + month + "/" + year;
+                binding.selectdate.setText(date);
+            }
+        }, '1', 2, 5);
+        datePickerDialog.show();
+    }
+
+    @Override
+    public void displayText(String number) {
+        binding.numberTxt.setText(number);
+    }
+
+    @Override
+    public void showText(String number) {
+        binding.PresstoadjustTxt.setText(number);
+    }
+
+    @Override
+    public void chooseRefillAmount(String amount) {
+        binding.selectAmountRefill.setText(amount);
+
+    }
 }

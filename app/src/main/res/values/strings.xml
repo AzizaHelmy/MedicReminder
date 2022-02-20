@@ -102,6 +102,8 @@
     <string name="suspendBtnDisplay">Suspend</string>
     <string name="refillBtnDisplay">Refill</string>
     <string name="Adddose">ADD DOSE</string>
-    <color name="blue">#189AB4</color>
+    <string name="refillremindermsg">Medicine filling reminder</string>
+    <string name="reciveRefillnotification">When any number of medicines you want to receive a packing notification</string>
+
 
 </resources>
