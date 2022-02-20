@@ -1,7 +1,7 @@
 package com.example.medicationreminder.db;
 
-import com.example.medicationreminder.model.Drug;
+import com.example.medicationreminder.model.Medication;
 
 public interface LocalSource {
-    public void insertDrug(Drug drug);
+    public void insertDrug(Medication medication);
 }

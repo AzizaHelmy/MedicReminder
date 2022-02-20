@@ -4,10 +4,11 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 
-import com.example.medicationreminder.model.Drug;
+import com.example.medicationreminder.model.Medication;
 
 @Dao
 public interface DrugDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-   void insertDrug (Drug drug);
+   void insertDrug (Medication medication);
+
 }

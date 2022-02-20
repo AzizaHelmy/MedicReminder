@@ -8,9 +8,9 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
 import com.example.medicationreminder.model.Converters;
-import com.example.medicationreminder.model.Drug;
+import com.example.medicationreminder.model.Medication;
 
-@Database(entities = {Drug.class},version=1)
+@Database(entities = {Medication.class},version=2)
 @TypeConverters({Converters.class})
 public abstract class AppDataBase extends RoomDatabase {
     private  static AppDataBase instance=null;

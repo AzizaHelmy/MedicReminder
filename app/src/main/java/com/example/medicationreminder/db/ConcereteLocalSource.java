@@ -2,7 +2,7 @@ package com.example.medicationreminder.db;
 
 import android.content.Context;
 
-import com.example.medicationreminder.model.Drug;
+import com.example.medicationreminder.model.Medication;
 
 public class ConcereteLocalSource implements LocalSource {
     DrugDao drugDao;
@@ -21,11 +21,11 @@ public class ConcereteLocalSource implements LocalSource {
     }
 
     @Override
-    public void insertDrug(Drug drug) {
+    public void insertDrug(Medication medication) {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                drugDao.insertDrug(drug);
+                drugDao.insertDrug(medication);
             }
         }).start();
     }

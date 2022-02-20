@@ -6,5 +6,5 @@ import java.util.List;
 public class Prescription {
   private  String userName;
   ArrayList<HealthTaker>healthTakers;
- private List<Drug> drugs;
+ private List<Medication> medications;
 }
