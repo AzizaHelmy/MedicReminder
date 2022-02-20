@@ -102,6 +102,6 @@
     <string name="suspendBtnDisplay">Suspend</string>
     <string name="refillBtnDisplay">Refill</string>
     <string name="Adddose">ADD DOSE</string>
-
+    <color name="blue">#189AB4</color>
 
 </resources>
