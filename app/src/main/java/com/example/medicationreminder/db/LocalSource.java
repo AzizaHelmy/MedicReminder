@@ -1,13 +1,7 @@
 package com.example.medicationreminder.db;
 
-import androidx.lifecycle.LiveData;
-
-import com.example.medicationreminder.model.Drug;
-
-import java.util.List;
+import com.example.medicationreminder.model.Medication;
 
 public interface LocalSource {
-    public void insertDrug(Drug drug);
-
-    LiveData<List<Drug>> getActiveDrugs(String status);
+    public void insertDrug(Medication medication);
 }

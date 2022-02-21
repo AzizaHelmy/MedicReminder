@@ -17,6 +17,7 @@ import com.example.medicationreminder.Network.FirebaseConnection;
 import com.example.medicationreminder.databinding.ActivityRegisterAcivityBinding;
 
 
+import com.example.medicationreminder.db.ConcereteLocalSource;
 import com.example.medicationreminder.model.Repository;
 import com.example.medicationreminder.model.User;
 import com.example.medicationreminder.register.representer.RegisterPresentationInterFace;
@@ -41,7 +42,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
         binding = ActivityRegisterAcivityBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
 
-        registerPresentationInterFace=new RegisterPresenter(this, Repository.getRepository(this, FirebaseConnection.getFirebaseConnection()),this);
+        registerPresentationInterFace=new RegisterPresenter(this, Repository.getRepository(this, FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(this)),this);
         setContentView(view);
         clearEditText();
 

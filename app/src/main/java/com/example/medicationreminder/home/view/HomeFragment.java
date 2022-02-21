@@ -1,20 +1,29 @@
 package com.example.medicationreminder.home.view;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
-import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-import androidx.viewpager.widget.ViewPager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.medicationreminder.Network.FirebaseConnection;
 import com.example.medicationreminder.R;
-import com.google.android.material.tabs.TabLayout;
+import com.example.medicationreminder.db.ConcereteLocalSource;
+import com.example.medicationreminder.home.presenter.HomePresenter;
+import com.example.medicationreminder.home.presenter.HomePresenterInterface;
+import com.example.medicationreminder.login.restPassword.presnter.RestPasswordPresenter;
+import com.example.medicationreminder.model.Medication;
+import com.example.medicationreminder.model.Drug;
+import com.example.medicationreminder.model.Repository;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -23,15 +32,17 @@ import java.util.List;
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment  implements HomeViewInterface{
 
+    HorizontalCalendar horizontalCalendar;
+    RecyclerView recyclerView;
+    DaysAdapter drugAdapter;
+    View viewRoot;
+    HomePresenterInterface homePresenterInterface;
 
- View viewRoot;
-//    ViewPager viewPager;
-//    DemoCollectionPagerAdapter demoCollectionPagerAdapter;
 
     public HomeFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -39,30 +50,22 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       OnBackPressedCallback pressedCallback = new OnBackPressedCallback(true) {
-          @Override
-          public void handleOnBackPressed() {
-             requireActivity().finish();
-          }
-       };
-       requireActivity().getOnBackPressedDispatcher().addCallback(this, pressedCallback);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
      viewRoot=inflater.inflate(R.layout.fragment_home, container, false);
-
-//.setupWithViewPager(viewPager);
-
-        /* starts before 1 month from now */
+        homePresenterInterface =new HomePresenter(getActivity(), Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())),this);
+        insert();
         Calendar startDate = Calendar.getInstance();
         startDate.add(Calendar.MONTH, -1);
 
         Calendar endDate = Calendar.getInstance();
         endDate.add(Calendar.MONTH, 1);
 
-        HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(viewRoot, R.id.calendarView).showMonthName(false)
+        horizontalCalendar = new HorizontalCalendar.Builder(viewRoot, R.id.calendarView).showMonthName(false)
                 .dayNumberFormat("d")
                 .textSizeDayNumber(16)
                 .startDate(startDate.getTime())
@@ -72,27 +75,63 @@ public class HomeFragment extends Fragment {
                 .build();
 
 
-
         return viewRoot;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        viewPager = view.findViewById(R.id.pager);
-//        viewPager.setAdapter(demoCollectionPagerAdapter);
-//        viewPager.canScrollHorizontally(2);
+
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+
+//        recyclerView=viewRoot.findViewById(R.id.day_recycler);
+//        recyclerView.setLayoutManager(linearLayoutManager);
+//        drugAdapter=new DaysAdapter(list());
+//        recyclerView.setAdapter(drugAdapter);
+
 
     }
-//    public List<Model>getData(){
-//         List<Model>list=new ArrayList<>();
-//         for (int i=0;i<5;i++){
-//             Model model=new Model("doaa"+i,"hello"+i);
-//         }
+
+//  //public void list(){
+//       List<Medication> listOfData=new ArrayList<>();
+//       for(int i=0;i<10;i++){
+//           listOfData.add(new Medication("doaa"+i,"de"+i,"solution"+i,R.id.img_medic,200,"mg"+i,2));
 //
-//       return list;
 //
-//    }
+//       }
+//      // return listOfData;
+//  }
+
+    @Override
+    public void insert() {
+        Log.e(TAG, "insert: ");
+
+              int i=0;
 
 
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+              i++;
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+        i++;
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+        i++;
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+        i++;
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+        i++;
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+        i++;
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+        i++;
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+        i++;
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+        i++;
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+
+
+
+            homePresenterInterface.insertMed(new Medication("doaa"+i,"de"+i,"solution"+i,1,200,"mg"+i,2));
+    }
 }
+
