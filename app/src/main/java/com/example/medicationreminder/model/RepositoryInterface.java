@@ -20,6 +20,8 @@ public interface RepositoryInterface {
     public void firebaseAuthWithGoogle(Activity activity, Task<GoogleSignInAccount> task, FirebaseConnectionDelegated firebaseConnectionDelegated) ;
     public boolean restPassword(String emil,FirebaseConnectionDelegated firebaseConnectionDelegated) ;
     public  void insertMed(Medication medication);
+    LiveData<List<Medication>> displayDrug();
+    //public void displayMed(Medication medication);
     public List<Medication> selectAllDrugsForHome(String day);
 
 }

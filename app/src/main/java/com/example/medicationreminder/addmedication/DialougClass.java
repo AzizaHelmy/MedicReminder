@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -21,6 +22,7 @@ public class DialougClass extends AppCompatDialogFragment {
     FloatingActionButton decreaseBtn;
     TextView counter;
     DialogClassListener listener;
+    Spinner usage_spinner;
     int count;
     @NonNull
     @Override
@@ -28,6 +30,7 @@ public class DialougClass extends AppCompatDialogFragment {
         AlertDialog .Builder builder=new AlertDialog.Builder(getActivity());
         LayoutInflater layoutInflater=getActivity().getLayoutInflater();
         View view =layoutInflater.inflate(R.layout.numberpicker_layout,null);
+        usage_spinner=view.findViewById(R.id.usage_spinner);
         builder.setView(view).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -37,7 +40,9 @@ public class DialougClass extends AppCompatDialogFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 String times=counter.getText().toString();
-listener.displayText(times);
+String selctedusage=usage_spinner.getSelectedItem().toString();
+String output=times+" "+selctedusage;
+listener.displayText(output);
             }
         });
         increaseBtn=view.findViewById(R.id.increaseBtn);

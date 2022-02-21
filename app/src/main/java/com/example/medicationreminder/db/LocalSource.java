@@ -9,5 +9,10 @@ import java.util.List;
 
 public interface LocalSource {
     public void insertDrug(Medication medication);
+    public void deleteDrug(Medication medication);
+   // public void displayDrug(Medication medication);
+   public List<Medication>dispalyedDrug();
+    public void editeDrug(Medication medication);
     public List<Medication>selectAllDrugs(String day);
+
 }

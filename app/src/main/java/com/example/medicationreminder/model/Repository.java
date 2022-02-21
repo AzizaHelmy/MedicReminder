@@ -76,6 +76,13 @@ public class Repository  implements RepositoryInterface{
     }
 
     @Override
+    public LiveData<List<Medication>> displayDrug() {
+        return (LiveData<List<Medication>>) localSource.dispalyedDrug();
+    }
+
+
+
+    @Override
     public List<Medication>selectAllDrugsForHome(String day) {
       return   localSource.selectAllDrugs(day);
     }

@@ -17,7 +17,7 @@ public class Medication {
     private boolean isRemindered;
     private String medicineType;
     private int icon;
-    private int strength;
+    private String strength;
     private String mesaure;
     private double dose;
     boolean isDaily;
@@ -27,13 +27,13 @@ public class Medication {
     private List<Drug> drugs;
     private String instructions;
     private String status;
-    private int drugAmount;
+    private String drugAmount;
     private boolean isRefillReminder;
     private int leftDrug;
     private String RefilTime;
 
 
-    public Medication(String drugAdder, String medicine_Name, String medicineType, int icon, int strength, String mesaure, int drugAmount) {
+    public Medication(String drugAdder, String medicine_Name, String medicineType, int icon, String strength, String mesaure, String drugAmount) {
         this.drugAdder = drugAdder;
         this.medicine_Name = medicine_Name;
         this.medicineType = medicineType;
@@ -53,7 +53,7 @@ public class Medication {
         this.days = days;
     }
 
-    public Medication(String drugAdder, String medicine_Name, boolean isRemindered, String medicineType, int icon, int strength, String mesaure, double dose, int drugDuration, ArrayList<String> days, ArrayList<Drug> dates, String instructions, String status, int drugAmount, boolean isRefillReminder, int leftDrug, String refilTime) {
+    public Medication(String drugAdder, String medicine_Name, boolean isRemindered, String medicineType, int icon, String strength, String mesaure, double dose, int drugDuration, ArrayList<String> days, ArrayList<Drug> dates, String instructions, String status, String drugAmount, boolean isRefillReminder, int leftDrug, String refilTime) {
         this.drugAdder = drugAdder;
         this.medicine_Name = medicine_Name;
         this.isRemindered = isRemindered;
@@ -73,7 +73,7 @@ public class Medication {
         RefilTime = refilTime;
     }
 
-    public Medication(String medicine_Name, int icon, ArrayList<Drug> dates, int drugAmount) {
+    public Medication(String medicine_Name, int icon, ArrayList<Drug> dates, String drugAmount) {
         this.medicine_Name = medicine_Name;
         this.icon = icon;
         this.drugs = dates;
@@ -128,11 +128,11 @@ public class Medication {
         this.icon = icon;
     }
 
-    public int getStrength() {
+    public String getStrength() {
         return strength;
     }
 
-    public void setStrength(int strength) {
+    public void setStrength(String strength) {
         this.strength = strength;
     }
 
@@ -192,11 +192,11 @@ public class Medication {
         this.status = status;
     }
 
-    public int getDrugAmount() {
+    public String getDrugAmount() {
         return drugAmount;
     }
 
-    public void setDrugAmount(int drugAmount) {
+    public void setDrugAmount(String drugAmount) {
         this.drugAmount = drugAmount;
     }
 

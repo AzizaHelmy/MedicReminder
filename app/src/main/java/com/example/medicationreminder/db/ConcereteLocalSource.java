@@ -13,6 +13,7 @@ public class ConcereteLocalSource implements LocalSource {
     DrugDao drugDao;
     private static ConcereteLocalSource concreteLocalSource = null;
     List<Medication>allDrugsForHome;
+    List<Medication>displayedDrug;
     private ConcereteLocalSource(Context context) {
         AppDataBase db = AppDataBase.getInstance(context.getApplicationContext());
         drugDao = db.drugDao();
@@ -33,6 +34,23 @@ public class ConcereteLocalSource implements LocalSource {
                 drugDao.insertDrug(medication);
             }
         }).start();
+    }
+
+    @Override
+    public void deleteDrug(Medication medication) {
+
+    }
+
+    @Override
+    public List<Medication> dispalyedDrug() {
+        displayedDrug=drugDao.displayDrug();
+        return displayedDrug;
+    }
+
+
+    @Override
+    public void editeDrug(Medication medication) {
+     drugDao.updateDrug(medication);
     }
 //    @Override
 //    public void (Medication medication) {

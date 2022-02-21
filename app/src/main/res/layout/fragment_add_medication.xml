@@ -31,6 +31,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/medName"
                 android:layout_marginLeft="10dp"
                 android:hint="@string/medicineNamehint" />
 
@@ -164,11 +165,13 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_margin="5dp"
+                        android:id="@+id/eyedropper"
                         android:src="@drawable/eyedropper" />
 
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
+                        android:id="@+id/capsules"
                         android:layout_margin="5dp"
                         android:src="@drawable/capsules" />
 
@@ -176,22 +179,26 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_margin="5dp"
+                        android:id="@+id/ointment"
                         android:src="@drawable/ointment" />
 
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_margin="5dp"
+                        android:id="@+id/pill"
                         android:src="@drawable/pill" />
 
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_margin="5dp"
+                        android:id="@+id/respirator"
                         android:src="@drawable/respirator" />
 
                     <ImageView
                         android:layout_width="40dp"
+                        android:id="@+id/spoon"
                         android:layout_height="40dp"
                         android:layout_margin="5dp"
                         android:src="@drawable/spoon" />
@@ -199,6 +206,7 @@
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
+                        android:id="@+id/transfusion"
                         android:layout_margin="5dp"
                         android:src="@drawable/transfusion" />
 
@@ -206,6 +214,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_margin="5dp"
+                        android:id="@+id/vaccine"
                         android:src="@drawable/vaccine" />
                 </LinearLayout>
             </HorizontalScrollView>
@@ -268,6 +277,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/medicine_taken"/>
                 <RadioGroup
+                    android:id="@+id/radioeatgroup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     >

@@ -37,9 +37,11 @@
             android:layout_height="wrap_content"
             android:src="@drawable/minus_icon" />
     </LinearLayout>
+
     <Spinner
+        android:id="@+id/usage_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:entries="@array/amount"
-        android:layout_margin="10dp"/>
+        android:layout_margin="10dp"
+        android:entries="@array/amount" />
 </LinearLayout>

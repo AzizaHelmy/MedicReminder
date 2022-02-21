@@ -1,5 +1,7 @@
 package com.example.medicationreminder.addmedication.view;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
@@ -12,28 +14,38 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.RadioGroup;
 import android.widget.TimePicker;
 
+import com.example.medicationreminder.Network.FirebaseConnection;
 import com.example.medicationreminder.R;
 
 import com.example.medicationreminder.addmedication.DialougClass;
 import com.example.medicationreminder.addmedication.StrengthDialog;
+import com.example.medicationreminder.addmedication.presenter.AddMedicationPresenter;
+import com.example.medicationreminder.addmedication.presenter.AddMedicationPresenterInterface;
 import com.example.medicationreminder.addmedication.refillTimeDialoug;
 import com.example.medicationreminder.databinding.FragmentAddMedicationBinding;
+import com.example.medicationreminder.db.ConcereteLocalSource;
+import com.example.medicationreminder.home.presenter.HomePresenter;
+import com.example.medicationreminder.model.Medication;
+import com.example.medicationreminder.model.Repository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class AddMedicationFragment extends Fragment implements refillTimeDialoug.DialougrefillLisener, DialougClass.DialogClassListener, StrengthDialog.StrengthDialogListener {
+public class AddMedicationFragment extends Fragment implements  refillTimeDialoug.DialougrefillLisener, DialougClass.DialogClassListener, StrengthDialog.StrengthDialogListener,AddMedicationViewInterface {
     FragmentAddMedicationBinding binding;
     int timerHour, timerMinute;
-
+    Medication medication;
+AddMedicationPresenterInterface addMedicationPresenterInterface;
     public AddMedicationFragment() {
 
     }
@@ -42,6 +54,7 @@ public class AddMedicationFragment extends Fragment implements refillTimeDialoug
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        addMedicationPresenterInterface =new AddMedicationPresenter(getActivity(), Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())),this);
         OnBackPressedCallback pressedCallback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -49,12 +62,14 @@ public class AddMedicationFragment extends Fragment implements refillTimeDialoug
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, pressedCallback);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentAddMedicationBinding.inflate(getLayoutInflater(), container, false);
+
         binding.afterLayout3.setVisibility(View.GONE);
         binding.afterLayout4.setVisibility(View.GONE);
         binding.moreopitions.setVisibility(View.GONE);
@@ -74,6 +89,7 @@ public class AddMedicationFragment extends Fragment implements refillTimeDialoug
         binding.doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+               // addMedicationPresenterInterface.insert(Medication);
         Navigation.findNavController(view).navigate(R.id.action_addMedicationFragment_to_medicationsFragment2);
             }
         });
@@ -110,6 +126,16 @@ public class AddMedicationFragment extends Fragment implements refillTimeDialoug
                 binding.doneBtn.setVisibility(View.GONE);
             }
         });
+        //===========================================================================
+        binding.doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e(TAG, "onClick: ");
+                addMedicationPresenterInterface.insert(saveData());
+
+                Log.i("tag","what is your problem");
+            }
+        });
         //============================================================================
         binding.moreopitions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +150,7 @@ public class AddMedicationFragment extends Fragment implements refillTimeDialoug
                 binding.instructionsLayout.setVisibility(View.VISIBLE);
                 binding.refillingLayout.setVisibility(View.VISIBLE);
                 binding.doneBtn.setVisibility(View.VISIBLE);
+
             }
         });
         //=============================================================================
@@ -237,5 +264,33 @@ public class AddMedicationFragment extends Fragment implements refillTimeDialoug
     public void chooseRefillAmount(String amount) {
         binding.selectAmountRefill.setText(amount);
 
+    }
+
+    @Override
+    public void insert() {
+addMedicationPresenterInterface.insert(medication);
+    }
+
+
+
+    //==========================================================
+    public Medication saveData( ){
+        Log.e(TAG, "saveData: ");
+        Medication medication=new Medication();
+        medication.setMedicine_Name(binding.medName.getText().toString());
+        Log.i("salasoka","hdjhwjq");
+      medication.setStrength(binding.PresstoadjustTxt.getText().toString());
+      medication.setDrugAmount(binding.numberTxt.getText().toString());
+        Log.i("attt","what is the proplem");
+
+binding.radioeatgroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+        medication.setInstructions(radioGroup.toString());
+
+    }
+});
+        Log.e(TAG, "saveData: "+medication.getMedicine_Name());
+return  medication;
     }
 }
