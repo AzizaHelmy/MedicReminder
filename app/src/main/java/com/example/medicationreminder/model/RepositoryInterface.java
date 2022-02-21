@@ -2,9 +2,14 @@ package com.example.medicationreminder.model;
 
 import android.app.Activity;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.medicationreminder.Network.FirebaseConnectionDelegated;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.Task;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public interface RepositoryInterface {
     public void registerNewUser(User user, Activity activity , FirebaseConnectionDelegated firebaseConnectionDelegated);
@@ -15,5 +20,6 @@ public interface RepositoryInterface {
     public void firebaseAuthWithGoogle(Activity activity, Task<GoogleSignInAccount> task, FirebaseConnectionDelegated firebaseConnectionDelegated) ;
     public boolean restPassword(String emil,FirebaseConnectionDelegated firebaseConnectionDelegated) ;
     public  void insertMed(Medication medication);
+    public List<Medication> selectAllDrugsForHome(String day);
 
 }

@@ -6,11 +6,16 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.medicationreminder.Network.FirebaseConnectionDelegated;
 import com.example.medicationreminder.Network.FirebaseConnectionInterface;
 import com.example.medicationreminder.db.LocalSource;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.Task;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Repository  implements RepositoryInterface{
 
@@ -68,5 +73,10 @@ public class Repository  implements RepositoryInterface{
     @Override
     public void insertMed(Medication medication) {
             localSource.insertDrug(medication);
+    }
+
+    @Override
+    public List<Medication>selectAllDrugsForHome(String day) {
+      return   localSource.selectAllDrugs(day);
     }
 }

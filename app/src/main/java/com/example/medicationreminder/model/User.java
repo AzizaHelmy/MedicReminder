@@ -1,11 +1,15 @@
 package com.example.medicationreminder.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class User {
     String userId;
     String UserName;
     String password;
     String userEmail;
-
+    private List<HealthTaker> healthTakers;
+    private List<Medication> medications;
     public String getPassword() {
         return password;
     }

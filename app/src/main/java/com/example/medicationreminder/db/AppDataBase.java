@@ -10,13 +10,13 @@ import androidx.room.TypeConverters;
 import com.example.medicationreminder.model.Converters;
 import com.example.medicationreminder.model.Medication;
 
-@Database(entities = {Medication.class},version=2)
+@Database(entities = {Medication.class},version=5)
 @TypeConverters({Converters.class})
 public abstract class AppDataBase extends RoomDatabase {
     private  static AppDataBase instance=null;
     public static synchronized AppDataBase getInstance(Context context){
         if(instance==null){
-            instance= Room.databaseBuilder(context.getApplicationContext(),AppDataBase.class,"movies").build();
+            instance= Room.databaseBuilder(context.getApplicationContext(),AppDataBase.class,"Medication").build();
         }
         return instance;
     }
