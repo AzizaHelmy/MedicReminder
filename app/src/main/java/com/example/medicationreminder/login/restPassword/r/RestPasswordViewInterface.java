@@ -1,4 +1,4 @@
-package com.example.medicationreminder.login.restPassword.view;
+package com.example.medicationreminder.login.restPassword.r;
 
 import com.google.firebase.auth.FirebaseUser;
 

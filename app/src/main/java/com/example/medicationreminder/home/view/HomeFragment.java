@@ -20,14 +20,12 @@ import com.example.medicationreminder.R;
 import com.example.medicationreminder.db.ConcereteLocalSource;
 import com.example.medicationreminder.home.presenter.HomePresenter;
 import com.example.medicationreminder.home.presenter.HomePresenterInterface;
-import com.example.medicationreminder.login.restPassword.presnter.RestPasswordPresenter;
+
 import com.example.medicationreminder.model.Medication;
 import com.example.medicationreminder.model.Drug;
 import com.example.medicationreminder.model.Repository;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 

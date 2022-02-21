@@ -17,9 +17,9 @@ import com.example.medicationreminder.medications.model.MedicsModel;
 import com.example.medicationreminder.medications.view.adapter.MedicsAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import com.example.medicationreminder.model.Drug;
+import com.example.medicationreminder.model.Medication;
 
 public class MedicationsFragment extends BaseFragment implements MedicsOnClick ,MedicsInterface{
     Button buttAdd;
@@ -55,30 +55,30 @@ public class MedicationsFragment extends BaseFragment implements MedicsOnClick ,
     private List<MedicsModel> buildItemList() {
         itemList = new ArrayList<>();
 
-        item = new MedicsModel("Active ", buildSubItemList());
-        itemList.add(item);
-        itemList.add(new MedicsModel("INActive ", buildSubItemList()));
+//        item = new MedicsModel("Active ", buildSubItemList());
+//        itemList.add(item);
+//        itemList.add(new MedicsModel("INActive ", buildSubItemList()));
 
         return itemList;
     }
 
-    private List<Drug> buildSubItemList() {
-        subItemList = new ArrayList<>();
-        for (int i = 1; i <= 2; i++) {
-            subItem = new Drug(R.drawable.img_medicine, "panadol", "1000 gm", "2 left", "Added by Asmaa");
-            subItemList.add(new Drug(R.drawable.pill, "Tusskan", "500 gm", "1 left", " Added by Azza"));
-           // subItemList.add(new ItemModel(R.drawable.pillsbottle, "kohol", "500 gm", "0 left", "Added by salma"));
-            subItemList.add(subItem);
-        }
-        return subItemList;
-    }
+//    private List<Medication> buildSubItemList() {
+//        subItemList = new ArrayList<>();
+//        for (int i = 1; i <= 2; i++) {
+//           // subItem = new Medication(R.drawable.img_medicine, "panadol", "1000 gm", "2 left", "Added by Asmaa");
+//           // subItemList.add(new Drug(R.drawable.pill, "Tusskan", "500 gm", "1 left", " Added by Azza"));
+//           // subItemList.add(new ItemModel(R.drawable.pillsbottle, "kohol", "500 gm", "0 left", "Added by salma"));
+//            subItemList.add(subItem);
+//        }
+//        return subItemList;
+//    }
 
     @Override
     public void setListeners() {
         buttAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_medicationsFragment_to_addMedicationFragment);
+               // Navigation.findNavController(view).navigate(R.id.action_medicationsFragment_to_addMedicationFragment);
 //                findNavController(fragment).navigate(
 //                        SignInFragmentDirections.actionSignInFragmentToUserNameFragment())
 
@@ -99,7 +99,7 @@ public class MedicationsFragment extends BaseFragment implements MedicsOnClick ,
     }
 
     @Override
-    public void ItemOnClick(Drug model) {
+    public void ItemOnClick(Medication model) {
         subItemList.remove(model);
         adapterMedics.notifyDataSetChanged();
     }

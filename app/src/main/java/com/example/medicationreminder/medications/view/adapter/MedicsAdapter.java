@@ -1,9 +1,6 @@
 package com.example.medicationreminder.medications.view.adapter;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.medicationreminder.R;
 import com.example.medicationreminder.medications.model.MedicsModel;
 import com.example.medicationreminder.medications.view.MedicsOnClick;
-import com.example.medicationreminder.model.Drug;
 
-import java.util.ArrayList;
+import com.example.medicationreminder.model.Drug;
+import com.example.medicationreminder.model.Medication;
+
 import java.util.List;
 
 public class MedicsAdapter extends RecyclerView.Adapter<MedicsAdapter.MedicsViewHolder> implements MedicsOnClick {
@@ -46,7 +44,7 @@ public class MedicsAdapter extends RecyclerView.Adapter<MedicsAdapter.MedicsView
         holder.tvTitle.setText(model.getTitle());
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context.getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         linearLayoutManager.setInitialPrefetchItemCount(model.getList().size());
-        itemAdapter =new ItemAdapter(context,model.getList(),this);
+       // itemAdapter =new ItemAdapter(context,model.getList(),this);
         holder.rvMedicItem.setLayoutManager(linearLayoutManager);
         holder.rvMedicItem.setAdapter(itemAdapter);
         //holder.rvMedicItem.setRecycledViewPool(viewPool);
@@ -57,11 +55,12 @@ public class MedicsAdapter extends RecyclerView.Adapter<MedicsAdapter.MedicsView
         return medics.size();
     }
 
+
     @Override
-    public void ItemOnClick(Drug medic) {
-        medics.remove(medic);
-        notifyDataSetChanged();
+    public void ItemOnClick(Medication medic) {
+
     }
+
 
     //====================================================================
     public class MedicsViewHolder extends RecyclerView.ViewHolder {

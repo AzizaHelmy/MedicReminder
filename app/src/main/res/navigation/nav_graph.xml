@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/addMedicationFragment"
-        android:name="com.example.medicationreminder.medications.view.AddMedicationFragment"
+        android:name="com.example.medicationreminder.addmedication.AddMedicationFragment"
         android:label="fragment_add_medication"
         tools:layout="@layout/fragment_add_medication" >
         <action

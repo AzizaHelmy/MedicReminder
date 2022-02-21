@@ -5,7 +5,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,16 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.medicationreminder.R;
 import com.example.medicationreminder.medications.view.MedicsOnClick;
-import com.example.medicationreminder.model.Drug;
+import com.example.medicationreminder.model.Medication;
 
 import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MedicsTypeViewHolder> {
     Context context;
-    List<Drug> medics;
+    List<Medication> medics;
     MedicsOnClick onClick;
 
-    public ItemAdapter(Context context, List<Drug> medics, MedicsOnClick onClick) {
+    public ItemAdapter(Context context, List<Medication> medics, MedicsOnClick onClick) {
         this.context = context;
         this.medics = medics;
         this.onClick=onClick;
@@ -39,8 +38,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MedicsTypeView
 
     @Override
     public void onBindViewHolder(@NonNull MedicsTypeViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Drug model = medics.get(position);
-        holder.tvMedicName.setText(model.getMedicName());
+        Medication model = medics.get(position);
+       // holder.tvMedicName.setText(model.getMedicName());
         holder.tvMedicAdder.setText(model.getDrugAdder());
         holder.tvMedicLeft.setText(model.getLeftDrug()+"");
         holder.tvMedicStrength.setText(model.getStrength()+"");

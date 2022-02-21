@@ -20,11 +20,12 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
+import com.example.medicationreminder.DialougClass;
 import com.example.medicationreminder.R;
-import com.example.medicationreminder.addmedication.DialougClass;
-import com.example.medicationreminder.addmedication.StrengthDialog;
-import com.example.medicationreminder.addmedication.refillTimeDialoug;
+
+import com.example.medicationreminder.StrengthDialog;
 import com.example.medicationreminder.databinding.FragmentAddMedicationBinding;
+import com.example.medicationreminder.refillTimeDialoug;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -186,19 +187,19 @@ public class AddMedicationFragment extends Fragment implements refillTimeDialoug
 
     public void openNumberPicker() {
         DialougClass dialougClass = new DialougClass();
-        dialougClass.show(getChildFragmentManager(), "NumberDialoug");
+        dialougClass.show(getActivity().getSupportFragmentManager(), "NumberDialoug");
 
     }
 
     public void openStrengthDialoug() {
         StrengthDialog strengthDialog = new StrengthDialog();
-        strengthDialog.show(getChildFragmentManager(), "strengthDialoug");
+        strengthDialog.show(getActivity().getSupportFragmentManager(), "strengthDialoug");
     }
 
     //==================================================================
     public void openRefillDialoug() {
         refillTimeDialoug refillTimeDialoug = new refillTimeDialoug();
-        refillTimeDialoug.show(getChildFragmentManager(), "refillDialog");
+        refillTimeDialoug.show(getActivity().getSupportFragmentManager(), "refillDialog");
     }
 
     public void openDatePicker() {

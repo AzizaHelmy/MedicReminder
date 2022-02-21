@@ -1,4 +1,4 @@
-package com.example.medicationreminder.addmedication;
+package com.example.medicationreminder;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -17,15 +17,15 @@ import com.example.medicationreminder.R;
 
 public class refillTimeDialoug extends AppCompatDialogFragment {
     EditText chooseRefill;
-   DialougrefillLisener lisener;
+    DialougrefillLisener lisener;
 
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-        LayoutInflater layoutInflater=getActivity().getLayoutInflater();
-        View view =layoutInflater.inflate(R.layout.refilldialouug,null);
-        chooseRefill=view.findViewById(R.id.chooseRefillAmount);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        LayoutInflater layoutInflater = getActivity().getLayoutInflater();
+        View view = layoutInflater.inflate(R.layout.refilldialouug, null);
+        chooseRefill = view.findViewById(R.id.chooseRefillAmount);
         builder.setView(view).setNegativeButton("cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -34,7 +34,7 @@ public class refillTimeDialoug extends AppCompatDialogFragment {
         }).setPositiveButton("ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                String amount=chooseRefill.getText().toString();
+                String amount = chooseRefill.getText().toString();
                 lisener.chooseRefillAmount(amount);
             }
         });
@@ -44,7 +44,7 @@ public class refillTimeDialoug extends AppCompatDialogFragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        lisener= (DialougrefillLisener) context;
+        lisener = (DialougrefillLisener) context;
     }
 
     public interface DialougrefillLisener {
