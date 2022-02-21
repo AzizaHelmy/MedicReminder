@@ -71,7 +71,7 @@ public class HealthTakersFragment extends Fragment implements TakerOnClick {
         binding = FragmentHealthTakersBinding.inflate(getLayoutInflater(), container, false);
         View view = binding.getRoot();
         setUpRecycler();
-        // getdataSource();
+        getdataSource();
         cheackHealthTaker(takerList);
         adapter = new HealthTakerAdapter(takerList, getContext(), this);
         binding.rvTaker.setAdapter(adapter);
