@@ -78,7 +78,7 @@ public class MedicationsFragment extends BaseFragment implements MedicsOnClick ,
         buttAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // Navigation.findNavController(view).navigate(R.id.action_medicationsFragment_to_addMedicationFragment);
+                Navigation.findNavController(view).navigate(R.id.action_medicationsFragment_to_addMedicationFragment);
 //                findNavController(fragment).navigate(
 //                        SignInFragmentDirections.actionSignInFragmentToUserNameFragment())
 

@@ -3,8 +3,8 @@ package com.example.medicationreminder.login.restPassword.presnter;
 import android.content.Context;
 
 import com.example.medicationreminder.Network.FirebaseConnectionDelegated;
-import com.example.medicationreminder.login.restPassword.view.RestPasswordViewInterface;
-import com.example.medicationreminder.login.view.LoginViewInterface;
+
+import com.example.medicationreminder.login.restPassword.r.RestPasswordViewInterface;
 import com.example.medicationreminder.model.RepositoryInterface;
 import com.google.firebase.auth.FirebaseUser;
 

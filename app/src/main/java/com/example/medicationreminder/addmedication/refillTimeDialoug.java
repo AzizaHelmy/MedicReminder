@@ -1,4 +1,4 @@
-package com.example.medicationreminder;
+package com.example.medicationreminder.addmedication;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

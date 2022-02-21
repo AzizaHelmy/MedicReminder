@@ -1,4 +1,4 @@
-package com.example.medicationreminder.medications.view;
+package com.example.medicationreminder.addmedication.view;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -10,8 +10,6 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
@@ -20,12 +18,12 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 
-import com.example.medicationreminder.DialougClass;
 import com.example.medicationreminder.R;
 
-import com.example.medicationreminder.StrengthDialog;
+import com.example.medicationreminder.addmedication.DialougClass;
+import com.example.medicationreminder.addmedication.StrengthDialog;
+import com.example.medicationreminder.addmedication.refillTimeDialoug;
 import com.example.medicationreminder.databinding.FragmentAddMedicationBinding;
-import com.example.medicationreminder.refillTimeDialoug;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -67,7 +65,18 @@ public class AddMedicationFragment extends Fragment implements refillTimeDialoug
         binding.instructionsLayout.setVisibility(View.GONE);
         binding.refillingLayout.setVisibility(View.GONE);
         binding.doneBtn.setVisibility(View.GONE);
-
+        binding.afterLayout4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_addMedicationFragment_to_medicationsFragment2);
+            }
+        });
+        binding.doneBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+        Navigation.findNavController(view).navigate(R.id.action_addMedicationFragment_to_medicationsFragment2);
+            }
+        });
 
         return binding.getRoot();
 
