@@ -6,6 +6,8 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
+import java.util.List;
+
 @Entity(tableName = "medications")
 public class Medication {
     private String drugAdder;
@@ -18,10 +20,11 @@ public class Medication {
     private int strength;
     private String mesaure;
     private double dose;
+    boolean isDaily;
     private int drugDuration;
-    private ArrayList<String>days;
-    @Ignore
-    private ArrayList<Drug> drugs;
+    
+    private List<String> days;
+    private List<Drug> drugs;
     private String instructions;
     private String status;
     private int drugAmount;
@@ -41,6 +44,13 @@ public class Medication {
     }
 
     public Medication() {
+    }
+
+    public Medication(String drugAdder, @NonNull String medicine_Name,  ArrayList<String> days) {
+        this.drugAdder = drugAdder;
+        this.medicine_Name = medicine_Name;
+
+        this.days = days;
     }
 
     public Medication(String drugAdder, String medicine_Name, boolean isRemindered, String medicineType, int icon, int strength, String mesaure, double dose, int drugDuration, ArrayList<String> days, ArrayList<Drug> dates, String instructions, String status, int drugAmount, boolean isRefillReminder, int leftDrug, String refilTime) {
@@ -68,6 +78,14 @@ public class Medication {
         this.icon = icon;
         this.drugs = dates;
         this.drugAmount = drugAmount;
+    }
+
+    public boolean isDaily() {
+        return isDaily;
+    }
+
+    public void setDaily(boolean daily) {
+        isDaily = daily;
     }
 
     public String getDrugAdder() {
@@ -142,19 +160,19 @@ public class Medication {
         this.drugDuration = drugDuration;
     }
 
-    public ArrayList<String> getDays() {
+    public List<String> getDays() {
         return days;
     }
 
-    public void setDays(ArrayList<String> days) {
+    public void setDays(List<String> days) {
         this.days = days;
     }
 
-    public ArrayList<Drug> getDrugs() {
+    public List<Drug> getDrugs() {
         return drugs;
     }
 
-    public void setDrugs(ArrayList<Drug> drugs) {
+    public void setDrugs(List<Drug> drugs) {
         this.drugs = drugs;
     }
 
