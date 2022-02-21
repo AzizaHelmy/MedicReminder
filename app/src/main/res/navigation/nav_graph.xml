@@ -22,15 +22,7 @@
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popUpTo="@id/homeFragment2"
             app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_medicationsFragment_to_displayMedicineFragment"
-            app:destination="@id/displayMedicineFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/moreFragment"
-        android:name="com.example.medicationreminder.MoreFragment"
-        android:label="fragment_more"
-        tools:layout="@layout/fragment_more" />
     <fragment
         android:id="@+id/addMedicationFragment"
         android:name="com.example.medicationreminder.medications.view.AddMedicationFragment"
@@ -42,6 +34,24 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/homeFragment2"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/healthTakersFragment"
+        android:name="com.example.medicationreminder.healthTakers.HealthTakersFragment"
+        android:label="fragment_health_takers"
+        tools:layout="@layout/fragment_health_takers" >
+        <action
+            android:id="@+id/action_healthTakersFragment_to_addHealthTakerFragment"
+            app:destination="@id/addHealthTakerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addHealthTakerFragment"
+        android:name="com.example.medicationreminder.healthTakers.AddHealthTakerFragment"
+        android:label="fragment_add_health_taker"
+        tools:layout="@layout/fragment_add_health_taker" >
+        <action
+            android:id="@+id/action_addHealthTakerFragment_to_healthTakersFragment"
+            app:destination="@id/healthTakersFragment" />
     </fragment>
     <fragment
         android:id="@+id/displayMedicineFragment"
