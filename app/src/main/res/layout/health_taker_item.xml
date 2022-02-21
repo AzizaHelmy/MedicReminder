@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_margin="13dp"
+        android:src="@drawable/profile1"
+        app:civ_border_color="#FFFFFF"
+        app:civ_border_width="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="17dp"
+        android:text="Azza Helmy"
+        android:fontFamily="serif"
+        android:textColor="@color/black"
+        android:textSize="21sp"
+        app:layout_constraintStart_toEndOf="@id/profile_image"
+        app:layout_constraintTop_toTopOf="@id/profile_image"
+        tools:layout_editor_absoluteX="119dp"
+        tools:layout_editor_absoluteY="27dp" />
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:ems="7"
+        android:text="is invited you to take care of her"
+        app:layout_constraintStart_toStartOf="@+id/tv_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+    <ImageView
+        android:id="@+id/img_cancel"
+        android:layout_width="62dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@id/tv_description"
+        app:layout_constraintTop_toTopOf="@id/tv_name"
+        app:srcCompat="@drawable/icon_cancle" />
+
+    <ImageView
+        android:id="@+id/img_ok"
+        android:layout_width="43dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="7dp"
+        app:layout_constraintStart_toEndOf="@id/img_cancel"
+        app:layout_constraintTop_toTopOf="@id/img_cancel"
+        app:srcCompat="@drawable/icon_check" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,12 +10,8 @@
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
     <string name="addbutt">addButt</string>
-
-
     <string name="registerbtn">Register</string>
     <string name="confirmPassword">Confirm password</string>
-
-
 
 
 </resources>
