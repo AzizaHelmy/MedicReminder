@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface MedicsInterface {
     void showMedics(List<Medication> movies);
+    public  void insert();
 }

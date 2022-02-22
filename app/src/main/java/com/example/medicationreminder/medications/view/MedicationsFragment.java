@@ -118,6 +118,13 @@ public class MedicationsFragment extends Fragment implements MedicsOnClick, Medi
         adapterMedics.notifyDataSetChanged();
     }
 
+    @Override
+    public void insert() {
+        list.add(new Medication("Panadol","mahlol", R.drawable.pill,500, "gm",3));
+        list.add(new Medication("Panadol","mahlol", R.drawable.pill,500, "gm",3));
+        list.add(new Medication("Panadol","mahlol", R.drawable.pill,500, "gm",3));
+    }
+
     //=======================================================================
     private void cheackMedic(List<Medication> medications) {
         if (medications.isEmpty()) {
