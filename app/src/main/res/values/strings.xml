@@ -116,4 +116,10 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="done">done</string>
+    <string name="tuskkan">Tuskkan</string>
+    <string name="_500_mg">500 mg</string>
+    <string name="_1_left">1 left</string>
+    <string name="added_by_azza">added by Azza</string>
+    <string name="azza_helmy">Azza Helmy</string>
+    <string name="is_invited_you_to_take_care_of_her">is invited you to take care of her</string>
 </resources>

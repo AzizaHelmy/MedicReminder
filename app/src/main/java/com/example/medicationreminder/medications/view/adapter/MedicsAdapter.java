@@ -1,53 +1,61 @@
 package com.example.medicationreminder.medications.view.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.medicationreminder.R;
-import com.example.medicationreminder.medications.model.MedicsModel;
+import com.example.medicationreminder.databinding.HealthTakerItemBinding;
+import com.example.medicationreminder.databinding.MedicItemRvBinding;
+import com.example.medicationreminder.healthTakers.HealthTakerAdapter;
 import com.example.medicationreminder.medications.view.MedicsOnClick;
-
-import com.example.medicationreminder.model.Drug;
 import com.example.medicationreminder.model.Medication;
 
 import java.util.List;
 
-public class MedicsAdapter extends RecyclerView.Adapter<MedicsAdapter.MedicsViewHolder> implements MedicsOnClick {
+public class MedicsAdapter extends RecyclerView.Adapter<MedicsAdapter.MedicsTypeViewHolder> {
     Context context;
-    List<MedicsModel> medics;
-    ItemAdapter itemAdapter;
-    private RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();
+    List<Medication> medics;
+    MedicsOnClick onClick;
+    MedicItemRvBinding binding;
 
-    public MedicsAdapter(Context context, List<MedicsModel> list) {
+    public MedicsAdapter(Context context, List<Medication> medics, MedicsOnClick onClick) {
         this.context = context;
-        this.medics = list;
-    }
+        this.medics = medics;
+        this.onClick = onClick;
 
+    }
+    public void setList(List<Medication> medics) {
+        this.medics = medics;
+    }
     @NonNull
     @Override
-    public MedicsAdapter.MedicsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.medic_rv, parent, false);
-        return new MedicsViewHolder(view);
+    public MedicsTypeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        binding = MedicItemRvBinding.inflate(LayoutInflater.from(parent.getContext()));
+        return new MedicsTypeViewHolder(binding.getRoot());
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MedicsViewHolder holder, int position) {
-        MedicsModel model = medics.get(position);
-
-        holder.tvTitle.setText(model.getTitle());
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context.getApplicationContext(),LinearLayoutManager.VERTICAL,false);
-        linearLayoutManager.setInitialPrefetchItemCount(model.getList().size());
-       // itemAdapter =new ItemAdapter(context,model.getList(),this);
-        holder.rvMedicItem.setLayoutManager(linearLayoutManager);
-        holder.rvMedicItem.setAdapter(itemAdapter);
-        //holder.rvMedicItem.setRecycledViewPool(viewPool);
+    public void onBindViewHolder(@NonNull MedicsTypeViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        Medication model = medics.get(position);
+        binding.tvMedicName.setText(model.getMedicine_Name());
+        //binding.tvAdder.setText(model.getDrugAdder());
+        binding.tvRefill.setText(model.getLeftDrug() + "");
+        binding.tvStrngth.setText(model.getStrength() + "");
+        binding.imgMedic.setImageResource(model.getIcon());
+        binding.imgAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClick.alarmOnClick(model,binding.imgAlarm);
+            }
+        });
     }
 
     @Override
@@ -55,24 +63,13 @@ public class MedicsAdapter extends RecyclerView.Adapter<MedicsAdapter.MedicsView
         return medics.size();
     }
 
-
-    @Override
-    public void ItemOnClick(Medication medic) {
-
-    }
+    //===============================================
+    public class MedicsTypeViewHolder extends RecyclerView.ViewHolder {
 
 
-    //====================================================================
-    public class MedicsViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTitle;
-        RecyclerView rvMedicItem;
-
-        public MedicsViewHolder(@NonNull View itemView) {
+        public MedicsTypeViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvTitle = itemView.findViewById(R.id.tv_active);
-            rvMedicItem = itemView.findViewById(R.id.rv_activ);
-
-
+            binding = MedicItemRvBinding.bind(itemView);
         }
     }
 }

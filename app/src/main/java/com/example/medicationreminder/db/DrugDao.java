@@ -19,4 +19,9 @@ public interface DrugDao {
     @Query("SELECT * FROM MEDICATIONS where isDaily=1 or days LIKE '%' || :day || '%'")
     List<Medication >selectAllDrugsForHome(String day);
 
+    @Query("SELECT * From MEDICATIONS")
+    LiveData<List<Medication>> getAllMedics();
+
+    @Query("SELECT EXISTS (SELECT 1 FROM MEDICATIONS WHERE medicine_Name=:medicine_Name)")
+    boolean isReminder(String medicine_Name);
 }

@@ -10,4 +10,5 @@ import java.util.List;
 public interface LocalSource {
     public void insertDrug(Medication medication);
     public List<Medication>selectAllDrugs(String day);
+    LiveData<List<Medication>> getAllMedics();
 }

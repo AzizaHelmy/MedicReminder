@@ -1,8 +1,10 @@
 package com.example.medicationreminder.model;
 
+import androidx.room.Entity;
+
 import java.util.ArrayList;
 import java.util.List;
-
+@Entity(tableName = "User")
 public class User {
     String userId;
     String UserName;

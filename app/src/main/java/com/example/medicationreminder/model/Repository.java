@@ -79,4 +79,9 @@ public class Repository  implements RepositoryInterface{
     public List<Medication>selectAllDrugsForHome(String day) {
       return   localSource.selectAllDrugs(day);
     }
+//=============================for Medics Screen==============================
+    @Override
+    public LiveData<List<Medication>> getMedics() {
+        return localSource.getAllMedics();
+    }
 }
