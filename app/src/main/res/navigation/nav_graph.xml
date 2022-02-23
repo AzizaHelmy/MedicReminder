@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/healthTakersFragment"
-        android:name="com.example.medicationreminder.healthTakers.HealthTakersFragment"
+        android:name="com.example.medicationreminder.healthTakers.view.HealthTakersFragment"
         android:label="fragment_health_takers"
         tools:layout="@layout/fragment_health_takers" >
         <action
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/addHealthTakerFragment"
-        android:name="com.example.medicationreminder.healthTakers.AddHealthTakerFragment"
+        android:name="com.example.medicationreminder.healthTakers.view.AddHealthTakerFragment"
         android:label="fragment_add_health_taker"
         tools:layout="@layout/fragment_add_health_taker" >
         <action

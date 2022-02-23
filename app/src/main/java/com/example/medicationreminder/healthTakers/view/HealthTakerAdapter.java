@@ -1,4 +1,4 @@
-package com.example.medicationreminder.healthTakers;
+package com.example.medicationreminder.healthTakers.view;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,8 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.medicationreminder.databinding.HealthTakerItemBinding;
-import com.example.medicationreminder.healthTakers.model.HealthTaker;
-import com.example.medicationreminder.healthTakers.view.TakerOnClick;
+import com.example.medicationreminder.model.HealthTaker;
 
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class HealthTakerAdapter extends RecyclerView.Adapter<HealthTakerAdapter.
     public void onBindViewHolder(@NonNull HealthTakerViewHolder holder, int position) {
         HealthTaker healthTaker = takerList.get(position);
         //binding.profileImage.setImageResource(healthTaker.getTakerImg());
-        binding.tvName.setText(healthTaker.getTakerName());
+        binding.tvName.setText(healthTaker.getName());
         binding.imgCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

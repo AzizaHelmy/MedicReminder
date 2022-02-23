@@ -1,4 +1,4 @@
-package com.example.medicationreminder.healthTakers;
+package com.example.medicationreminder.healthTakers.view;
 
 import android.os.Bundle;
 
@@ -76,10 +76,27 @@ public class AddHealthTakerFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (cheachEmail()) {
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    database.getReference("Patient").child("HealthTakers")
+                            .addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    for (DataSnapshot dsp : snapshot.getChildren()) {
+                                        if (dsp.getValue().equals(binding.emailEt.getText().toString())) {
+                                            Toast.makeText(getActivity(), "find", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
 
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                }
+                            });
                     // FirebaseDatabase.getInstance().getReference().push().setValue(email, FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
                     Navigation.findNavController(view).navigate(R.id.action_addHealthTakerFragment_to_healthTakersFragment);
                     Toast.makeText(getContext(), "Invitation Sent Successfully", Toast.LENGTH_SHORT).show();
+
+                }else{
 
                 }
                 //if this email find in firebase

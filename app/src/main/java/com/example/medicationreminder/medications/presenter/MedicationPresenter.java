@@ -25,7 +25,7 @@ public class MedicationPresenter implements MedicsPresenter {
 
     @Override
     public void getMedics(LifecycleOwner owner) {
-        repositoryInterface.getMedics().observe(owner, new Observer<List<Medication>>() {
+        repositoryInterface.getMedics(owner).observe(owner, new Observer<List<Medication>>() {
             @Override
             public void onChanged(List<Medication> medications) {
                 medicsInterface.showMedics(medications);
@@ -36,5 +36,10 @@ public class MedicationPresenter implements MedicsPresenter {
     @Override
     public void suspendReminder(Medication medication) {
         //  repositoryInterface.
+    }
+
+    @Override
+    public void insert(Medication medication) {
+        repositoryInterface.insertMed(medication);
     }
 }

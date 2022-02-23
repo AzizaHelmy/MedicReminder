@@ -1,6 +1,5 @@
 package com.example.medicationreminder.medications.view;
 
-import android.nfc.Tag;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -9,15 +8,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
-
 import com.example.medicationreminder.Network.FirebaseConnection;
 import com.example.medicationreminder.R;
 
@@ -37,12 +32,10 @@ import com.example.medicationreminder.model.Repository;
 public class MedicationsFragment extends Fragment implements MedicsOnClick, MedicsInterface {
 
     FragmentMedicationsBinding binding;
-
     MedicsAdapter adapterMedics;
     List<Medication> list;
     MedicsPresenter medicsPresenter;
     public static final String TAG = "TAG";
-
     public MedicationsFragment() {
         // Required empty public constructor
     }
@@ -53,7 +46,10 @@ public class MedicationsFragment extends Fragment implements MedicsOnClick, Medi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentMedicationsBinding.inflate(getLayoutInflater(), container, false);
         View view = binding.getRoot();
+        setUpRecyclerView();
         medicsPresenter = new MedicationPresenter(getContext(), Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())), this);
+        insert();
+       medicsPresenter.getMedics(getViewLifecycleOwner());
         return view;
     }
 
@@ -73,7 +69,7 @@ public class MedicationsFragment extends Fragment implements MedicsOnClick, Medi
     //==========================================================
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        setUpRecyclerView();
+
 
         super.onCreate(savedInstanceState);
         OnBackPressedCallback pressedCallback = new OnBackPressedCallback(true) {
@@ -91,7 +87,7 @@ public class MedicationsFragment extends Fragment implements MedicsOnClick, Medi
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         binding.rvMedics.setLayoutManager(layoutManager);
         Log.e(TAG, "showMedics: " + list);
-        adapterMedics = new MedicsAdapter(getContext(), list, this);
+        adapterMedics = new MedicsAdapter(getContext(), list, this, Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())));
         binding.rvMedics.setAdapter(adapterMedics);
     }
 
@@ -113,18 +109,24 @@ public class MedicationsFragment extends Fragment implements MedicsOnClick, Medi
     @Override
     public void showMedics(List<Medication> medications) {
         adapterMedics.setList(medications);
-
         cheackMedic(medications);
         adapterMedics.notifyDataSetChanged();
     }
 
     @Override
     public void insert() {
-        list.add(new Medication("Panadol","mahlol", R.drawable.pill,500, "gm",3));
-        list.add(new Medication("Panadol","mahlol", R.drawable.pill,500, "gm",3));
-        list.add(new Medication("Panadol","mahlol", R.drawable.pill,500, "gm",3));
+        medicsPresenter.insert(new Medication("Panadol","mahlol", R.drawable.icon_medi,500, "gm",3));
+        medicsPresenter.insert(new Medication("Tusskan","mahlol", R.drawable.pillsbottle,500, "gm",3));
+        medicsPresenter.insert(new Medication("Runy","mahlol", R.drawable.heartbeat,500, "gm",3));
+        medicsPresenter.insert(new Medication("Rtxh","mahlol", R.drawable.eyedropper,500, "gm",3));
+        medicsPresenter.insert(new Medication("potr","mahlol", R.drawable.ointment,500, "gm",3));
+        medicsPresenter.insert(new Medication("bjuy","mahlol", R.drawable.vaccine,500, "gm",3));
+        medicsPresenter.insert(new Medication("ewsf","mahlol", R.drawable.ointment,500, "gm",3));
+        medicsPresenter.insert(new Medication("tyrew","mahlol", R.drawable.spoon,500, "gm",3));
+        medicsPresenter.insert(new Medication("iuytd","mahlol", R.drawable.eyedropper,500, "gm",3));
+        medicsPresenter.insert(new Medication("porytr","mahlol", R.drawable.icon_medi,500, "gm",3));
+        medicsPresenter.insert(new Medication("hfjjf","mahlol", R.drawable.heartbeat,500, "gm",3));
     }
-
     //=======================================================================
     private void cheackMedic(List<Medication> medications) {
         if (medications.isEmpty()) {

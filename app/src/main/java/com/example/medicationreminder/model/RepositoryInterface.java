@@ -2,6 +2,7 @@ package com.example.medicationreminder.model;
 
 import android.app.Activity;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 
 import com.example.medicationreminder.Network.FirebaseConnectionDelegated;
@@ -27,7 +28,9 @@ public interface RepositoryInterface {
     public void insertMed(Medication medication);
 
     public List<Medication> selectAllDrugsForHome(String day);
+
     //========================For Medics===========================
-    public LiveData<List<Medication>> getMedics();
+    public LiveData<List<Medication>> getMedics(LifecycleOwner owner);
+    public boolean isReminder(String medicName);
 
 }

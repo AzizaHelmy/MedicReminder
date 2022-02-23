@@ -14,6 +14,9 @@ public class HealthTaker {
         this.email = email;
     }
 
+    public HealthTaker(String name, int img) {
+    }
+
     public String getName() {
         return name;
     }
