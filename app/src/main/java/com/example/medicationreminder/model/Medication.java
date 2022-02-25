@@ -22,19 +22,17 @@ public class Medication {
     private double dose;
     boolean isDaily;
     private int drugDuration;
-    
     private List<String> days;
     private String [] drugs;
     private String instructions;
-    private String status;
+    private String status;//Active or InActive
     private int drugAmount;
     private boolean isRefillReminder;
     private int leftDrug;
     private String RefilTime;
 
-
-    public Medication(String drugAdder, String medicine_Name, String medicineType, int icon, int strength, String mesaure, int drugAmount) {
-        this.drugAdder = drugAdder;
+    public Medication(String medicine_Name, String medicineType, int icon, int strength, String mesaure, int drugAmount) {
+        //this.drugAdder = drugAdder;
         this.medicine_Name = medicine_Name;
         this.medicineType = medicineType;
         this.icon = icon;

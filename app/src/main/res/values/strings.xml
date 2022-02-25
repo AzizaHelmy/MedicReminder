@@ -125,4 +125,10 @@
     <string name="appName">Medical Reminder</string>
     <string name="login">Login</string>
     <string name="login_with">Or Login With</string>
+    <string name="tuskkan">Tuskkan</string>
+    <string name="_500_mg">500 mg</string>
+    <string name="_1_left">1 left</string>
+    <string name="added_by_azza">added by Azza</string>
+    <string name="azza_helmy">Azza Helmy</string>
+    <string name="is_invited_you_to_take_care_of_her">is invited you to take care of her</string>
 </resources>

@@ -85,4 +85,9 @@ public class Repository  implements RepositoryInterface{
     public LiveData<List<Medication>> selectAllDrugsForHome1(LifecycleOwner owner) {
         return  localSource.selectAllDrugs1();
     }
+//=============================for Medics Screen==============================
+    @Override
+    public LiveData<List<Medication>> getMedics() {
+        return localSource.getAllMedics();
+    }
 }

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    app:cardCornerRadius="12dp"
+    app:cardCornerRadius="7dp"
     app:cardElevation="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="16dp"
-            tools:srcCompat="@drawable/img_medicine" />
+            tools:srcCompat="@drawable/pillsbottle" />
 
         <TextView
             android:id="@+id/tv_medic_name"
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:fontFamily="monospace"
-            android:text="Tuskkan"
+            android:text="@string/tuskkan"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@id/img_medic"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:fontFamily="serif-monospace"
-            android:text="500 mg"
+            android:text="@string/_500_mg"
             android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@id/tv_medic_name"
@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="1 left"
+            android:text="@string/_1_left"
             app:layout_constraintEnd_toEndOf="@id/img_medic"
             app:layout_constraintStart_toStartOf="@id/img_medic"
             app:layout_constraintTop_toBottomOf="@id/img_medic" />
@@ -64,9 +64,20 @@
             android:layout_margin="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="20dp"
-            android:text="added by Azza"
-            app:layout_constraintBottom_toBottomOf="@id/img_medic"
+            android:text="@string/added_by_azza"
+           app:layout_constraintTop_toBottomOf="@id/img_alarm"
             app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/img_alarm"
+            android:layout_width="wrap_content"
+            android:layout_marginEnd="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_medic_name"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_notifications_active_24"
+            tools:layout_editor_absoluteX="345dp"
+            tools:layout_editor_absoluteY="0dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

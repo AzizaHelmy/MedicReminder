@@ -21,10 +21,8 @@ import com.example.medicationreminder.R;
 import com.example.medicationreminder.databinding.FragmentHealthTakersBinding;
 import com.example.medicationreminder.healthTakers.model.HealthTaker;
 import com.example.medicationreminder.healthTakers.view.TakerOnClick;
-import com.example.medicationreminder.model.Patient;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
