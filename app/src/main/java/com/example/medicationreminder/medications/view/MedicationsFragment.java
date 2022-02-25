@@ -25,7 +25,6 @@ import com.example.medicationreminder.db.ConcereteLocalSource;
 import com.example.medicationreminder.medications.presenter.MedicationPresenter;
 import com.example.medicationreminder.medications.presenter.MedicsPresenter;
 import com.example.medicationreminder.medications.view.adapter.MedicsAdapter;
-import com.example.medicationreminder.model.Drug;
 import com.example.medicationreminder.model.Medication;
 import com.example.medicationreminder.model.Repository;
 

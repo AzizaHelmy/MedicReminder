@@ -55,15 +55,7 @@ public class ConcereteLocalSource implements LocalSource {
     public void editeDrug(Medication medication) {
      drugDao.updateDrug(medication);
     }
-//    @Override
-//    public void (Medication medication) {
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                drugDao.insertDrug(medication);
-//            }
-//        }).start();
-//    }
+
 
     @Override
     public List<Medication> selectAllDrugs(String day) {
