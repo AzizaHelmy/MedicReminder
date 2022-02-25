@@ -15,6 +15,7 @@ import com.example.medicationreminder.db.LocalSource;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Repository  implements RepositoryInterface{
@@ -87,10 +88,21 @@ public class Repository  implements RepositoryInterface{
 
 
     @Override
-    public List<Medication>selectAllDrugsForHome(String day) {
+    public LiveData<List<Medication>>selectAllDrugsForHome(String day , LifecycleOwner owner) {
       return   localSource.selectAllDrugs(day);
     }
-//=============================for Medics Screen==============================
+
+    @Override
+    public LiveData<List<Medication>> selectAllDrugsForHome1(LifecycleOwner owner) {
+        return  localSource.selectAllDrugs1();
+    }
+
+    @Override
+    public List<Medication> selectAllDrugsForHome(String day) {
+        return null;
+    }
+
+    //=============================for Medics Screen==============================
     @Override
     public LiveData<List<Medication>> getMedics(LifecycleOwner owner) {
         return localSource.getAllMedics();

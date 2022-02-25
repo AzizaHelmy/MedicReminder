@@ -2,17 +2,18 @@ package com.example.medicationreminder.db;
 
 import android.content.Context;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 
 import com.example.medicationreminder.model.Medication;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ConcereteLocalSource implements LocalSource {
     DrugDao drugDao;
     private static ConcereteLocalSource concreteLocalSource = null;
-    List<Medication>allDrugsForHome;
+    LiveData<List<Medication >>allDrugsForHome;
+
     private LiveData<List<Medication>> storedMedics;
     LiveData<List<Medication>>displayedDrug;
     private ConcereteLocalSource(Context context) {
@@ -60,6 +61,15 @@ public class ConcereteLocalSource implements LocalSource {
     @Override
     public List<Medication> selectAllDrugs(String day) {
 
+    public LiveData<List<Medication>> selectAllDrugs1() {
+       return  drugDao.selectAllDrugsForHome();
+    }
+
+
+    @Override
+    public LiveData<List<Medication >>selectAllDrugs(String day) {
+
+        return drugDao.selectAllDrugsForHome1(day);
         new Thread(new Runnable() {
             @Override
             public void run() {
