@@ -1,26 +1,22 @@
 package com.example.medicationreminder.model;
 
+import android.text.format.Time;
+
 import java.util.Calendar;
 
 public class Drug {
-    private String numberOfDose;
-    private Calendar time;
 
+    private String time;
 
-    public Drug(String numberOfDose, String clock) {
-        this.numberOfDose = numberOfDose;
-
+    public Drug(String  time) {
+        this.time = time;
     }
 
-    public Drug() {
+    public String getTime() {
+        return time;
     }
 
-    public String getNumberOfDose() {
-        return numberOfDose;
+    public void setTime(String time) {
+        this.time = time;
     }
-
-    public void setNumberOfDose(String numberOfDose) {
-        this.numberOfDose = numberOfDose;
-    }
-
 }

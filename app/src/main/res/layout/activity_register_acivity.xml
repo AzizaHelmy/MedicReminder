@@ -1,43 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-        android:focusableInTouchMode="true"
-        android:gravity="center"
-    android:layout_marginTop="32dp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-
-    tools:context=".register.view.RegisterActivity"
-    android:background="#009688"
-
-        android:layout_gravity="center">
-    <androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/app_color"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+
+        tools:context=".register.view.RegisterActivity"
+        >
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:indeterminate="true"
             android:id="@+id/progress_bar"
-
-
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            />
+        <ImageView
+            android:id="@+id/app_icon_register"
+            android:layout_width="269dp"
+            android:layout_height="170dp"
+            android:layout_marginTop="32dp"
+            android:gravity="bottom"
+            android:scaleType="centerCrop"
 
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/app_icon"
+            />
+        <TextView
+            android:id="@+id/app_name_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="32dp"
+            android:text="@string/appName"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:layout_marginTop="16dp"
+
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/app_icon_register"
 
             />
 
-   <LinearLayout
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_register"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="32dp"
+            app:cardCornerRadius="40dp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/app_name_register"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
 
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:orientation="vertical">
+            <LinearLayout
+
+                android:id="@+id/linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="12dp"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:layout_marginTop="32dp"
+                app:layout_constraintTop_toBottomOf="@id/app_name_register"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:orientation="vertical"
+
+                >
        <com.google.android.material.textfield.TextInputLayout
            android:id="@+id/user_name"
      android:layout_width="match_parent"
@@ -124,20 +166,63 @@
                />
        </com.google.android.material.textfield.TextInputLayout>
        <Button
-           android:id="@+id/btn_login"
+           android:id="@+id/btn_register"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-
-
-           android:backgroundTint="@color/purple_200"
            android:onClick="onRegisterClick"
-           android:text="@string/registerbtn" />
-   </LinearLayout>
+           android:text="@string/registerbtn"
+
+           android:layout_marginStart="60dp"
+           android:layout_marginEnd="60dp"
+           android:layout_marginTop="8dp"
+           android:layout_gravity="center"
+           android:textSize="24sp"
+           android:textColor="@color/white"
+           android:background="@drawable/button_background"
+           />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_gravity="center"
+                    android:paddingTop="24dp"
+                    android:layout_marginBottom="32dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/have_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:text="@string/already_have_account_login"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+
+                        android:textStyle="normal"
+
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="start"
+
+                        android:text="@string/login"
+                        android:textColor="@color/app_color"
+                        android:textSize="16sp"
+                        android:textStyle="normal" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 
-    </ScrollView>
 
 
 

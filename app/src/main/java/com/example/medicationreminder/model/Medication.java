@@ -24,7 +24,7 @@ public class Medication {
     private int drugDuration;
     
     private List<String> days;
-    private List<Drug> drugs;
+    private String [] drugs;
     private String instructions;
     private String status;
     private int drugAmount;
@@ -46,14 +46,15 @@ public class Medication {
     public Medication() {
     }
 
-    public Medication(String drugAdder, @NonNull String medicine_Name,  ArrayList<String> days) {
+    public Medication(String drugAdder, @NonNull String medicine_Name,  ArrayList<String> days ,boolean isDaily, String [] drugs) {
         this.drugAdder = drugAdder;
         this.medicine_Name = medicine_Name;
-
+         this.isDaily=isDaily;
         this.days = days;
+        this.drugs=drugs;
     }
 
-    public Medication(String drugAdder, String medicine_Name, boolean isRemindered, String medicineType, int icon, int strength, String mesaure, double dose, int drugDuration, ArrayList<String> days, ArrayList<Drug> dates, String instructions, String status, int drugAmount, boolean isRefillReminder, int leftDrug, String refilTime) {
+    public Medication(String drugAdder, String medicine_Name, boolean isRemindered, String medicineType, int icon, int strength, String mesaure, double dose, int drugDuration, ArrayList<String> days, String [] drugs, String instructions, String status, int drugAmount, boolean isRefillReminder, int leftDrug, String refilTime) {
         this.drugAdder = drugAdder;
         this.medicine_Name = medicine_Name;
         this.isRemindered = isRemindered;
@@ -64,7 +65,7 @@ public class Medication {
         this.dose = dose;
         this.drugDuration = drugDuration;
         this.days = days;
-        this.drugs = dates;
+        this.drugs = drugs;
         this.instructions = instructions;
         this.status = status;
         this.drugAmount = drugAmount;
@@ -73,10 +74,10 @@ public class Medication {
         RefilTime = refilTime;
     }
 
-    public Medication(String medicine_Name, int icon, ArrayList<Drug> dates, int drugAmount) {
+    public Medication(String medicine_Name, int icon, String [] drugs, int drugAmount) {
         this.medicine_Name = medicine_Name;
         this.icon = icon;
-        this.drugs = dates;
+        this.drugs = drugs;
         this.drugAmount = drugAmount;
     }
 
@@ -168,11 +169,11 @@ public class Medication {
         this.days = days;
     }
 
-    public List<Drug> getDrugs() {
+    public String [] getDrugs() {
         return drugs;
     }
 
-    public void setDrugs(List<Drug> drugs) {
+    public void setDrugs(String [] drugs) {
         this.drugs = drugs;
     }
 

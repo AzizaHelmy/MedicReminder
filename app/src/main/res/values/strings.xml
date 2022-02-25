@@ -12,7 +12,7 @@
     <string name="addbutt">addMedic</string>
 
     <string name="web_client">541607280272-ici76tipfj9bu9sh9brq33cd4qda9jls.apps.googleusercontent.com</string>
-    <string name="registerbtn">Register</string>
+    <string name="registerbtn">Sign Up</string>
     <string name="confirmPassword">Confirm password</string>
     <string name="btn_login_text">Login</string>
     <string name="forgetPassword">Forgetting password</string>
@@ -116,4 +116,13 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="done">done</string>
+    <string name="new_user">New User?</string>
+    <string name="creat_account">Creat Account</string>
+    <string name="already_have_login">Login</string>
+    <string name="already_have_account_login">Already Have Account?</string>
+
+
+    <string name="appName">Medical Reminder</string>
+    <string name="login">Login</string>
+    <string name="login_with">Or Login With</string>
 </resources>

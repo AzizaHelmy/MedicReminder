@@ -3,12 +3,12 @@ package com.example.medicationreminder.Network;
 import static android.content.ContentValues.TAG;
 
 import android.app.Activity;
-import android.content.Context;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.service.controls.ControlsProviderService;
 import android.util.Log;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 
@@ -50,12 +50,12 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
     SharedPreferences.Editor editor;
 
 
-         public static FirebaseConnection getFirebaseConnection(){
-             if (getInstance==null){
-                 getInstance=new FirebaseConnection();
-             }
-             return getInstance;
-         }
+    public static FirebaseConnection getFirebaseConnection() {
+        if (getInstance == null) {
+            getInstance = new FirebaseConnection();
+        }
+        return getInstance;
+    }
 
     @Override
     public void registerNewUser(User user, Activity activity, FirebaseConnectionDelegated firebaseConnectionDelegated) {
@@ -158,7 +158,7 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
         Log.e(TAG, "signWithGoogle: connectio");
         GoogleSignInOptions gso = new GoogleSignInOptions
                 .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-          .requestIdToken(activity.getString(R.string.web_client))
+                .requestIdToken(activity.getString(R.string.web_client))
                 .requestEmail()
                 .build();
         googleSingInClient = GoogleSignIn.getClient(activity, gso);
@@ -178,7 +178,7 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Log.e(TAG, "onComplete: "+task.getResult().getUser().getEmail());
+                                Log.e(TAG, "onComplete: " + task.getResult().getUser().getEmail());
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 firebaseConnectionDelegated.onCompleteResultSuccess(user);
                                 //  googleSingInClient.signOut();
@@ -191,41 +191,42 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
                         }
                     });
         } catch (ApiException e) {
-            Log.e(TAG, "firebaseAuthWithGoogle: "+e.getLocalizedMessage());
+            Log.e(TAG, "firebaseAuthWithGoogle: " + e.getLocalizedMessage());
             e.printStackTrace();
         }
 
     }
+
     @Override
-    public boolean restPassword(String emil,FirebaseConnectionDelegated firebaseConnectionDelegated) {
+    public boolean restPassword(String emil, FirebaseConnectionDelegated firebaseConnectionDelegated) {
         final int[] isSuccess = {0};
         mAuth = FirebaseAuth.getInstance();
-            mAuth.sendPasswordResetEmail(emil).addOnCompleteListener(new OnCompleteListener<Void>() {
-                @Override
-                public void onComplete(@NonNull Task<Void> task) {
+        mAuth.sendPasswordResetEmail(emil).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
 
-                }
-            })
-                  .addOnSuccessListener(new OnSuccessListener<Void>() {
-                      @Override
-                      public void onSuccess(Void unused) {
-                     isSuccess[0] =1;
+            }
+        })
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        isSuccess[0] = 1;
 
-                      }
+                    }
 
-                  }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                        firebaseConnectionDelegated.onFailureResult(e.getMessage());
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                firebaseConnectionDelegated.onFailureResult(e.getMessage());
 
-                }
-            });
-    if (isSuccess[0]==1){
-        return  true;
-    }
+            }
+        });
+        if (isSuccess[0] == 1) {
+            return true;
+        }
 
         return false;
     }
 
 
-    }
+}

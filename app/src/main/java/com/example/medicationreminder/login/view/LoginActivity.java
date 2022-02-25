@@ -23,6 +23,7 @@ import com.example.medicationreminder.login.presenter.LoginPresenter;
 import com.example.medicationreminder.login.presenter.LoginPresenterInterface;
 import com.example.medicationreminder.model.Repository;
 import com.example.medicationreminder.model.User;
+import com.example.medicationreminder.register.view.RegisterActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.Task;
@@ -232,5 +233,10 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
 
 
 
+    }
+
+    public void openRegister(View view) {
+        Intent intent=new Intent(LoginActivity.this, RegisterActivity.class);
+        startActivity(intent);
     }
 }

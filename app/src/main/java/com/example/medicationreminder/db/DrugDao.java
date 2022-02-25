@@ -16,7 +16,9 @@ public interface DrugDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
    void insertDrug (Medication medication);
 
-    @Query("SELECT * FROM MEDICATIONS where isDaily=1 or days LIKE '%' || :day || '%'")
-    List<Medication >selectAllDrugsForHome(String day);
+    @Query("SELECT * FROM MEDICATIONS  where isDaily=1 or days LIKE '%'|| :day || '%'")
+    LiveData<List<Medication >> selectAllDrugsForHome1(String day);
+    @Query("SELECT * FROM MEDICATIONS  where isDaily=1 ")
+    LiveData<List<Medication >> selectAllDrugsForHome();
 
 }

@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
+//////////////////////////////////////////////
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
         bottomNavigationView = findViewById(R.id.bottom_nav_view);
@@ -44,15 +44,18 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
+/////////////////////////////////////
         drawerLayout=findViewById(R.id.drawerLayout);
         Toolbar toolbar=findViewById(R.id.toolbar);
+
+        toolbar.setNavigationIcon(R.drawable.user_icon);
+
         NavigationView navigationView=findViewById(R.id.navigation_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph())
                 .setOpenableLayout(drawerLayout)
                 .build();
 
-        NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(toolbar, navController);
         NavigationUI.setupWithNavController(navigationView, navController);
 
     }

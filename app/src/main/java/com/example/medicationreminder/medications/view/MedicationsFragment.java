@@ -3,6 +3,7 @@ package com.example.medicationreminder.medications.view;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.medicationreminder.BaseFragment;
 import com.example.medicationreminder.R;
 
 import com.example.medicationreminder.medications.model.MedicsModel;
@@ -21,7 +21,7 @@ import java.util.List;
 import com.example.medicationreminder.model.Drug;
 import com.example.medicationreminder.model.Medication;
 
-public class MedicationsFragment extends BaseFragment implements MedicsOnClick ,MedicsInterface{
+public class MedicationsFragment extends Fragment implements MedicsOnClick ,MedicsInterface{
     Button buttAdd;
     RecyclerView rvMedics;
     MedicsAdapter adapterMedics;
@@ -35,22 +35,7 @@ public class MedicationsFragment extends BaseFragment implements MedicsOnClick ,
         // Required empty public constructor
     }
 
-    @Override
-    public int getLayoutId() {
-        return R.layout.fragment_medications;
-    }
 
-    @Override
-    public void initializeViews(View view) {
-        buttAdd = view.findViewById(R.id.butt_add);
-        rvMedics = view.findViewById(R.id.rv_medics);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        rvMedics.setLayoutManager(linearLayoutManager);
-        adapterMedics = new MedicsAdapter(getContext(), buildItemList());
-        list = buildItemList();
-
-        rvMedics.setAdapter(adapterMedics);
-    }
 
     private List<MedicsModel> buildItemList() {
         itemList = new ArrayList<>();
@@ -73,18 +58,8 @@ public class MedicationsFragment extends BaseFragment implements MedicsOnClick ,
 //        return subItemList;
 //    }
 
-    @Override
-    public void setListeners() {
-        buttAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_medicationsFragment_to_addMedicationFragment);
-//                findNavController(fragment).navigate(
-//                        SignInFragmentDirections.actionSignInFragmentToUserNameFragment())
 
-            }
-        });
-    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

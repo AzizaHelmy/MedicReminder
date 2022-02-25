@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 
 import com.example.medicationreminder.Network.FirebaseConnectionDelegated;
@@ -76,7 +77,12 @@ public class Repository  implements RepositoryInterface{
     }
 
     @Override
-    public List<Medication>selectAllDrugsForHome(String day) {
+    public LiveData<List<Medication>>selectAllDrugsForHome(String day , LifecycleOwner owner) {
       return   localSource.selectAllDrugs(day);
+    }
+
+    @Override
+    public LiveData<List<Medication>> selectAllDrugsForHome1(LifecycleOwner owner) {
+        return  localSource.selectAllDrugs1();
     }
 }
