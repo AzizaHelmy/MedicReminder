@@ -5,6 +5,6 @@ import com.example.medicationreminder.model.Medication;
 import java.util.List;
 
 public interface MedicsInterface {
-    void showMedics(List<Medication> movies);
+    void showMedics(List<Medication> medics);
     public  void insert();
 }
