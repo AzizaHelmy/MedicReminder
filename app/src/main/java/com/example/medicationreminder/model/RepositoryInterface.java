@@ -25,12 +25,6 @@ public interface RepositoryInterface {
     public  void insertMed(Medication medication);
     public LiveData<List<Medication>> selectAllDrugsForHome(String day, LifecycleOwner owner);
     public LiveData<List<Medication>> selectAllDrugsForHome1(LifecycleOwner owner);
-
-
-
-    public void firebaseAuthWithGoogle(Activity activity, Task<GoogleSignInAccount> task, FirebaseConnectionDelegated firebaseConnectionDelegated) ;
-    public boolean restPassword(String emil,FirebaseConnectionDelegated firebaseConnectionDelegated) ;
-    public  void insertMed(Medication medication);
     LiveData<List<Medication>> displayDrug();
     public  void updateDrug(Medication medication);
     //public void displayMed(Medication medication);

@@ -58,8 +58,6 @@ public class ConcereteLocalSource implements LocalSource {
     }
 
 
-    @Override
-    public List<Medication> selectAllDrugs(String day) {
 
     public LiveData<List<Medication>> selectAllDrugs1() {
        return  drugDao.selectAllDrugsForHome();
@@ -70,14 +68,8 @@ public class ConcereteLocalSource implements LocalSource {
     public LiveData<List<Medication >>selectAllDrugs(String day) {
 
         return drugDao.selectAllDrugsForHome1(day);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                allDrugsForHome = drugDao.selectAllDrugsForHome(day);
-       // allDrugsForHome=drugDao.selectAllDrugsForHome(day);
-            }
-        }).start();
-        return allDrugsForHome;
+
+
     }
 
     @Override

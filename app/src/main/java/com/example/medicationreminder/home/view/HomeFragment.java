@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
@@ -64,7 +65,13 @@ public class HomeFragment extends Fragment implements HomeViewInterface {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        OnBackPressedCallback pressedCallback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                requireActivity().finish();
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, pressedCallback);
     }
 //لسه
     @Override
@@ -89,7 +96,7 @@ public class HomeFragment extends Fragment implements HomeViewInterface {
         recyclerView=viewRoot.findViewById(R.id.day_recycler);
         recyclerView.setLayoutManager(linearLayoutManager);
       dayAdapter=new DayAdapter(getContext(),new ArrayList<HoursModel>(),this);
-        recyclerView.setAdapter(dayAdapter);
+        //recyclerView.setAdapter(dayAdapter);
         homePresenterInterface.selectAllDrugsForHome1(this);
         return viewRoot;
     }
@@ -108,8 +115,8 @@ public class HomeFragment extends Fragment implements HomeViewInterface {
 
                     @Override
                     public void onChanged(List<Medication> medications) {
-                        dayAdapter.setData(list((ArrayList<Medication>) medications));
-                        dayAdapter.notifyDataSetChanged();
+//                        dayAdapter.setData(list((ArrayList<Medication>) medications));
+//                        dayAdapter.notifyDataSetChanged();
 
 
                     }
@@ -150,13 +157,13 @@ public class HomeFragment extends Fragment implements HomeViewInterface {
         String[] drugs4 = {"10:20 am", "2:49 pm", "2:00 pm"};
 
 
-        homePresenterInterface.insertMed(new Medication("doaa", "aziza", days1, true, drugs1));
-
-        homePresenterInterface.insertMed(new Medication("salma", "yssmeen", days2, true, drugs2));
-
-        homePresenterInterface.insertMed(new Medication("azza", "riaaan", days3, true, drugs3));
-
-        homePresenterInterface.insertMed(new Medication("yasmeen", "salma", days4, true, drugs4));
+//        homePresenterInterface.insertMed(new Medication("doaa", "aziza", days1, true, drugs1));
+//
+//        homePresenterInterface.insertMed(new Medication("salma", "yssmeen", days2, true, drugs2));
+//
+//        homePresenterInterface.insertMed(new Medication("azza", "riaaan", days3, true, drugs3));
+//
+//        homePresenterInterface.insertMed(new Medication("yasmeen", "salma", days4, true, drugs4));
 
     }
 
@@ -286,14 +293,14 @@ private ArrayList<HoursModel>list(ArrayList<Medication>med){
         String[] drugs3 = {"11:30 am", "4:16 pm", "6:50 pm"};
         String[] drugs4 = {"10:20 am", "2:49 pm", "2:00 pm"};
 
-
-        medications.add(new Medication("doaa", "medicine1", days1, true, drugs1));
-
-        medications.add(new Medication("salma", "medicine2", days2, true, drugs2));
-
-        medications.add(new Medication("azza", "medicine3", days3, true, drugs3));
-
-        medications.add(new Medication("yasmeen", "medicine4", days4, true, drugs4));
+//
+//        medications.add(new Medication("doaa", "medicine1", days1, true, drugs1));
+//
+//        medications.add(new Medication("salma", "medicine2", days2, true, drugs2));
+//
+//        medications.add(new Medication("azza", "medicine3", days3, true, drugs3));
+//
+//        medications.add(new Medication("yasmeen", "medicine4", days4, true, drugs4));
         return medications;
     }
 

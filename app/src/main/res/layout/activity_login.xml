@@ -5,7 +5,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-       android:background="@color/app_color"
+       android:background="@color/purple_500"
         tools:context=".login.view.LoginActivity"
 
         >
@@ -27,7 +27,7 @@
         android:layout_marginTop="32dp"
         android:gravity="bottom"
         android:scaleType="centerCrop"
-        android:src="@drawable/app_icon"
+        android:src="@drawable/icon_medi"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -108,7 +108,7 @@
 
                     android:onClick="openRegister"
                     android:text="@string/creat_account"
-                    android:textColor="@color/app_color"
+                    android:textColor="@color/purple_700"
                     android:textSize="16sp"
                     android:textStyle="normal" />
             </LinearLayout>
@@ -167,7 +167,7 @@
                 android:layout_marginStart="48dp"
                 android:layout_marginTop="12dp"
                 android:onClick="onForgetPasswordClick"
-                android:textColor="@color/app_color"
+                android:textColor="@color/purple_500"
                 android:text="@string/forgetPassword"
                 />
             <Button
@@ -207,7 +207,7 @@
         android:layout_gravity="center"
         android:background="@color/white"
         android:onClick="loginWithGoogle"
-        android:src="@drawable/google_plus"/>
+        android:src="@drawable/google_icon"/>
     <ImageView
         android:id="@+id/btn_facebook"
         android:layout_width="60dp"

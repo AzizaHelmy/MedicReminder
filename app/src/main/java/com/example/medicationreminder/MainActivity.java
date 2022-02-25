@@ -27,7 +27,20 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        navController = navHostFragment.getNavController();
+        bottomNavigationView = findViewById(R.id.bottom_nav_view);
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
+                if (navDestination.getId() == R.id.addMedicationFragment || navDestination.getId() == R.id.addHealthTakerFragment || navDestination.getId() == R.id.displayMedicineFragment) {
+                    bottomNavigationView.setVisibility(View.GONE);
+                } else {
+                    bottomNavigationView.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
 //////////////////////////////////////////////
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
@@ -48,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout=findViewById(R.id.drawerLayout);
         Toolbar toolbar=findViewById(R.id.toolbar);
 
-        toolbar.setNavigationIcon(R.drawable.user_icon);
+       // toolbar.setNavigationIcon(R.drawable.user_icon);
 
         NavigationView navigationView=findViewById(R.id.navigation_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph())

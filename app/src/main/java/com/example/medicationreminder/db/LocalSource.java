@@ -13,7 +13,7 @@ public interface LocalSource {
    // public void displayDrug(Medication medication);
    LiveData< List<Medication>>dispalyedDrug();
     public void editeDrug(Medication medication);
-    public List<Medication>selectAllDrugs(String day);
+
     public LiveData<List<Medication >>selectAllDrugs(String day);
     public LiveData<List<Medication >>selectAllDrugs1();
 
