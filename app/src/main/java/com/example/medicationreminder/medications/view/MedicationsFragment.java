@@ -3,91 +3,74 @@ package com.example.medicationreminder.medications.view;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-
-import com.example.medicationreminder.BaseFragment;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import com.example.medicationreminder.Network.FirebaseConnection;
 import com.example.medicationreminder.R;
 
-import com.example.medicationreminder.medications.model.MedicsModel;
-import com.example.medicationreminder.medications.view.adapter.MedicsAdapter;
+import com.example.medicationreminder.databinding.FragmentMedicationsBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.medicationreminder.db.ConcereteLocalSource;
+import com.example.medicationreminder.medications.presenter.MedicationPresenter;
+import com.example.medicationreminder.medications.presenter.MedicsPresenter;
+import com.example.medicationreminder.medications.view.adapter.MedicsAdapter;
+import com.example.medicationreminder.model.Drug;
 import com.example.medicationreminder.model.Medication;
+import com.example.medicationreminder.model.Repository;
 
-public class MedicationsFragment extends BaseFragment implements MedicsOnClick ,MedicsInterface{
-    Button buttAdd;
-    RecyclerView rvMedics;
+public class MedicationsFragment extends Fragment implements MedicsOnClick, MedicsInterface {
+
+    FragmentMedicationsBinding binding;
     MedicsAdapter adapterMedics;
-    List<MedicsModel> list = new ArrayList<>();
-    String subItem;
-    MedicsModel item;
-    List<String> subItemList;
-    List<MedicsModel> itemList;
-
+    List<Medication> list;
+    MedicsPresenter medicsPresenter;
+    public static final String TAG = "TAG";
     public MedicationsFragment() {
         // Required empty public constructor
     }
 
+    //========================================================
+    @Nullable
     @Override
-    public int getLayoutId() {
-        return R.layout.fragment_medications;
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = FragmentMedicationsBinding.inflate(getLayoutInflater(), container, false);
+        View view = binding.getRoot();
+        setUpRecyclerView();
+        medicsPresenter = new MedicationPresenter(getContext(), Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())), this);
+        insert();
+       medicsPresenter.getMedics(getViewLifecycleOwner());
+        return view;
     }
 
+    //============================================================
     @Override
-    public void initializeViews(View view) {
-        buttAdd = view.findViewById(R.id.butt_add);
-        rvMedics = view.findViewById(R.id.rv_medics);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        rvMedics.setLayoutManager(linearLayoutManager);
-        adapterMedics = new MedicsAdapter(getContext(), buildItemList());
-        list = buildItemList();
-
-        rvMedics.setAdapter(adapterMedics);
-    }
-
-    private List<MedicsModel> buildItemList() {
-        itemList = new ArrayList<>();
-
-//        item = new MedicsModel("Active ", buildSubItemList());
-//        itemList.add(item);
-//        itemList.add(new MedicsModel("INActive ", buildSubItemList()));
-
-        return itemList;
-    }
-
-//    private List<Medication> buildSubItemList() {
-//        subItemList = new ArrayList<>();
-//        for (int i = 1; i <= 2; i++) {
-//           // subItem = new Medication(R.drawable.img_medicine, "panadol", "1000 gm", "2 left", "Added by Asmaa");
-//           // subItemList.add(new Drug(R.drawable.pill, "Tusskan", "500 gm", "1 left", " Added by Azza"));
-//           // subItemList.add(new ItemModel(R.drawable.pillsbottle, "kohol", "500 gm", "0 left", "Added by salma"));
-//            subItemList.add(subItem);
-//        }
-//        return subItemList;
-//    }
-
-    @Override
-    public void setListeners() {
-        buttAdd.setOnClickListener(new View.OnClickListener() {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        binding.buttAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Navigation.findNavController(view).navigate(R.id.action_medicationsFragment_to_addMedicationFragment);
-//                findNavController(fragment).navigate(
-//                        SignInFragmentDirections.actionSignInFragmentToUserNameFragment())
 
             }
         });
     }
 
+    //==========================================================
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         OnBackPressedCallback pressedCallback = new OnBackPressedCallback(true) {
             @Override
@@ -98,15 +81,61 @@ public class MedicationsFragment extends BaseFragment implements MedicsOnClick ,
         requireActivity().getOnBackPressedDispatcher().addCallback(this, pressedCallback);
     }
 
+    //==================================================================
+    private void setUpRecyclerView() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        binding.rvMedics.setLayoutManager(layoutManager);
+        Log.e(TAG, "showMedics: " + list);
+        adapterMedics = new MedicsAdapter(getContext(), list, this, Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())));
+        binding.rvMedics.setAdapter(adapterMedics);
+    }
+
+    //========================================================================
     @Override
     public void ItemOnClick(Medication model) {
-        subItemList.remove(model);
+        //send args
+        //bundel
+        Navigation.findNavController(getView()).navigate(R.id.action_medicationsFragment_to_displayMedicineFragment);
         adapterMedics.notifyDataSetChanged();
     }
 
     @Override
-    public void showMedics(List<MedicsModel> movies) {
+    public void alarmOnClick(Medication medic, ImageView view) {
 
+    }
+
+    //=========================================================================
+    @Override
+    public void showMedics(List<Medication> medications) {
+        adapterMedics.setList(medications);
+        cheackMedic(medications);
+        adapterMedics.notifyDataSetChanged();
+    }
+
+    @Override
+    public void insert() {
+        medicsPresenter.insert(new Medication("Panadol","mahlol", R.drawable.icon_medi,500, "gm",3));
+        medicsPresenter.insert(new Medication("Tusskan","mahlol", R.drawable.pillsbottle,500, "gm",3));
+        medicsPresenter.insert(new Medication("Runy","mahlol", R.drawable.heartbeat,500, "gm",3));
+        medicsPresenter.insert(new Medication("Rtxh","mahlol", R.drawable.eyedropper,500, "gm",3));
+        medicsPresenter.insert(new Medication("potr","mahlol", R.drawable.ointment,500, "gm",3));
+        medicsPresenter.insert(new Medication("bjuy","mahlol", R.drawable.vaccine,500, "gm",3));
+        medicsPresenter.insert(new Medication("ewsf","mahlol", R.drawable.ointment,500, "gm",3));
+        medicsPresenter.insert(new Medication("tyrew","mahlol", R.drawable.spoon,500, "gm",3));
+        medicsPresenter.insert(new Medication("iuytd","mahlol", R.drawable.eyedropper,500, "gm",3));
+        medicsPresenter.insert(new Medication("porytr","mahlol", R.drawable.icon_medi,500, "gm",3));
+        medicsPresenter.insert(new Medication("hfjjf","mahlol", R.drawable.heartbeat,500, "gm",3));
+    }
+    //=======================================================================
+    private void cheackMedic(List<Medication> medications) {
+        if (medications.isEmpty()) {
+            binding.rvMedics.setVisibility(View.GONE);
+            binding.emptyIv.setVisibility(View.VISIBLE);
+        } else {
+            binding.emptyIv.setVisibility(View.GONE);
+            binding.rvMedics.setVisibility(View.VISIBLE);
+        }
     }
 }
 

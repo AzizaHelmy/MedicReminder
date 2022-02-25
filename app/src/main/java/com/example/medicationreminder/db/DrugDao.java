@@ -29,4 +29,9 @@ public interface DrugDao {
      @Query("SELECT * FROM MEDICATIONS")
      LiveData<List<Medication>>displayDrug();
 
+    @Query("SELECT * From MEDICATIONS")
+    LiveData<List<Medication>> getAllMedics();
+
+    @Query("SELECT EXISTS (SELECT 1 FROM MEDICATIONS WHERE medicine_Name=:medicine_Name)")
+    boolean isReminder(String medicine_Name);
 }

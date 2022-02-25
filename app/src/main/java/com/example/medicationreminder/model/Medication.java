@@ -33,7 +33,14 @@ public class Medication {
     private String leftDrug;
     private String RefilTime;
 
+    public Medication(@NonNull String medicine_Name) {
+        this.medicine_Name = medicine_Name;
+    }
 
+    public Medication(String medicine_Name, String medicineType, int icon, int strength, String mesaure, int drugAmount) {
+    }
+
+        //this.drugAdder = drugAdder;
     public Medication(String drugAdder, String medicine_Name, String medicineType, int icon, String strength,  String drugAmount) {
         this.drugAdder = drugAdder;
         this.medicine_Name = medicine_Name;

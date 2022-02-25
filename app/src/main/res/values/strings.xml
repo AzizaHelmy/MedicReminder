@@ -88,7 +88,7 @@
     <string name="whileeating">while eating</string>
     <string name="doesnotmatter">does not matter</string>
     <string name="refillamount">Enter the quantity of medication you have now to receive a reminder to fill the medication</string>
-    <string name="Fillingtheprescription">Filling the prescription</string>
+    <string name="Fillingtheprescription">Filling the prescription></string>
     <string name="Amountofmedicine">Amount of medicine</string>
     <string name="Aremindertofillthemedicine">A reminder to fill the medicine</string>
     <string name="WhenIhaveleft">When I have left</string>
@@ -112,4 +112,10 @@
     <string name="done">done</string>
     <string name="refillagain">Fill your prescription again</string>
 
+    <string name="tuskkan">Tuskkan</string>
+    <string name="_500_mg">500 mg</string>
+    <string name="_1_left">1 left</string>
+    <string name="added_by_azza">added by Azza</string>
+    <string name="azza_helmy">Azza Helmy</string>
+    <string name="is_invited_you_to_take_care_of_her">is invited you to take care of her</string>
 </resources>

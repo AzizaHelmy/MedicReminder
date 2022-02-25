@@ -1,15 +1,16 @@
 package com.example.medicationreminder.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import androidx.room.Entity;
 
+import java.util.List;
+@Entity(tableName = "User")
 public class User {
     String userId;
     String UserName;
     String password;
     String userEmail;
-    private List<HealthTaker> healthTakers;
-    private List<Medication> medications;
+    private List<Request> requests;
+
     public String getPassword() {
         return password;
     }

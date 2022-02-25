@@ -21,11 +21,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_medics"
         android:layout_width="match_parent"
-        android:layout_height="604dp"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="65dp"
+        android:background="@color/purple_700"
         app:layout_constraintBottom_toTopOf="@+id/butt_add"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/medic_item_rv" />
     <ImageView
         android:id="@+id/empty_iv"
@@ -34,7 +36,8 @@
         android:layout_marginTop="176dp"
         android:layout_marginEnd="96dp"
         android:scaleType="fitCenter"
-        android:visibility="visible"
+        android:visibility="gone"
+        android:src="@drawable/prescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

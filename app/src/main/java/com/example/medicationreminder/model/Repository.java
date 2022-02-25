@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 
 import com.example.medicationreminder.Network.FirebaseConnectionDelegated;
@@ -14,7 +15,6 @@ import com.example.medicationreminder.db.LocalSource;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.Task;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Repository  implements RepositoryInterface{
@@ -90,4 +90,45 @@ public class Repository  implements RepositoryInterface{
     public List<Medication>selectAllDrugsForHome(String day) {
       return   localSource.selectAllDrugs(day);
     }
+//=============================for Medics Screen==============================
+    @Override
+    public LiveData<List<Medication>> getMedics(LifecycleOwner owner) {
+        return localSource.getAllMedics();
+    }
+
+    @Override
+    public boolean isReminder(String medicName) {
+        return false;
+    }
+
+//    @Override
+//    public boolean isReminder(String medicName) {
+//        Reminder reminder =new Reminder();
+//        reminder.setName(medicName);
+//        Thread th=new Thread(reminder);
+//        th.start();
+//        try {
+//            th.join();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        return  reminder.isFlag();
+//    }
+
+//    public class Reminder implements Runnable {
+//        private boolean flag=false;
+//        private String medicName;
+//
+//        @Override
+//        public void run() {
+//            flag = repository.isReminder(medicName);
+//        }
+//        public void setName(String name) {
+//            this.medicName = name;
+//        }
+//        public boolean isFlag() {
+//            return flag;
+//        }
+//    }
+
 }

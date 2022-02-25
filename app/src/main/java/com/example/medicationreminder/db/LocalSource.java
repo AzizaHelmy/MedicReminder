@@ -14,5 +14,6 @@ public interface LocalSource {
    LiveData< List<Medication>>dispalyedDrug();
     public void editeDrug(Medication medication);
     public List<Medication>selectAllDrugs(String day);
+    LiveData<List<Medication>> getAllMedics();
 
 }

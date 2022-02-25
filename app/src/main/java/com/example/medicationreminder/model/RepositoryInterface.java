@@ -2,6 +2,7 @@ package com.example.medicationreminder.model;
 
 import android.app.Activity;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 
 import com.example.medicationreminder.Network.FirebaseConnectionDelegated;
@@ -12,10 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface RepositoryInterface {
-    public void registerNewUser(User user, Activity activity , FirebaseConnectionDelegated firebaseConnectionDelegated);
+    public void registerNewUser(User user, Activity activity, FirebaseConnectionDelegated firebaseConnectionDelegated);
 
-   public  void signIn(User user, Activity activity , FirebaseConnectionDelegated firebaseConnectionDelegated);
-    boolean   isUserSignIn();
+    public void signIn(User user, Activity activity, FirebaseConnectionDelegated firebaseConnectionDelegated);
+
+    boolean isUserSignIn();
+
     public void signWithGoogle(Activity activity);
     public void firebaseAuthWithGoogle(Activity activity, Task<GoogleSignInAccount> task, FirebaseConnectionDelegated firebaseConnectionDelegated) ;
     public boolean restPassword(String emil,FirebaseConnectionDelegated firebaseConnectionDelegated) ;
@@ -23,6 +26,11 @@ public interface RepositoryInterface {
     LiveData<List<Medication>> displayDrug();
     public  void updateDrug(Medication medication);
     //public void displayMed(Medication medication);
+
     public List<Medication> selectAllDrugsForHome(String day);
+
+    //========================For Medics===========================
+    public LiveData<List<Medication>> getMedics(LifecycleOwner owner);
+    public boolean isReminder(String medicName);
 
 }
