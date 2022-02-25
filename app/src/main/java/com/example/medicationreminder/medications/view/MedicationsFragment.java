@@ -16,11 +16,11 @@ import android.widget.ImageView;
 import com.example.medicationreminder.Network.FirebaseConnection;
 import com.example.medicationreminder.R;
 
-import com.example.medicationreminder.databinding.FragmentMedicationsBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.medicationreminder.databinding.FragmentMedicationsBinding;
 import com.example.medicationreminder.db.ConcereteLocalSource;
 import com.example.medicationreminder.medications.presenter.MedicationPresenter;
 import com.example.medicationreminder.medications.presenter.MedicsPresenter;
@@ -49,7 +49,7 @@ public class MedicationsFragment extends Fragment implements MedicsOnClick, Medi
         setUpRecyclerView();
         medicsPresenter = new MedicationPresenter(getContext(), Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())), this);
         insert();
-       medicsPresenter.getMedics(getViewLifecycleOwner());
+        medicsPresenter.getMedics(getViewLifecycleOwner());
         return view;
     }
 
