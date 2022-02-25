@@ -13,7 +13,7 @@ public class ConcereteLocalSource implements LocalSource {
     DrugDao drugDao;
     private static ConcereteLocalSource concreteLocalSource = null;
     LiveData<List<Medication >>allDrugsForHome;
-    List<Medication>allDrugsForHome;
+
     private LiveData<List<Medication>> storedMedics;
     private ConcereteLocalSource(Context context) {
         AppDataBase db = AppDataBase.getInstance(context.getApplicationContext());
@@ -38,19 +38,12 @@ public class ConcereteLocalSource implements LocalSource {
         }).start();
     }
 
-    @Override
-    public List<Medication> selectAllDrugs(String day) {
+
     public LiveData<List<Medication>> selectAllDrugs1() {
        return  drugDao.selectAllDrugsForHome();
     }
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                allDrugsForHome = drugDao.selectAllDrugsForHome(day);
-            }
-        }).start();
-        return allDrugsForHome;
+
     @Override
     public LiveData<List<Medication >>selectAllDrugs(String day) {
 

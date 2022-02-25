@@ -13,6 +13,5 @@ public interface LocalSource {
     public LiveData<List<Medication >>selectAllDrugs(String day);
     public LiveData<List<Medication >>selectAllDrugs1();
 
-    public List<Medication>selectAllDrugs(String day);
     LiveData<List<Medication>> getAllMedics();
 }
