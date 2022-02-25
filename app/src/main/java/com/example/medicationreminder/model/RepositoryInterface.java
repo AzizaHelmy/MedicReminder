@@ -21,6 +21,7 @@ public interface RepositoryInterface {
     public boolean restPassword(String emil,FirebaseConnectionDelegated firebaseConnectionDelegated) ;
     public  void insertMed(Medication medication);
     LiveData<List<Medication>> displayDrug();
+    public  void updateDrug(Medication medication);
     //public void displayMed(Medication medication);
     public List<Medication> selectAllDrugsForHome(String day);
 

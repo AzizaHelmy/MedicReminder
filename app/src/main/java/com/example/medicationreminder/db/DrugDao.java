@@ -24,7 +24,9 @@ public interface DrugDao {
     void updateDrug(Medication medication);
      @Delete
     void deleteDrug(Medication medication);
+
+
      @Query("SELECT * FROM MEDICATIONS")
-     List<Medication>displayDrug();
+     LiveData<List<Medication>>displayDrug();
 
 }

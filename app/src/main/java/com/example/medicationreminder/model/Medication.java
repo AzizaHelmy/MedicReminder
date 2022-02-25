@@ -18,28 +18,28 @@ public class Medication {
     private String medicineType;
     private int icon;
     private String strength;
-    private String mesaure;
     private double dose;
     boolean isDaily;
+    private String frequencyOfrepition;
     private int drugDuration;
-    
+    private String noOfDays;
+    private String stratingDate;
     private List<String> days;
-    private List<Drug> drugs;
+    private String[] drugs;
     private String instructions;
     private String status;
     private String drugAmount;
     private boolean isRefillReminder;
-    private int leftDrug;
+    private String leftDrug;
     private String RefilTime;
 
 
-    public Medication(String drugAdder, String medicine_Name, String medicineType, int icon, String strength, String mesaure, String drugAmount) {
+    public Medication(String drugAdder, String medicine_Name, String medicineType, int icon, String strength,  String drugAmount) {
         this.drugAdder = drugAdder;
         this.medicine_Name = medicine_Name;
         this.medicineType = medicineType;
         this.icon = icon;
         this.strength = strength;
-        this.mesaure = mesaure;
         this.drugAmount = drugAmount;
     }
 
@@ -53,18 +53,17 @@ public class Medication {
         this.days = days;
     }
 
-    public Medication(String drugAdder, String medicine_Name, boolean isRemindered, String medicineType, int icon, String strength, String mesaure, double dose, int drugDuration, ArrayList<String> days, ArrayList<Drug> dates, String instructions, String status, String drugAmount, boolean isRefillReminder, int leftDrug, String refilTime) {
+    public Medication(String drugAdder, String medicine_Name, boolean isRemindered, String medicineType, int icon, String strength,double dose, int drugDuration, ArrayList<String> days,String[] drugs, String instructions, String status, String drugAmount, boolean isRefillReminder, String leftDrug, String refilTime) {
         this.drugAdder = drugAdder;
         this.medicine_Name = medicine_Name;
         this.isRemindered = isRemindered;
         this.medicineType = medicineType;
         this.icon = icon;
         this.strength = strength;
-        this.mesaure = mesaure;
         this.dose = dose;
         this.drugDuration = drugDuration;
         this.days = days;
-        this.drugs = dates;
+        this.drugs = drugs;
         this.instructions = instructions;
         this.status = status;
         this.drugAmount = drugAmount;
@@ -73,19 +72,11 @@ public class Medication {
         RefilTime = refilTime;
     }
 
-    public Medication(String medicine_Name, int icon, ArrayList<Drug> dates, String drugAmount) {
+    public Medication(String medicine_Name, int icon, String[]drugs, String drugAmount) {
         this.medicine_Name = medicine_Name;
         this.icon = icon;
-        this.drugs = dates;
+        this.drugs = drugs;
         this.drugAmount = drugAmount;
-    }
-
-    public boolean isDaily() {
-        return isDaily;
-    }
-
-    public void setDaily(boolean daily) {
-        isDaily = daily;
     }
 
     public String getDrugAdder() {
@@ -96,11 +87,12 @@ public class Medication {
         this.drugAdder = drugAdder;
     }
 
+    @NonNull
     public String getMedicine_Name() {
         return medicine_Name;
     }
 
-    public void setMedicine_Name(String medicine_Name) {
+    public void setMedicine_Name(@NonNull String medicine_Name) {
         this.medicine_Name = medicine_Name;
     }
 
@@ -136,20 +128,24 @@ public class Medication {
         this.strength = strength;
     }
 
-    public String getMesaure() {
-        return mesaure;
-    }
-
-    public void setMesaure(String mesaure) {
-        this.mesaure = mesaure;
-    }
-
+   public void setFrequencyOfrepition(String frequencyOfrepition){
+        this.frequencyOfrepition=frequencyOfrepition;
+   }
+   public String getFrequencyOfrepition(){return frequencyOfrepition;}
     public double getDose() {
         return dose;
     }
 
     public void setDose(double dose) {
         this.dose = dose;
+    }
+
+    public boolean isDaily() {
+        return isDaily;
+    }
+
+    public void setDaily(boolean daily) {
+        isDaily = daily;
     }
 
     public int getDrugDuration() {
@@ -160,6 +156,14 @@ public class Medication {
         this.drugDuration = drugDuration;
     }
 
+    public String getStratingDate() {
+        return stratingDate;
+    }
+
+    public void setStratingDate(String stratingDate) {
+        this.stratingDate = stratingDate;
+    }
+
     public List<String> getDays() {
         return days;
     }
@@ -168,11 +172,11 @@ public class Medication {
         this.days = days;
     }
 
-    public List<Drug> getDrugs() {
+    public String[] getDrugs() {
         return drugs;
     }
 
-    public void setDrugs(List<Drug> drugs) {
+    public void setDrugs(String[] drugs) {
         this.drugs = drugs;
     }
 
@@ -208,11 +212,11 @@ public class Medication {
         isRefillReminder = refillReminder;
     }
 
-    public int getLeftDrug() {
+    public String getLeftDrug() {
         return leftDrug;
     }
 
-    public void setLeftDrug(int leftDrug) {
+    public void setLeftDrug(String leftDrug) {
         this.leftDrug = leftDrug;
     }
 
@@ -222,5 +226,12 @@ public class Medication {
 
     public void setRefilTime(String refilTime) {
         RefilTime = refilTime;
+    }
+    public void setNoOfDays(String NoOfDays){
+        noOfDays=NoOfDays;
+
+    }
+    public String getNoOfDays(){
+        return noOfDays;
     }
 }

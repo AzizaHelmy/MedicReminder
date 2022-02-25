@@ -18,9 +18,9 @@
     <string name="forgetPassword">Forgetting password</string>
     <string name="send_email">Send Email</string>
 
-
+<string name="instructions">Instructions</string>
     <string name="medicineName">medicament name</string>
-    <string name="medicineNamehint">Write the name of the medical or commercial drug</string>
+    <string name="medicineNamehint">write medicine name</string>
     <string name="nextBtn">Next</string>
     <string name="remindertimes">reminder times</string>
     <string name="drugQuantaty">What dose did you take / how often did you take it?</string>
@@ -35,16 +35,10 @@
         <item>seven times a day</item>
         <item>eight times a day</item>
         <item>nine times a day</item>
+        <item>ten times a day</item>
         <item>eleven times a day</item>
         <item>tweleve times a day</item>
-        <item>every number of hours</item>
-        <item>every 12 hours</item>
-        <item>every 8 hours</item>
-        <item>every 6 hours</item>
-        <item>every 4 hours</item>
-        <item>every 3 hours</item>
-        <item>every 2 hours</item>
-        <item>every hour</item>
+
     </string-array>
     \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     <string-array name="measure">
@@ -94,7 +88,7 @@
     <string name="whileeating">while eating</string>
     <string name="doesnotmatter">does not matter</string>
     <string name="refillamount">Enter the quantity of medication you have now to receive a reminder to fill the medication</string>
-    <string name="Fillingtheprescription">Filling the prescription></string>
+    <string name="Fillingtheprescription">Filling the prescription</string>
     <string name="Amountofmedicine">Amount of medicine</string>
     <string name="Aremindertofillthemedicine">A reminder to fill the medicine</string>
     <string name="WhenIhaveleft">When I have left</string>
@@ -116,4 +110,6 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="done">done</string>
+    <string name="refillagain">Fill your prescription again</string>
+
 </resources>

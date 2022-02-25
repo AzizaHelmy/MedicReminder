@@ -14,7 +14,6 @@ import com.example.medicationreminder.R;
 import com.example.medicationreminder.medications.model.MedicsModel;
 import com.example.medicationreminder.medications.view.MedicsOnClick;
 
-import com.example.medicationreminder.model.Drug;
 import com.example.medicationreminder.model.Medication;
 
 import java.util.List;

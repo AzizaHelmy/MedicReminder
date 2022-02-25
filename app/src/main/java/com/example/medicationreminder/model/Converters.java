@@ -14,14 +14,14 @@ import java.util.List;
 public class Converters {
 
     @TypeConverter
-    public static List<Drug> stringToDrugList(String value) {
-        Type listType = new TypeToken<ArrayList<String>>() {
+    public static String[] stringToDrugList(String value) {
+        Type listType = new TypeToken<String[]>() {
         }.getType();
         return new Gson().fromJson(value, listType);
     }
 
     @TypeConverter
-    public static String drugListToString(List<Drug> list) {
+    public static String drugListToString(String []list) {
         Gson gson = new Gson();
         String json = gson.toJson(list);
         return json;

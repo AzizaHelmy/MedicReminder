@@ -5,16 +5,22 @@
       <map>
         <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/drawable-v24/ic_arrow_back_white_24dp.xml" value="0.1" />
         <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/drawable-v24/minus_icon.xml" value="0.1" />
+        <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/layout/activity_register_acivity.xml" value="0.18489583333333334" />
+        <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/layout/activity_rest_password.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/layout/alarmlayout.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/layout/day_drags.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/layout/fragment_add_health_taker.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/layout/fragment_add_medication.xml" value="0.25" />
         <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/layout/fragment_display_medicine.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/layout/fragment_health_takers.xml" value="0.13177083333333334" />
         <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/layout/fragment_medications.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/layout/fragment_more.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/layout/fragment_update_medication.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/layout/medic_item_rv.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/layout/medic_rv.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/layout/numberpicker_layout.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/layout/refillagaindialoug.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/layout/refillalert.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/layout/refilldialouug.xml" value="0.19947916666666668" />
         <entry key="..\:/Users/MG/AndroidStudioProjects/MedicReminder/app/src/main/res/layout/strengthdialoug.xml" value="0.20416666666666666" />

@@ -18,7 +18,7 @@ import com.example.medicationreminder.medications.view.adapter.MedicsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.example.medicationreminder.model.Drug;
+
 import com.example.medicationreminder.model.Medication;
 
 public class MedicationsFragment extends BaseFragment implements MedicsOnClick ,MedicsInterface{
@@ -26,9 +26,9 @@ public class MedicationsFragment extends BaseFragment implements MedicsOnClick ,
     RecyclerView rvMedics;
     MedicsAdapter adapterMedics;
     List<MedicsModel> list = new ArrayList<>();
-    Drug subItem;
+    String subItem;
     MedicsModel item;
-    List<Drug> subItemList;
+    List<String> subItemList;
     List<MedicsModel> itemList;
 
     public MedicationsFragment() {

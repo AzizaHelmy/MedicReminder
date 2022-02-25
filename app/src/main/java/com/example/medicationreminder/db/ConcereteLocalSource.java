@@ -6,17 +6,17 @@ import androidx.lifecycle.LiveData;
 
 import com.example.medicationreminder.model.Medication;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ConcereteLocalSource implements LocalSource {
     DrugDao drugDao;
     private static ConcereteLocalSource concreteLocalSource = null;
     List<Medication>allDrugsForHome;
-    List<Medication>displayedDrug;
+    LiveData<List<Medication>>displayedDrug;
     private ConcereteLocalSource(Context context) {
         AppDataBase db = AppDataBase.getInstance(context.getApplicationContext());
         drugDao = db.drugDao();
+        displayedDrug=drugDao.displayDrug();
     }
 
     public static ConcereteLocalSource getInstance(Context context) {
@@ -42,8 +42,8 @@ public class ConcereteLocalSource implements LocalSource {
     }
 
     @Override
-    public List<Medication> dispalyedDrug() {
-        displayedDrug=drugDao.displayDrug();
+    public LiveData<List<Medication>> dispalyedDrug() {
+
         return displayedDrug;
     }
 
@@ -68,7 +68,7 @@ public class ConcereteLocalSource implements LocalSource {
         new Thread(new Runnable() {
             @Override
             public void run() {
-        allDrugsForHome=drugDao.selectAllDrugsForHome(day);
+       // allDrugsForHome=drugDao.selectAllDrugsForHome(day);
             }
         }).start();
  return  allDrugsForHome;

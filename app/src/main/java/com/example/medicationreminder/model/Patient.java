@@ -12,26 +12,26 @@ public class Patient {
     @PrimaryKey
     //@ForeignKey()
     @NonNull
-    private String userName;
+    private java.lang.String userName;
     private ArrayList<HealthTaker> healthTakers;
     @Ignore
-    private List<Drug> drugs;
+    private List<String> strings;
 
     public Patient() {
     }
 
-    public Patient(@NonNull String userName, ArrayList<HealthTaker> healthTakers, List<Drug> drugs) {
+    public Patient(@NonNull java.lang.String userName, ArrayList<HealthTaker> healthTakers, List<String> strings) {
         this.userName = userName;
         this.healthTakers = healthTakers;
-        this.drugs = drugs;
+        this.strings = strings;
     }
 
     @NonNull
-    public String getUserName() {
+    public java.lang.String getUserName() {
         return userName;
     }
 
-    public void setUserName(@NonNull String userName) {
+    public void setUserName(@NonNull java.lang.String userName) {
         this.userName = userName;
     }
 
@@ -43,11 +43,11 @@ public class Patient {
         this.healthTakers = healthTakers;
     }
 
-    public List<Drug> getDrugs() {
-        return drugs;
+    public List<String> getDrugs() {
+        return strings;
     }
 
-    public void setDrugs(List<Drug> drugs) {
-        this.drugs = drugs;
+    public void setDrugs(List<String> strings) {
+        this.strings = strings;
     }
 }

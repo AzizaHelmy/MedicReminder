@@ -7,7 +7,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,18 +20,13 @@ import com.example.medicationreminder.R;
 import com.example.medicationreminder.db.ConcereteLocalSource;
 import com.example.medicationreminder.home.presenter.HomePresenter;
 import com.example.medicationreminder.home.presenter.HomePresenterInterface;
-import com.example.medicationreminder.login.restPassword.presnter.RestPasswordPresenter;
 import com.example.medicationreminder.model.Medication;
-import com.example.medicationreminder.model.Drug;
 import com.example.medicationreminder.model.Repository;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import devs.mulham.horizontalcalendar.HorizontalCalendar;
 import devs.mulham.horizontalcalendar.HorizontalCalendarListener;

@@ -80,6 +80,10 @@ public class Repository  implements RepositoryInterface{
         return (LiveData<List<Medication>>) localSource.dispalyedDrug();
     }
 
+    @Override
+    public void updateDrug(Medication medication) {
+        localSource.editeDrug(medication);
+    }
 
 
     @Override
