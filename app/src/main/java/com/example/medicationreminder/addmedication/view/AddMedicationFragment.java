@@ -44,14 +44,15 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-public class AddMedicationFragment extends Fragment implements OnDialogClickListener,AddMedicationViewInterface {
+public class AddMedicationFragment extends Fragment implements OnDialogClickListener, AddMedicationViewInterface {
     FragmentAddMedicationBinding binding;
     int iconId;
     int timerHour, timerMinute;
     String frequencyRepition;
-    ArrayList<String>days;
+    ArrayList<String> days;
     Medication medication;
-AddMedicationPresenterInterface addMedicationPresenterInterface;
+    AddMedicationPresenterInterface addMedicationPresenterInterface;
+
     public AddMedicationFragment() {
 
     }
@@ -60,8 +61,8 @@ AddMedicationPresenterInterface addMedicationPresenterInterface;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        days=new ArrayList<>();
-        addMedicationPresenterInterface =new AddMedicationPresenter(getActivity(), Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())),this);
+        days = new ArrayList<>();
+        addMedicationPresenterInterface = new AddMedicationPresenter(getActivity(), Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())), this);
         OnBackPressedCallback pressedCallback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
@@ -82,22 +83,22 @@ AddMedicationPresenterInterface addMedicationPresenterInterface;
         //====================================================
 
         binding.selectdays.setVisibility(View.GONE);
-binding.afterreminderSwitch.setVisibility(View.GONE);
- binding.isdaily.setOnClickListener(new View.OnClickListener() {
-     @Override
-     public void onClick(View view) {
-         binding.selectdays.setVisibility(View.GONE);
+        binding.afterreminderSwitch.setVisibility(View.GONE);
+        binding.isdaily.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.selectdays.setVisibility(View.GONE);
 
 
-     }
- });
- //=================================================================
+            }
+        });
+        //=================================================================
         binding.sun.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(binding.sun.isChecked()){
+                if (binding.sun.isChecked()) {
                     days.add(binding.sun.getText().toString());
-                    Log.i("saloka","day : "+binding.sun.getText().toString());
+                    Log.i("saloka", "day : " + binding.sun.getText().toString());
                 }
             }
         });
@@ -105,9 +106,9 @@ binding.afterreminderSwitch.setVisibility(View.GONE);
         binding.mon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(binding.mon.isChecked()){
+                if (binding.mon.isChecked()) {
                     days.add(binding.mon.getText().toString());
-                    Log.i("saloka","day : "+binding.mon.getText().toString());
+                    Log.i("saloka", "day : " + binding.mon.getText().toString());
                 }
             }
         });
@@ -115,9 +116,9 @@ binding.afterreminderSwitch.setVisibility(View.GONE);
         binding.tue.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(binding.sun.isChecked()){
+                if (binding.sun.isChecked()) {
                     days.add(binding.tue.getText().toString());
-                    Log.i("saloka","day : "+binding.tue.getText().toString());
+                    Log.i("saloka", "day : " + binding.tue.getText().toString());
                 }
             }
         });
@@ -125,9 +126,9 @@ binding.afterreminderSwitch.setVisibility(View.GONE);
         binding.wes.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(binding.wes.isChecked()){
+                if (binding.wes.isChecked()) {
                     days.add(binding.sun.getText().toString());
-                    Log.i("saloka","day : "+binding.wes.getText().toString());
+                    Log.i("saloka", "day : " + binding.wes.getText().toString());
                 }
             }
         });
@@ -135,9 +136,9 @@ binding.afterreminderSwitch.setVisibility(View.GONE);
         binding.thu.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(binding.sun.isChecked()){
+                if (binding.sun.isChecked()) {
                     days.add(binding.thu.getText().toString());
-                    Log.i("saloka","day : "+binding.thu.getText().toString());
+                    Log.i("saloka", "day : " + binding.thu.getText().toString());
                 }
             }
         });
@@ -145,11 +146,9 @@ binding.afterreminderSwitch.setVisibility(View.GONE);
         binding.reminderswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(binding.reminderswitch.isChecked()){
+                if (binding.reminderswitch.isChecked()) {
                     binding.afterreminderSwitch.setVisibility(View.VISIBLE);
-                }
-                else
-                {
+                } else {
                     binding.afterreminderSwitch.setVisibility(View.GONE);
                 }
             }
@@ -158,9 +157,9 @@ binding.afterreminderSwitch.setVisibility(View.GONE);
         binding.fri.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(binding.fri.isChecked()){
+                if (binding.fri.isChecked()) {
                     days.add(binding.fri.getText().toString());
-                    Log.i("saloka","day : "+binding.fri.getText().toString());
+                    Log.i("saloka", "day : " + binding.fri.getText().toString());
                 }
             }
         });
@@ -168,25 +167,22 @@ binding.afterreminderSwitch.setVisibility(View.GONE);
         binding.frequencyOfRepition.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                frequencyRepition =adapterView.getSelectedItem().toString();
-                if (frequencyRepition==adapterView.getItemAtPosition(1).toString()){
+                frequencyRepition = adapterView.getSelectedItem().toString();
+                if (frequencyRepition == adapterView.getItemAtPosition(1).toString()) {
                     binding.oneTimeaday.setVisibility(View.VISIBLE);
-                    Log.i("spinnerr","the first item is"+adapterView.getItemAtPosition(1).toString()+frequencyRepition);
-                }
-                else if(frequencyRepition==adapterView.getItemAtPosition(2).toString()){
+                    Log.i("spinnerr", "the first item is" + adapterView.getItemAtPosition(1).toString() + frequencyRepition);
+                } else if (frequencyRepition == adapterView.getItemAtPosition(2).toString()) {
                     binding.twoTimeaday.setVisibility(View.VISIBLE);
 
-                }
-                else if(frequencyRepition==adapterView.getItemAtPosition(3).toString()){
+                } else if (frequencyRepition == adapterView.getItemAtPosition(3).toString()) {
                     binding.threeTimeaday.setVisibility(View.VISIBLE);
-                }
-                else {
+                } else {
                     //binding.noOftimesLayout.setVisibility(View.GONE);
                     binding.oneTimeaday.setVisibility(View.GONE);
                     binding.twoTimeaday.setVisibility(View.GONE);
                     binding.threeTimeaday.setVisibility(View.GONE);
                 }
-                Log.i("spinner",""+frequencyRepition);
+                Log.i("spinner", "" + frequencyRepition);
 
             }
 
@@ -199,22 +195,22 @@ binding.afterreminderSwitch.setVisibility(View.GONE);
         binding.sat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(binding.sun.isChecked()){
+                if (binding.sun.isChecked()) {
                     days.add(binding.sat.getText().toString());
-                    Log.i("saloka","day : "+binding.sat.getText().toString());
+                    Log.i("saloka", "day : " + binding.sat.getText().toString());
                 }
             }
         });
         //===========================================================
 
- binding.specificdays.setOnClickListener(new View.OnClickListener() {
-     @Override
-     public void onClick(View view) {
-         binding.selectdays.setVisibility(View.VISIBLE);
-     }
- });
+        binding.specificdays.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.selectdays.setVisibility(View.VISIBLE);
+            }
+        });
 
- binding.ifIsReminderdLayout.setVisibility(View.GONE);
+        binding.ifIsReminderdLayout.setVisibility(View.GONE);
         binding.afterLayout3.setVisibility(View.GONE);
         binding.afterLayout4.setVisibility(View.GONE);
         binding.moreopitions.setVisibility(View.GONE);
@@ -229,14 +225,15 @@ binding.afterreminderSwitch.setVisibility(View.GONE);
         binding.afterLayout4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                addMedicationPresenterInterface.insert(saveData());
                 Navigation.findNavController(view).navigate(R.id.action_addMedicationFragment_to_medicationsFragment2);
             }
         });
         binding.doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // addMedicationPresenterInterface.insert(Medication);
-        Navigation.findNavController(view).navigate(R.id.action_addMedicationFragment_to_medicationsFragment2);
+                addMedicationPresenterInterface.insert(saveData());
+                Navigation.findNavController(view).navigate(R.id.action_addMedicationFragment_to_medicationsFragment2);
             }
         });
 
@@ -263,7 +260,7 @@ binding.afterreminderSwitch.setVisibility(View.GONE);
         binding.isReminderd.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if(binding.isReminderd.isChecked()){
+                if (binding.isReminderd.isChecked()) {
                     binding.ifIsReminderdLayout.setVisibility(View.VISIBLE);
                 }
             }
@@ -273,14 +270,14 @@ binding.afterreminderSwitch.setVisibility(View.GONE);
         binding.capsules.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iconId=binding.capsules.getId();
+                iconId = binding.capsules.getId();
 
             }
         });
         binding.spoon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iconId=binding.spoon.getId();
+                iconId = binding.spoon.getId();
 
             }
         });
@@ -288,7 +285,7 @@ binding.afterreminderSwitch.setVisibility(View.GONE);
         binding.respirator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iconId=binding.respirator.getId();
+                iconId = binding.respirator.getId();
 
             }
         });
@@ -296,7 +293,7 @@ binding.afterreminderSwitch.setVisibility(View.GONE);
         binding.transfusion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iconId=binding.transfusion.getId();
+                iconId = binding.transfusion.getId();
 
             }
         });
@@ -304,7 +301,7 @@ binding.afterreminderSwitch.setVisibility(View.GONE);
         binding.pill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iconId=binding.pill.getId();
+                iconId = binding.pill.getId();
 
             }
         });
@@ -312,7 +309,7 @@ binding.afterreminderSwitch.setVisibility(View.GONE);
         binding.ointment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iconId=binding.ointment.getId();
+                iconId = binding.ointment.getId();
 
             }
         });
@@ -320,7 +317,7 @@ binding.afterreminderSwitch.setVisibility(View.GONE);
         binding.vaccine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iconId=binding.vaccine.getId();
+                iconId = binding.vaccine.getId();
 
             }
         });
@@ -343,8 +340,8 @@ binding.afterreminderSwitch.setVisibility(View.GONE);
             public void onClick(View view) {
                 Log.e(TAG, "onClick: ");
                 addMedicationPresenterInterface.insert(saveData());
-
-                Log.i("tag","what is your problem");
+                Navigation.findNavController(view).navigate(R.id.action_addMedicationFragment_to_medicationsFragment2);
+                Log.i("tag", "what is your problem");
             }
         });
         //============================================================================
@@ -382,7 +379,7 @@ binding.afterreminderSwitch.setVisibility(View.GONE);
         binding.numberTxtone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e(TAG, "onClick: "+"erroe" );
+                Log.e(TAG, "onClick: " + "erroe");
                 openNumberPicker();
             }
         });
@@ -390,7 +387,7 @@ binding.afterreminderSwitch.setVisibility(View.GONE);
         binding.numberTxttwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-openNumberPicker();
+                openNumberPicker();
             }
         });
         //======================================================================
@@ -411,7 +408,7 @@ openNumberPicker();
         binding.selectRefillTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              openRefillTimePicker();
+                openRefillTimePicker();
             }
         });
         //====================================================================
@@ -421,7 +418,7 @@ openNumberPicker();
                 openStrengthDialoug();
             }
         });
-        // Navigation.findNavController(view).navigate(R.id.action_addMedicationFragment_to_medicationsFragment2);
+
     }
 
     //======================================================================
@@ -453,31 +450,33 @@ openNumberPicker();
         timePickerDialog.updateTime(timerHour, timerMinute);
         timePickerDialog.show();
     }
-//========================================================
-  public  void   openRefillTimePicker(){
-      TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, new TimePickerDialog.OnTimeSetListener() {
-          @Override
-          public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
-              timerHour = hourOfDay;
-              timerMinute = minute;
-              String time = timerHour + ":" + timerMinute;
-              SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
-              try {
-                  Date date = simpleDateFormat.parse(time);
-                  SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("hh:mm:aa");
-                  binding.selectRefillTime.setText(simpleDateFormat1.format(date));
-              } catch (ParseException e) {
-                  e.printStackTrace();
-              }
-          }
-      }, 12, 0, false);
-      timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-      timePickerDialog.updateTime(timerHour, timerMinute);
-      timePickerDialog.show();
-  }
+
+    //========================================================
+    public void openRefillTimePicker() {
+        TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+                timerHour = hourOfDay;
+                timerMinute = minute;
+                String time = timerHour + ":" + timerMinute;
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+                try {
+                    Date date = simpleDateFormat.parse(time);
+                    SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("hh:mm:aa");
+                    binding.selectRefillTime.setText(simpleDateFormat1.format(date));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, 12, 0, false);
+        timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        timePickerDialog.updateTime(timerHour, timerMinute);
+        timePickerDialog.show();
+    }
+
     //=====================================================
     public void openNumberPicker() {
-        Log.e(TAG, "openNumberPicker: "+"error");
+        Log.e(TAG, "openNumberPicker: " + "error");
         DialougClass dialougClass = new DialougClass();
         dialougClass.show(getChildFragmentManager(), "NumberDialoug");
 
@@ -487,9 +486,6 @@ openNumberPicker();
         StrengthDialog strengthDialog = new StrengthDialog();
         strengthDialog.show(getChildFragmentManager(), "strengthDialoug");
     }
-    //================================================================
-
-
     //==================================================================
     public void openRefillDialoug() {
         RefillTimeDialoug refillTimeDialoug = new RefillTimeDialoug();
@@ -515,7 +511,7 @@ openNumberPicker();
 
     @Override
     public void showText(String number) {
-        Log.e(TAG, "showText: "+number );
+        Log.e(TAG, "showText: " + number);
         binding.PresstoadjustTxt.setText(number);
     }
 
@@ -533,58 +529,57 @@ openNumberPicker();
 
     @Override
     public void insert() {
-addMedicationPresenterInterface.insert(medication);
+        addMedicationPresenterInterface.insert(medication);
     }
 
 
-
     //==========================================================
-    public Medication saveData( ){
+    public Medication saveData() {
         Log.e(TAG, "saveData: ");
-        Medication medication=new Medication();
+        Medication medication = new Medication();
 
         medication.setMedicine_Name(binding.medName.getText().toString());
-        Log.i("med",""+binding.medName.getText().toString());
-      Log.i("salasoka","hdjhwjq");
-      medication.setStrength(binding.PresstoadjustTxt.getText().toString());
-        Log.i("med",""+binding.PresstoadjustTxt.getText().toString());
-      medication.setDrugAmount(binding.numberTxtone.getText().toString());
-        Log.i("med",""+binding.numberTxtone.getText().toString());
-      medication.setStratingDate(binding.selectdate.getText().toString());
-        Log.i("med",""+binding.selectdate.getText().toString());
-      medication.setDaily(binding.isdaily.isChecked());
-        Log.i("med",""+binding.isdaily.isChecked());
-      medication.setDrugAmount(binding.amountofdrug.getText().toString());
-        Log.i("med",""+binding.amountofdrug.getText().toString());
-      medication.setLeftDrug(binding.selectAmountRefill.getText().toString());
-        Log.i("med",""+binding.selectAmountRefill.getText().toString());
+        Log.i("med", "" + binding.medName.getText().toString());
+        Log.i("salasoka", "hdjhwjq");
+        medication.setStrength(binding.PresstoadjustTxt.getText().toString());
+        Log.i("med", "" + binding.PresstoadjustTxt.getText().toString());
+        medication.setDrugAmount(binding.numberTxtone.getText().toString());
+        Log.i("med", "" + binding.numberTxtone.getText().toString());
+        medication.setStratingDate(binding.selectdate.getText().toString());
+        Log.i("med", "" + binding.selectdate.getText().toString());
+        medication.setDaily(binding.isdaily.isChecked());
+        Log.i("med", "" + binding.isdaily.isChecked());
+        medication.setDrugAmount(binding.amountofdrug.getText().toString());
+        Log.i("med", "" + binding.amountofdrug.getText().toString());
+        medication.setLeftDrug(binding.selectAmountRefill.getText().toString());
+        Log.i("med", "" + binding.selectAmountRefill.getText().toString());
 
         medication.setNoOfDays(binding.noOfdaysEdite.getText().toString());
-        Log.i("med",""+binding.noOfdaysEdite.getText().toString());
+        Log.i("med", "" + binding.noOfdaysEdite.getText().toString());
         medication.setRefilTime(binding.selectRefillTime.getText().toString());
-        Log.i("med",binding.selectRefillTime.getText().toString());
-        if(binding.beforeeatingRadio.isChecked()){
-    medication.setInstructions(binding.beforeeatingRadio.getText().toString());
-    Log.i("med",binding.beforeeatingRadio.getText().toString());
-}
-if(binding.aftereatingRadio.isChecked()){
-    medication.setInstructions(binding.aftereatingRadio.getText().toString());
-    Log.i("med",binding.aftereatingRadio.getText().toString());
-}
-if(binding.whileeatingRadio.isChecked()){
-    medication.setInstructions(binding.whileeatingRadio.getText().toString());
-    Log.i("med",binding.whileeatingRadio.getText().toString());
-}
-        Log.e(TAG, "saveData: "+medication.getMedicine_Name());
+        Log.i("med", binding.selectRefillTime.getText().toString());
+        if (binding.beforeeatingRadio.isChecked()) {
+            medication.setInstructions(binding.beforeeatingRadio.getText().toString());
+            Log.i("med", binding.beforeeatingRadio.getText().toString());
+        }
+        if (binding.aftereatingRadio.isChecked()) {
+            medication.setInstructions(binding.aftereatingRadio.getText().toString());
+            Log.i("med", binding.aftereatingRadio.getText().toString());
+        }
+        if (binding.whileeatingRadio.isChecked()) {
+            medication.setInstructions(binding.whileeatingRadio.getText().toString());
+            Log.i("med", binding.whileeatingRadio.getText().toString());
+        }
+        Log.e(TAG, "saveData: " + medication.getMedicine_Name());
 
 
-            medication.setRefillReminder(binding.isReminderd.isChecked());
-        Log.i("med",""+binding.isReminderd.isChecked());
+        medication.setRefillReminder(binding.isReminderd.isChecked());
+        Log.i("med", "" + binding.isReminderd.isChecked());
         medication.setDays(days);
-        Log.i("days",""+days);
+        Log.i("days", "" + days);
         medication.setIcon(iconId);
-        Log.i("icon","iconId:"+iconId);
+        Log.i("icon", "iconId:" + iconId);
         medication.setFrequencyOfrepition(frequencyRepition);
-return  medication;
+        return medication;
     }
 }

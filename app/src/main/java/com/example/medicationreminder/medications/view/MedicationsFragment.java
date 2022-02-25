@@ -8,11 +8,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
 import com.example.medicationreminder.Network.FirebaseConnection;
 import com.example.medicationreminder.R;
 
@@ -35,6 +37,7 @@ public class MedicationsFragment extends Fragment implements MedicsOnClick, Medi
     List<Medication> list;
     MedicsPresenter medicsPresenter;
     public static final String TAG = "TAG";
+
     public MedicationsFragment() {
         // Required empty public constructor
     }
@@ -47,8 +50,7 @@ public class MedicationsFragment extends Fragment implements MedicsOnClick, Medi
         View view = binding.getRoot();
         setUpRecyclerView();
         medicsPresenter = new MedicationPresenter(getContext(), Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())), this);
-        insert();
-       medicsPresenter.getMedics(getViewLifecycleOwner());
+        medicsPresenter.getMedics(getViewLifecycleOwner());
         return view;
     }
 
@@ -112,20 +114,6 @@ public class MedicationsFragment extends Fragment implements MedicsOnClick, Medi
         adapterMedics.notifyDataSetChanged();
     }
 
-    @Override
-    public void insert() {
-        medicsPresenter.insert(new Medication("Panadol","mahlol", R.drawable.icon_medi,500, "gm",3));
-        medicsPresenter.insert(new Medication("Tusskan","mahlol", R.drawable.pillsbottle,500, "gm",3));
-        medicsPresenter.insert(new Medication("Runy","mahlol", R.drawable.heartbeat,500, "gm",3));
-        medicsPresenter.insert(new Medication("Rtxh","mahlol", R.drawable.eyedropper,500, "gm",3));
-        medicsPresenter.insert(new Medication("potr","mahlol", R.drawable.ointment,500, "gm",3));
-        medicsPresenter.insert(new Medication("bjuy","mahlol", R.drawable.vaccine,500, "gm",3));
-        medicsPresenter.insert(new Medication("ewsf","mahlol", R.drawable.ointment,500, "gm",3));
-        medicsPresenter.insert(new Medication("tyrew","mahlol", R.drawable.spoon,500, "gm",3));
-        medicsPresenter.insert(new Medication("iuytd","mahlol", R.drawable.eyedropper,500, "gm",3));
-        medicsPresenter.insert(new Medication("porytr","mahlol", R.drawable.icon_medi,500, "gm",3));
-        medicsPresenter.insert(new Medication("hfjjf","mahlol", R.drawable.heartbeat,500, "gm",3));
-    }
     //=======================================================================
     private void cheackMedic(List<Medication> medications) {
         if (medications.isEmpty()) {

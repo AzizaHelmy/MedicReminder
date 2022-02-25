@@ -58,7 +58,7 @@ public class MedicsAdapter extends RecyclerView.Adapter<MedicsAdapter.MedicsType
         binding.tvRefill.setText(model.getLeftDrug() + "");
        //binding.
         binding.tvStrngth.setText(model.getStrength() + "");
-        binding.imgMedic.setImageResource(model.getIcon());
+        //binding.imgMedic.setImageResource(model.getIcon());
         binding.imgAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
