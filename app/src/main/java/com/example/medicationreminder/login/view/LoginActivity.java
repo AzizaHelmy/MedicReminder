@@ -33,6 +33,8 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
        ActivityLoginBinding binding;
     LoginPresenterInterface loginPresenterInterface;
     FirebaseUser currentUser=null;
+    public static String CURRENT_USER="current_user";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,21 +52,24 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
         Log.e(TAG, "onActivityResult: ");
         if (requestCode == FirebaseConnection.RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-//            Log.d("DOAA",""+task.getResult().getEmail());
            loginPresenterInterface. firebaseAuthWithGoogle(this,task);
-           successLogin(null);
+
         }}
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        if (loginPresenterInterface.isUserSignIn()){
-            Log.e(TAG, "onStart: if");
+        if (loginPresenterInterface.isUserSignIn()!=null){
+            currentUser=loginPresenterInterface.isUserSignIn();
             Intent intent=new Intent(this, MainActivity.class);
-
+            intent.putExtra(CURRENT_USER,currentUser);
+            Log.e(TAG, "onStart: "+currentUser.getDisplayName() );
             startActivity(intent);
             finish();
+        }
+        else {
+
+
         }
 
 
@@ -94,12 +99,14 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
     public void successLogin(FirebaseUser user) {
         binding.progressBar.setVisibility(View.GONE);
          currentUser=user;
+        Log.e(TAG, "successLogin: ");
+        Log.e(TAG, "successLogin: "+currentUser.getDisplayName() );
         Intent intent=new Intent(this, MainActivity.class);
-        intent.putExtra("currentUser",user);
+        intent.putExtra(CURRENT_USER,user);
         startActivity(intent);
         finish();
 
-       // Toast.makeText(this, "done", Toast.LENGTH_SHORT).show();
+
     }
 
     private boolean validateEmail() {

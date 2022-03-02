@@ -1,6 +1,9 @@
 package com.example.medicationreminder.db;
 
+import static com.example.medicationreminder.medications.view.MedicationsFragment.TAG;
+
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
@@ -60,6 +63,7 @@ public class ConcereteLocalSource implements LocalSource {
 
 
     public LiveData<List<Medication>> selectAllDrugs1() {
+        Log.e(TAG, "selectAllDrugs1: ");
        return  drugDao.selectAllDrugsForHome();
     }
 

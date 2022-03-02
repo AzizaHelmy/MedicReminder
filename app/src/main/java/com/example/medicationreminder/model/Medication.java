@@ -86,6 +86,14 @@ public class Medication {
         this.drugAmount = drugAmount;
     }
 
+    public Medication(String drugAdder, @NonNull String medicine_Name, boolean isDaily, List<String> days, String[] drugs) {
+        this.drugAdder = drugAdder;
+        this.medicine_Name = medicine_Name;
+        this.isDaily = isDaily;
+        this.days = days;
+        this.drugs = drugs;
+    }
+
     public String getDrugAdder() {
         return drugAdder;
     }

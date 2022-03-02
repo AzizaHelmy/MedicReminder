@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import com.example.medicationreminder.Network.FirebaseConnectionDelegated;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ public interface RepositoryInterface {
 
     public void signIn(User user, Activity activity, FirebaseConnectionDelegated firebaseConnectionDelegated);
 
-    boolean isUserSignIn();
+    FirebaseUser isUserSignIn();
 
     public void signWithGoogle(Activity activity);
     public void firebaseAuthWithGoogle(Activity activity, Task<GoogleSignInAccount> task, FirebaseConnectionDelegated firebaseConnectionDelegated) ;

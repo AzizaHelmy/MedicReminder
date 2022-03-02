@@ -14,6 +14,7 @@ import com.example.medicationreminder.Network.FirebaseConnectionInterface;
 import com.example.medicationreminder.db.LocalSource;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,6 @@ public class Repository  implements RepositoryInterface{
 
     @Override
     public void registerNewUser(User user, Activity activity , FirebaseConnectionDelegated firebaseConnectionDelegated) {
-        Log.e(TAG, "registerNewUser:repository ");
         firebaseConnection.registerNewUser(user,activity ,firebaseConnectionDelegated);
     }
 
@@ -50,7 +50,7 @@ public class Repository  implements RepositoryInterface{
     }
 
     @Override
-    public boolean isUserSignIn() {
+    public FirebaseUser isUserSignIn() {
         return firebaseConnection.isUserSignIn();
     }
 

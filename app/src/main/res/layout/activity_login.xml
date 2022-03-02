@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context=".login.view.LoginActivity">
+
+
+
 <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-       android:background="@color/purple_500"
+
+       android:background="@color/app_color"
         tools:context=".login.view.LoginActivity"
 
         >
@@ -22,12 +31,13 @@
 
     <ImageView
         android:id="@+id/app_icon"
-        android:layout_width="269dp"
-        android:layout_height="170dp"
-        android:layout_marginTop="32dp"
-        android:gravity="bottom"
+
+        android:layout_width="200dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="24dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/icon_medi"
+        android:gravity="bottom"
+        android:src="@drawable/app_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,7 +50,7 @@
         android:textColor="@android:color/white"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginTop="16dp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/app_icon"
@@ -51,8 +61,8 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-      android:layout_marginTop="32dp"
+    android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
     app:cardCornerRadius="40dp"
     app:cardBackgroundColor="@color/white"
     app:cardPreventCornerOverlap="true"
@@ -120,6 +130,7 @@
                 android:id="@+id/login_email"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
                 app:errorEnabled="true"
                 >
@@ -142,6 +153,7 @@
                 app:endIconMode="password_toggle"
                 app:passwordToggleEnabled="true"
                 app:errorEnabled="true"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
 
                 >
@@ -165,7 +177,7 @@
                 android:layout_gravity="end"
                 android:textSize="16sp"
                 android:layout_marginStart="48dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="4dp"
                 android:onClick="onForgetPasswordClick"
                 android:textColor="@color/purple_500"
                 android:text="@string/forgetPassword"
@@ -176,9 +188,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="60dp"
                 android:layout_marginEnd="60dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="12dp"
                 android:layout_gravity="center"
-                 android:textSize="24sp"
+                 android:textSize="16sp"
                 android:textColor="@color/white"
                 android:background="@drawable/button_background"
 
@@ -191,34 +203,38 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="12dp"
                 android:text="@string/login_with" />
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginTop="12dp"
 
-    >
-    <ImageView
-        android:id="@+id/btn_google"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:background="@color/white"
-        android:onClick="loginWithGoogle"
-        android:src="@drawable/google_icon"/>
-    <ImageView
-        android:id="@+id/btn_facebook"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="16dp"
-        android:background="@color/white"
-        android:onClick="loginWithGoogle"
-        android:src="@drawable/facebook_icon"/>
+            <LinearLayout
+                android:layout_width="131dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="32dp"
 
-</LinearLayout>
+                >
+
+                <ImageView
+                    android:id="@+id/btn_google"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:background="@color/white"
+                    android:onClick="loginWithGoogle"
+                    android:src="@drawable/google_plus" />
+
+                <ImageView
+                    android:id="@+id/btn_facebook"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="16dp"
+                    android:background="@color/white"
+                    android:onClick="loginWithGoogle"
+                    android:src="@drawable/facebook_icon" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -229,7 +245,7 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
+</ScrollView>
 
 
 

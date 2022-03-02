@@ -39,15 +39,15 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.DrugsL
 
       holder.drud_image.setImageResource(medicine.getIcon());
        holder.drug_name.setText(medicine.getMedicine_Name());
-       holder.drug_type.setText(medicine.getMedicineType());
+      // holder.drug_type.setText(medicine.getMedicineType());
       // holder.drug_time.setText(medicine.getDrugAmount());
-     holder.cardView.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View view) {
-
-
-         }
-     });
+//     holder.cardView.setOnClickListener(new View.OnClickListener() {
+//         @Override
+//         public void onClick(View view) {
+//
+//
+//         }
+//     });
 
     }
 
@@ -67,7 +67,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.DrugsL
             super(itemView);
                  drud_image=itemView.findViewById(R.id.med_image);
               drug_name=itemView.findViewById(R.id.med_name);
-            drug_type=itemView.findViewById(R.id.med_type);
+            //drug_type=itemView.findViewById(R.id.);
           cardView=itemView.findViewById(R.id.card_view);
         }
     }

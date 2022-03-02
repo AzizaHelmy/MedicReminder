@@ -29,12 +29,13 @@ public class LoginPresenter implements LoginPresenterInterface,FirebaseConnectio
 
     @Override
     public void login(User user, Activity activity) {
+        Log.e(TAG, "login:   presenter ");
          repositoryInterface.signIn(user,activity,this);
     }
 
     @Override
     public void onCompleteResultSuccess(FirebaseUser user) {
-
+        Log.e(TAG, "onCompleteResultSuccess: ");
              loginViewInterface.successLogin(user);
 
 
@@ -47,7 +48,8 @@ public class LoginPresenter implements LoginPresenterInterface,FirebaseConnectio
     }
 
     @Override
-    public boolean isUserSignIn() {
+    public FirebaseUser isUserSignIn() {
+        Log.e(TAG, "isUserSignIn: presentr");
         return  repositoryInterface.isUserSignIn();
     }
 
@@ -62,6 +64,8 @@ public class LoginPresenter implements LoginPresenterInterface,FirebaseConnectio
            repositoryInterface.firebaseAuthWithGoogle(activity,task,this);
     }
 
+    @Override
+    public void autologin(FirebaseUser currentUser) {
 
-
+    }
 }

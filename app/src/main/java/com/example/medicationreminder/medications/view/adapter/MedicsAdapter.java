@@ -53,7 +53,7 @@ public class MedicsAdapter extends RecyclerView.Adapter<MedicsAdapter.MedicsType
                 onClick.ItemOnClick(model);
             }
         });
-        binding.tvMedicName.setText(model.getMedicine_Name());
+      //  binding.tvMedicName.setText(model.getMedicine_Name());
         //binding.tvAdder.setText(model.getDrugAdder());
         binding.tvRefill.setText(model.getLeftDrug() + "");
        //binding.

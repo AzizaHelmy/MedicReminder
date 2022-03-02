@@ -2,8 +2,15 @@ package com.example.medicationreminder.Network;
 
 import static android.content.ContentValues.TAG;
 
+import static com.example.medicationreminder.register.view.RegisterActivity.EMAIL;
+import static com.example.medicationreminder.register.view.RegisterActivity.SHARD_NAME;
+import static com.example.medicationreminder.register.view.RegisterActivity.USER_NAME;
+import static com.firebase.ui.auth.AuthUI.getApplicationContext;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.service.controls.ControlsProviderService;
@@ -31,8 +38,10 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 public class FirebaseConnection implements FirebaseConnectionInterface {
 
@@ -49,6 +58,14 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
+    @SuppressLint("RestrictedApi")
+    public FirebaseConnection() {
+        mAuth = FirebaseAuth.getInstance();
+        //sharedPreferences=getSharedPreferences(SHARD_NAME,this.MODE_PRIVATE);
+
+        preferences =getApplicationContext().getSharedPreferences(SHARD_NAME, Context.MODE_PRIVATE);
+        editor = preferences.edit();
+    }
 
     public static FirebaseConnection getFirebaseConnection() {
         if (getInstance == null) {
@@ -60,7 +77,7 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
     @Override
     public void registerNewUser(User user, Activity activity, FirebaseConnectionDelegated firebaseConnectionDelegated) {
 
-        mAuth = FirebaseAuth.getInstance();
+
         mAuth.createUserWithEmailAndPassword(user.getUserEmail(), user.getPassword())
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -69,9 +86,9 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
                             user.setUserId(task.getResult().getUser().getUid());
                             addUser(user, firebaseConnectionDelegated);
                             currentUser = mAuth.getCurrentUser();
+                            getUser(mAuth.getUid());
                             firebaseConnectionDelegated.onCompleteResultSuccess(currentUser);
                         } else {
-                            Log.e(TAG, "onComplete: " + task.getException().getLocalizedMessage());
                             firebaseConnectionDelegated.onFailureResult(task.getException().getLocalizedMessage());
 
 
@@ -82,47 +99,47 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
 
 
     @Override
-    public boolean isUserSignIn() {
+    public FirebaseUser isUserSignIn() {
+        Log.e(TAG, "isUserSignIn: ");
         if (currentUser != null) {
-            return true;
+            return currentUser;
         }
 
-        return false;
+        return null;
     }
 
 
     public void addUser(User user, FirebaseConnectionDelegated firebaseConnectionDelegated) {
-        Log.e(TAG, "addUser: ");
-        database = FirebaseDatabase.getInstance();
-        myRef = database.getReference(USER_REF);
-        myRef.child(user.getUserId()).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void unused) {
-                sendEmailValidation();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                firebaseConnectionDelegated.onFailureResult(e.getLocalizedMessage());
-            }
-        });
+
+            UserDao.addUser(user, new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                        sendEmailValidation();
+
+                    }
+                    else{
+                         firebaseConnectionDelegated.onFailureResult(task.getException().getMessage());
+                    }
+                }
+            });
 
     }
 
 
     @Override
     public void signIn(User user, Activity activity, FirebaseConnectionDelegated firebaseConnectionDelegated) {
-        Log.e(TAG, "signIn: " + user.getUserEmail());
-        Log.e(TAG, "signIn: " + user.getUserEmail());
-        mAuth = FirebaseAuth.getInstance();
 
+      mAuth=FirebaseAuth.getInstance();
         mAuth.signInWithEmailAndPassword(user.getUserEmail(), user.getPassword())
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         currentUser = authResult.getUser();
-                        Log.d(TAG, "signInWithEmail:success");
+                         getUser(mAuth.getUid());
+
                         firebaseConnectionDelegated.onCompleteResultSuccess(currentUser);
+
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -179,8 +196,8 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 Log.e(TAG, "onComplete: " + task.getResult().getUser().getEmail());
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                firebaseConnectionDelegated.onCompleteResultSuccess(user);
+                                currentUser = mAuth.getCurrentUser();
+                                firebaseConnectionDelegated.onCompleteResultSuccess(currentUser);
                                 //  googleSingInClient.signOut();
 
 
@@ -228,5 +245,23 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
         return false;
     }
 
+       public  void getUser(String id){
+         UserDao.getUser(id, new OnCompleteListener<DataSnapshot>() {
+              @Override
+             public void onComplete(@NonNull Task<DataSnapshot> task) {
+                 if (task.isSuccessful()) {
+                     User currentUser =task.getResult().getValue(User.class);
+                     editor.putString(USER_NAME, currentUser.getUserName());
+                     editor.putString(EMAIL, currentUser.getUserEmail());
+
+                     editor.apply();
+
+                 }
+                 else {
+                 }
+             }
+
+         });
+       }
 
 }

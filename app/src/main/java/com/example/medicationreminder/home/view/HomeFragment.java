@@ -20,15 +20,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.medicationreminder.Network.FirebaseConnection;
 import com.example.medicationreminder.R;
+import com.example.medicationreminder.addmedication.view.AddMedicationFragment;
+import com.example.medicationreminder.databinding.FragmentAddHealthTakerBinding;
+import com.example.medicationreminder.databinding.FragmentHomeBinding;
 import com.example.medicationreminder.db.ConcereteLocalSource;
+import com.example.medicationreminder.healthTakers.view.AddHealthTakerFragment;
 import com.example.medicationreminder.home.presenter.HomePresenter;
 import com.example.medicationreminder.home.presenter.HomePresenterInterface;
 import com.example.medicationreminder.home.view.model.HoursModel;
 import com.example.medicationreminder.model.Medication;
 import com.example.medicationreminder.model.Repository;
+import com.github.clans.fab.FloatingActionButton;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -57,7 +63,9 @@ public class HomeFragment extends Fragment implements HomeViewInterface {
     View viewRoot;
     HomePresenterInterface homePresenterInterface;
     DayAdapter dayAdapter;
-
+    FloatingActionButton btnAddMedicine;
+    FloatingActionButton btnHealthTracker;
+     private FragmentHomeBinding binding;
     public HomeFragment() {
 
     }
@@ -78,8 +86,10 @@ public class HomeFragment extends Fragment implements HomeViewInterface {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         viewRoot = inflater.inflate(R.layout.fragment_home, container, false);
+        btnAddMedicine=viewRoot.findViewById(R.id.btn_addMedicine);
+        btnHealthTracker=viewRoot.findViewById(R.id.btn_healthTracker);
         homePresenterInterface = new HomePresenter(getActivity(), Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())), this);
-       //  insert();
+         insert();
         Calendar startDate = Calendar.getInstance();
         startDate.add(Calendar.MONTH, -1);
         Calendar endDate = Calendar.getInstance();
@@ -95,9 +105,11 @@ public class HomeFragment extends Fragment implements HomeViewInterface {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView=viewRoot.findViewById(R.id.day_recycler);
         recyclerView.setLayoutManager(linearLayoutManager);
-      dayAdapter=new DayAdapter(getContext(),new ArrayList<HoursModel>(),this);
-        //recyclerView.setAdapter(dayAdapter);
+        dayAdapter=new DayAdapter(getContext(),new ArrayList<HoursModel>(),this);
+       recyclerView.setAdapter(dayAdapter);
         homePresenterInterface.selectAllDrugsForHome1(this);
+
+
         return viewRoot;
     }
 
@@ -108,15 +120,16 @@ public class HomeFragment extends Fragment implements HomeViewInterface {
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Date date, int position) {
-                Log.e(TAG, "onDateSelected: "+date.getDate());
                 String day = date.toString().substring(0, 3);
 
                 homePresenterInterface.selectAllDrugsForHome1(getViewLifecycleOwner()).observe(getViewLifecycleOwner(), new Observer<List<Medication>>() {
 
                     @Override
                     public void onChanged(List<Medication> medications) {
-//                        dayAdapter.setData(list((ArrayList<Medication>) medications));
-//                        dayAdapter.notifyDataSetChanged();
+
+
+                        dayAdapter.setData(list((ArrayList<Medication>) medications));
+                        dayAdapter.notifyDataSetChanged();
 
 
                     }
@@ -133,13 +146,34 @@ public class HomeFragment extends Fragment implements HomeViewInterface {
 
         });
 
+              btnAddMedicine.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View view) {
+                      AddMedicationFragment medicationFragment= new AddMedicationFragment();
+                      getActivity().getSupportFragmentManager().beginTransaction()
+                              .replace(R.id.medicationsFragment,medicationFragment, "findThisFragment")
+                              .addToBackStack(null)
+                              .commit();
+                  }
+              });
+              btnHealthTracker.setOnClickListener(new View.OnClickListener() {
+                  @Override
+                  public void onClick(View view) {
+                      AddHealthTakerFragment addHealthTakerFragment=new AddHealthTakerFragment();
 
+                      getActivity().getSupportFragmentManager().beginTransaction()
+                              .replace(R.id.addHealthTakerFragment,addHealthTakerFragment, "findThisFragment")
+                              .addToBackStack(null)
+                              .commit();
+
+                  }
+              });
     }
 
 
     @Override
     public void insert() {
-
+        Log.e(TAG, "insert: ");
         ArrayList<Medication> medications = new ArrayList<>();
         ArrayList<String> days1 = new ArrayList<String>();
         days1.add("sun");
@@ -157,13 +191,13 @@ public class HomeFragment extends Fragment implements HomeViewInterface {
         String[] drugs4 = {"10:20 am", "2:49 pm", "2:00 pm"};
 
 
-//        homePresenterInterface.insertMed(new Medication("doaa", "aziza", days1, true, drugs1));
-//
-//        homePresenterInterface.insertMed(new Medication("salma", "yssmeen", days2, true, drugs2));
-//
-//        homePresenterInterface.insertMed(new Medication("azza", "riaaan", days3, true, drugs3));
-//
-//        homePresenterInterface.insertMed(new Medication("yasmeen", "salma", days4, true, drugs4));
+        homePresenterInterface.insertMed(new Medication("doaa", "aziza", true,days1, drugs1));
+
+        homePresenterInterface.insertMed(new Medication("salma", "yssmeen", true,days2,  drugs2));
+
+        homePresenterInterface.insertMed(new Medication("azza", "riaaan",true, days3,  drugs3));
+
+        homePresenterInterface.insertMed(new Medication("yasmeen", "salma",true, days4,  drugs4));
 
     }
 
@@ -177,44 +211,6 @@ public class HomeFragment extends Fragment implements HomeViewInterface {
         return homePresenterInterface.selectAllDrugsForHome1(getViewLifecycleOwner());
     }
 
-    public List<Medication> medList() {
-        ArrayList<Medication> list = new ArrayList<>();
-
-
-        Log.e(TAG, "insert: ");
-
-        int i = 0;
-
-        ArrayList<String> days1 = new ArrayList<String>();
-        days1.add("sun");
-        ArrayList<String> days2 = new ArrayList<String>();
-
-        days2.add("sun");
-        ArrayList<String> days3 = new ArrayList<String>();
-        days3.add("sat");
-        days3.add("sun");
-        ArrayList<String> days4 = new ArrayList<String>();
-        days4.add("sat");
-        ArrayList<String> drugs1 = new ArrayList<>();
-        drugs1.add("10");
-        drugs1.add("2");
-        drugs1.add("6");
-        ArrayList<String> drugs3 = new ArrayList<>();
-        drugs3.add("11");
-        drugs3.add("4");
-        drugs3.add("8");
-        ArrayList<String> drugs2 = new ArrayList<>();
-        drugs2.add("7");
-        drugs2.add("12");
-        drugs2.add("5");
-        ArrayList<String> drugs4 = new ArrayList<>();
-        drugs4.add("9");
-        drugs4.add("3");
-        drugs4.add("11");
-
-
-        return list;
-    }
 private ArrayList<HoursModel>list(ArrayList<Medication>med){
     LinkedHashMap<String,ArrayList<Medication>> times=new LinkedHashMap<>();
     for (Medication medicien: med){
@@ -321,5 +317,8 @@ private ArrayList<HoursModel>list(ArrayList<Medication>med){
      });
 
  }
+
+
+
 }
 

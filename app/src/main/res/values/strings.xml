@@ -14,11 +14,11 @@
     <string name="web_client">541607280272-ici76tipfj9bu9sh9brq33cd4qda9jls.apps.googleusercontent.com</string>
     <string name="registerbtn">Sign Up</string>
     <string name="confirmPassword">Confirm password</string>
-    <string name="btn_login_text">Login</string>
+    <string name="btn_login_text">Sign In</string>
     <string name="forgetPassword">Forgetting password</string>
     <string name="send_email">Send Email</string>
 
-<string name="instructions">Instructions</string>
+    <string name="instructions">Instructions</string>
     <string name="medicineName">medicament name</string>
     <string name="medicineNamehint">write medicine name</string>
     <string name="nextBtn">Next</string>

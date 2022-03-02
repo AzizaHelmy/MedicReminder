@@ -370,22 +370,22 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_margin="5dp"
-                        android:id="@+id/eyedropper"
-                        android:src="@drawable/eyedropper" />
+                        android:id="@+id/eyedropper"/>
+
 
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:id="@+id/capsules"
-                        android:layout_margin="5dp"
-                        android:src="@drawable/capsules" />
+                        android:layout_margin="5dp"/>
+
 
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_margin="5dp"
                         android:id="@+id/ointment"
-                        android:src="@drawable/ointment" />
+                        />
 
                     <ImageView
                         android:layout_width="40dp"
@@ -399,28 +399,28 @@
                         android:layout_height="40dp"
                         android:layout_margin="5dp"
                         android:id="@+id/respirator"
-                        android:src="@drawable/respirator" />
+                        />
 
                     <ImageView
                         android:layout_width="40dp"
                         android:id="@+id/spoon"
                         android:layout_height="40dp"
                         android:layout_margin="5dp"
-                        android:src="@drawable/spoon" />
+                         />
 
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:id="@+id/transfusion"
                         android:layout_margin="5dp"
-                        android:src="@drawable/transfusion" />
+                        />
 
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_margin="5dp"
                         android:id="@+id/vaccine"
-                        android:src="@drawable/vaccine" />
+                        />
                 </LinearLayout>
             </HorizontalScrollView>
             <LinearLayout
