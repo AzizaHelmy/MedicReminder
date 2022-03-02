@@ -2,14 +2,14 @@ package com.example.medicationreminder.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = "medications")
-public class Medication {
+public class Medication  implements Serializable {
     private String drugAdder;
     @PrimaryKey
     @NonNull
@@ -28,9 +28,9 @@ public class Medication {
     private String[] drugs;
     private String instructions;
     private String status;
-    private String drugAmount;
+    private String drugAmount;//
     private boolean isRefillReminder;
-    private String leftDrug;
+    private String leftDrug;//
     private String RefilTime;
 
     public Medication(@NonNull String medicine_Name) {

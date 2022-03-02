@@ -18,7 +18,7 @@
     <string name="forgetPassword">Forgetting password</string>
     <string name="send_email">Send Email</string>
 
-<string name="instructions">Instructions</string>
+    <string name="instructions">Instructions</string>
     <string name="medicineName">medicament name</string>
     <string name="medicineNamehint">write medicine name</string>
     <string name="nextBtn">Next</string>

@@ -40,16 +40,19 @@
     </fragment>
     <fragment
         android:id="@+id/healthTakersFragment"
-        android:name="com.example.medicationreminder.healthTakers.view.HealthTakersFragment"
+        android:name="com.example.medicationreminder.healthTakers.request.view.RequestFragment"
         android:label="fragment_health_takers"
         tools:layout="@layout/fragment_health_takers" >
         <action
             android:id="@+id/action_healthTakersFragment_to_addHealthTakerFragment"
             app:destination="@id/addHealthTakerFragment" />
+        <action
+            android:id="@+id/action_healthTakersFragment_to_patientMedicsListFragment"
+            app:destination="@id/patientMedicsListFragment" />
     </fragment>
     <fragment
         android:id="@+id/addHealthTakerFragment"
-        android:name="com.example.medicationreminder.healthTakers.view.AddHealthTakerFragment"
+        android:name="com.example.medicationreminder.healthTakers.addTaker.view.AddHealthTakerFragment"
         android:label="fragment_add_health_taker"
         tools:layout="@layout/fragment_add_health_taker" >
         <action
@@ -60,10 +63,19 @@
         android:id="@+id/displayMedicineFragment"
         android:name="com.example.medicationreminder.displayMedics.view.displayMedicineFragment"
         android:label="fragment_display_medicine"
-        tools:layout="@layout/fragment_display_medicine" />
+        tools:layout="@layout/fragment_display_medicine" >
+        <action
+            android:id="@+id/action_displayMedicineFragment_to_updateMedicationFragment"
+            app:destination="@id/updateMedicationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/updateMedicationFragment"
-        android:name="com.example.medicationreminder.updateMedicationFragment"
+        android:name="com.example.medicationreminder.updatemedication.view.updateMedicationFragment"
         android:label="fragment_update_medication"
         tools:layout="@layout/fragment_update_medication" />
+    <fragment
+        android:id="@+id/patientMedicsListFragment"
+        android:name="com.example.medicationreminder.healthTakers.patientMedics.PatientMedicsListFragment"
+        android:label="fragment_patient_medics_list"
+        tools:layout="@layout/fragment_patient_medics_list" />
 </navigation>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F5F1F1"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".healthTakers.patientMedics.PatientMedicsListFragment">
+
+        <Button
+            android:id="@+id/butt_add_patient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="77dp"
+            android:background="@drawable/input_design"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/addbutt" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_medics_patient"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="65dp"
+            app:layout_constraintBottom_toTopOf="@+id/butt_add_patient"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:listitem="@layout/medic_patient" />
+        <ImageView
+            android:id="@+id/empty_iv_patient"
+            android:layout_width="220dp"
+            android:layout_height="263dp"
+            android:layout_marginTop="176dp"
+            android:layout_marginEnd="96dp"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            android:src="@drawable/emptyy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>

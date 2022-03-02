@@ -2,18 +2,26 @@ package com.example.medicationreminder.Network;
 
 import static android.content.ContentValues.TAG;
 
+import static com.example.medicationreminder.register.view.RegisterActivity.SHARD_NAME;
+
 import android.app.Activity;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.service.controls.ControlsProviderService;
 import android.util.Log;
+import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
 
+import com.example.medicationreminder.LoadingDialoge;
 import com.example.medicationreminder.R;
+import com.example.medicationreminder.healthTakers.addTaker.presenter.AddTakerPresenter;
+import com.example.medicationreminder.model.Request;
 import com.example.medicationreminder.model.User;
+import com.example.medicationreminder.register.view.RegisterActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -23,24 +31,28 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class FirebaseConnection implements FirebaseConnectionInterface {
 
     public static final int RC_SIGN_IN = 1;
     private FirebaseAuth mAuth;
-
+    SharedPreferences sharedPreferences;
+    String senderName;
+    String senderEmail;
+    String senderImg;
     private static FirebaseConnection getInstance = null;
     User newUser;
+    ProgressDialog progressDialog;
     static String USER_REF = "user";
     FirebaseDatabase database;
     DatabaseReference myRef;
@@ -48,7 +60,8 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
     private GoogleSignInClient googleSingInClient;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
-
+    FirebaseConnectionDelegated connectionDelegated;
+    boolean flag = false;
 
     public static FirebaseConnection getFirebaseConnection() {
         if (getInstance == null) {
@@ -226,6 +239,72 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
         }
 
         return false;
+    }
+
+    //=================================================
+    @Override
+    public boolean cheackUser(String userEmail) {
+
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference("user");
+        myRef.orderByChild("userEmail").equalTo(userEmail).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    flag=true;
+                    //call cheack mail
+
+                    //check if this email is my email!! ==> how to send to your self !!
+//                    if (snapshot.getValue().equals(senderEmail)) {
+//                        //how??
+//                    }
+//                    //else==>send invitation
+//
+//                } else {
+
+                }
+                connectionDelegated.onSuccess(flag);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return flag;
+    }
+
+    //=====================================================
+    @Override
+    public void addRequest(Request request) {
+        getInfo();
+        //request = new Request(senderName, reciverEmail, senderEmail, senderImg, medics);      //  Request healthTake = new Request(senderName, reciverEmail, senderEmail, senderImg, medications);
+        FirebaseDatabase.getInstance().getReference("Request").push().setValue(request);
+        // Toast.makeText(, "Invitation Sent Successfully", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setMyDelegate(FirebaseConnectionDelegated myDelegate) {
+        connectionDelegated=myDelegate;
+    }
+
+    //==============================================================
+    private void getInfo() {
+//        sharedPreferences = co.getSharedPreferences(SHARD_NAME, Context.MODE_PRIVATE);
+//        senderName = sharedPreferences.getString(RegisterActivity.USER_NAME, "anoynmous");
+//        senderEmail = sharedPreferences.getString(RegisterActivity.EMAIL, "anoynmous@gmail.com");
+//        senderImg = "https://firebasestorage.googleapis.com/v0/b/medical-reminder-c0a4c.appspot.com/o/mateo-avila-chinchilla-x_8oJhYU31k-unsplash.jpg?alt=media&token=9f6c259e-aace-42ab-8549-f36505939740";
+    }
+
+    private void shawingDialog() {
+        progressDialog.setTitle("Cheacking Email");
+        progressDialog.setMessage("Please wait while we are cheacking this email in our system.");
+//        progressDialog.show();
+        //progressDialog.set
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setCanceledOnTouchOutside(false);
     }
 
 

@@ -22,9 +22,9 @@
 
     <ImageView
         android:id="@+id/app_icon"
-        android:layout_width="269dp"
-        android:layout_height="170dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="30dp"
         android:gravity="bottom"
         android:scaleType="centerCrop"
         android:src="@drawable/icon_medi"

@@ -8,4 +8,5 @@ public interface MedicsPresenter {
     void getMedics(LifecycleOwner owner);
     void suspendReminder(Medication medication);
     void insert(Medication medication);
+    boolean isReminder(String medicName);
 }

@@ -14,4 +14,8 @@
         android:id="@+id/healthTakersFragment"
         android:icon="@drawable/icon_health"
         android:title="HealthTakers" />
+    <item
+        android:id="@+id/patientMedicsListFragment"
+        android:icon="@drawable/icon_more"
+        android:title="Taker" />
 </menu>

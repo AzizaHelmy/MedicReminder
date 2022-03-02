@@ -47,6 +47,11 @@ public class LoginPresenter implements LoginPresenterInterface,FirebaseConnectio
     }
 
     @Override
+    public void onSuccess(Boolean result) {
+
+    }
+
+    @Override
     public boolean isUserSignIn() {
         return  repositoryInterface.isUserSignIn();
     }

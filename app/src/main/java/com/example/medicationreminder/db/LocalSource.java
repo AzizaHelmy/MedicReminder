@@ -18,5 +18,7 @@ public interface LocalSource {
     public LiveData<List<Medication >>selectAllDrugs1();
 
     LiveData<List<Medication>> getAllMedics();
+    void addRequest(String reciverEmail);
+    boolean isReminder(String medicine_Name);
 
 }

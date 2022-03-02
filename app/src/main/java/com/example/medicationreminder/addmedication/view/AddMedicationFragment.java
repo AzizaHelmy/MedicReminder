@@ -6,11 +6,13 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -270,14 +272,14 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         binding.capsules.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iconId = binding.capsules.getId();
+                iconId = R.drawable.capsules;
 
             }
         });
         binding.spoon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iconId = binding.spoon.getId();
+                iconId = R.drawable.spoon;
 
             }
         });
@@ -285,7 +287,7 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         binding.respirator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iconId = binding.respirator.getId();
+                iconId = R.drawable.register_icon;
 
             }
         });
@@ -293,7 +295,7 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         binding.transfusion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iconId = binding.transfusion.getId();
+                iconId = R.drawable.transfusion;
 
             }
         });
@@ -301,15 +303,19 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         binding.pill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iconId = binding.pill.getId();
+                iconId = R.drawable.pill;
 
             }
         });
         //=======================================================================
         binding.ointment.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.Q)
             @Override
             public void onClick(View view) {
-                iconId = binding.ointment.getId();
+                iconId =  R.drawable.ointment;
+
+
+              //  Log.e(TAG, "onClick:salma salma "+ binding.ointment.getSourceLayoutResId());
 
             }
         });
@@ -317,7 +323,7 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         binding.vaccine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iconId = binding.vaccine.getId();
+                iconId = R.drawable.vaccine;
 
             }
         });
@@ -506,7 +512,7 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
 
     @Override
     public void displayText(String number) {
-        binding.numberTxtone.setText(number);
+        binding.numberTxtone.setText(number);//
     }
 
     @Override
@@ -553,7 +559,7 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         Log.i("med", "" + binding.amountofdrug.getText().toString());
         medication.setLeftDrug(binding.selectAmountRefill.getText().toString());
         Log.i("med", "" + binding.selectAmountRefill.getText().toString());
-
+      medication.setRemindered(binding.reminderswitch.isChecked());
         medication.setNoOfDays(binding.noOfdaysEdite.getText().toString());
         Log.i("med", "" + binding.noOfdaysEdite.getText().toString());
         medication.setRefilTime(binding.selectRefillTime.getText().toString());

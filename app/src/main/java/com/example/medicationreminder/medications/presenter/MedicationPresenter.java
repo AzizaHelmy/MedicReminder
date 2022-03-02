@@ -1,6 +1,9 @@
 package com.example.medicationreminder.medications.presenter;
 
+import static com.example.medicationreminder.medications.view.MedicationsFragment.TAG;
+
 import android.content.Context;
+import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.LifecycleOwner;
@@ -28,18 +31,27 @@ public class MedicationPresenter implements MedicsPresenter {
         repositoryInterface.getMedics(owner).observe(owner, new Observer<List<Medication>>() {
             @Override
             public void onChanged(List<Medication> medications) {
+                //Log.e(TAG, "onChanged:salma  "+ medications.get(medications.size()));
                 medicsInterface.showMedics(medications);
+
             }
         });
     }
 
     @Override
     public void suspendReminder(Medication medication) {
-        //  repositoryInterface.
+          repositoryInterface.isReminder(medication.getMedicine_Name());
     }
 
     @Override
+
     public void insert(Medication medication) {
         repositoryInterface.insertMed(medication);
     }
+
+    @Override
+    public boolean isReminder(String medicName) {
+        return repositoryInterface.isReminder(medicName);
+    }
 }
+

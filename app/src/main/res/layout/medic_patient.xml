@@ -10,7 +10,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="390dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="7dp"
+       android:layout_marginBottom="7dp"
         app:cardCornerRadius="17dp"
         android:layout_marginEnd="22dp"
         app:cardElevation="5dp">
@@ -21,75 +21,69 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/img_medic"
+                android:id="@+id/img_medic_patient"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_margin="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-               />
+                tools:srcCompat="@drawable/medicine" />
 
             <TextView
-                android:id="@+id/tv_medic_name"
+                android:id="@+id/tv_medic_name_patient"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="7dp"
+                android:layout_margin="12dp"
                 android:fontFamily="monospace"
                 android:text="@string/tuskkan"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@id/img_medic"
-                app:layout_constraintTop_toTopOf="@id/img_medic" />
+                app:layout_constraintStart_toEndOf="@id/img_medic_patient"
+                app:layout_constraintTop_toTopOf="@id/img_medic_patient" />
 
             <TextView
-                android:id="@+id/tv_strngth"
+                android:id="@+id/tv_strngth_patient"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="16dp"
                 android:fontFamily="serif-monospace"
                 android:text="@string/_500_mg"
                 android:textColor="@color/black"
                 android:textSize="18sp"
-                android:layout_marginTop="29dp"
-                app:layout_constraintEnd_toEndOf="@id/tv_medic_name"
-                app:layout_constraintStart_toStartOf="@id/tv_medic_name"
-                app:layout_constraintTop_toTopOf="@id/tv_medic_name" />
+                app:layout_constraintStart_toEndOf="@id/tv_medic_name_patient"
+                app:layout_constraintTop_toTopOf="@id/tv_medic_name_patient" />
 
             <TextView
-                android:id="@+id/tv_refill"
+                android:id="@+id/tv_refill_patient"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="@string/_1_left"
-                android:textSize="19sp"
-                app:layout_constraintEnd_toEndOf="@id/img_medic"
-                app:layout_constraintStart_toStartOf="@id/img_medic"
-                app:layout_constraintTop_toBottomOf="@id/img_medic" />
+                app:layout_constraintEnd_toEndOf="@id/img_medic_patient"
+                app:layout_constraintStart_toStartOf="@id/img_medic_patient"
+                app:layout_constraintTop_toBottomOf="@id/img_medic_patient" />
 
             <TextView
-                android:id="@+id/tv_adder"
+                android:id="@+id/tv_adder_patient"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="25dp"
                 android:layout_marginEnd="17dp"
-                android:textColor="@color/purple_700"
-                android:layout_marginTop="7dp"
-                android:textStyle="italic"
-                android:visibility="gone"
+                android:layout_marginBottom="25dp"
                 android:text="@string/added_by_azza"
-                android:textSize="19sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/img_alarm" />
+                app:layout_constraintTop_toBottomOf="@id/img_alarm_pationt" />
 
             <ImageView
-                android:id="@+id/img_alarm"
+                android:id="@+id/img_alarm_pationt"
                 android:layout_width="67dp"
                 android:layout_height="28dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginTop="7dp"
+                app:layout_constraintBottom_toBottomOf="@id/tv_strngth_patient"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_strngth_patient"
                 app:layout_constraintVertical_bias="1.0"
-                app:srcCompat="@drawable/alarm" />
+                app:srcCompat="@drawable/reminder" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

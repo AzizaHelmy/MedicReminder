@@ -3,14 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:background="#EDEEF3"
+    android:padding="7dp"
+    android:layout_height="wrap_content">
 
-    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_margin="13dp"
-        android:src="@drawable/profile1"
+        android:layout_width="79dp"
+        android:layout_height="79dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="11dp"
+        android:src="@drawable/puser"
         app:civ_border_color="#FFFFFF"
         app:civ_border_width="2dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,8 +31,7 @@
         android:textSize="21sp"
         app:layout_constraintStart_toEndOf="@id/profile_image"
         app:layout_constraintTop_toTopOf="@id/profile_image"
-        tools:layout_editor_absoluteX="119dp"
-        tools:layout_editor_absoluteY="27dp" />
+     />
 
     <TextView
         android:id="@+id/tv_description"
@@ -43,22 +45,21 @@
 
     <ImageView
         android:id="@+id/img_cancel"
-        android:layout_width="62dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="69dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="20dp"
         app:layout_constraintStart_toEndOf="@id/tv_description"
         app:layout_constraintTop_toTopOf="@id/tv_name"
-        app:srcCompat="@drawable/icon_cancle" />
+        app:srcCompat="@drawable/close" />
 
     <ImageView
         android:id="@+id/img_ok"
-        android:layout_width="43dp"
-        android:layout_height="42dp"
-        android:layout_marginEnd="7dp"
+        android:layout_width="69dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="4dp"
         app:layout_constraintStart_toEndOf="@id/img_cancel"
         app:layout_constraintTop_toTopOf="@id/img_cancel"
-        app:srcCompat="@drawable/icon_check" />
+        app:srcCompat="@drawable/done" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
