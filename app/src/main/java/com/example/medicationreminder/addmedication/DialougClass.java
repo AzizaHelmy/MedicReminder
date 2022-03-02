@@ -83,8 +83,9 @@ String times=counter.getText().toString();
         decreaseBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(count>0){
                 count--;
-                counter.setText(count+"");
+                counter.setText(count+"");}
             }
         });
 return builder.create();

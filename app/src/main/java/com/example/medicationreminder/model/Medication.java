@@ -1,5 +1,7 @@
 package com.example.medicationreminder.model;
 
+import android.graphics.drawable.Drawable;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -14,8 +16,10 @@ public class Medication {
     @PrimaryKey
     @NonNull
     private  String medicine_Name;
+
     private boolean isRemindered;
     private String medicineType;
+    private int frequencyOfRepitionId;
     private int icon;
     private String strength;
     private double dose;
@@ -24,10 +28,12 @@ public class Medication {
     private int drugDuration;
     private String noOfDays;
     private String stratingDate;
+    String duration;
     private List<String> days;
     private String[] drugs;
     private String instructions;
     private String status;
+    private  String[] noOfDose;
     private String drugAmount;
     private boolean isRefillReminder;
     private String leftDrug;
@@ -59,7 +65,21 @@ public class Medication {
 
         this.days = days;
     }
-
+      public Medication(String medcine_Name,String medicineType,ArrayList<String>days,int iconId,String drugAmount,boolean isReminderd,String strength,String frequencyOfRepition,String startingDate,String refilTime,String leftDrug,String instructions,String noOfDays){
+        this.medicine_Name=medcine_Name;
+        this.medicineType=medicineType;
+        this.days=days;
+        this.icon=iconId;
+        this.drugAmount=drugAmount;
+        this.isRemindered=isReminderd;
+        this.strength=strength;
+        this.frequencyOfrepition=frequencyOfRepition;
+        this.stratingDate=startingDate;
+        this.RefilTime=refilTime;
+        this.leftDrug=leftDrug;
+        this.instructions=instructions;
+        this.noOfDays=noOfDays;
+      }
     public Medication(String drugAdder, String medicine_Name, boolean isRemindered, String medicineType, int icon, String strength,double dose, int drugDuration, ArrayList<String> days,String[] drugs, String instructions, String status, String drugAmount, boolean isRefillReminder, String leftDrug, String refilTime) {
         this.drugAdder = drugAdder;
         this.medicine_Name = medicine_Name;
@@ -77,6 +97,12 @@ public class Medication {
         this.isRefillReminder = isRefillReminder;
         this.leftDrug = leftDrug;
         RefilTime = refilTime;
+    }
+    public Medication(String medicine_Name,String startingDate,String leftDrug,String drugAmount){
+        this.medicine_Name=medicine_Name;
+        this.stratingDate=startingDate;
+        this.leftDrug=leftDrug;
+        this.drugAmount=drugAmount;
     }
 
     public Medication(String medicine_Name, int icon, String[]drugs, String drugAmount) {
@@ -249,4 +275,23 @@ public class Medication {
     public String getNoOfDays(){
         return noOfDays;
     }
+    public void setFrequencyOfRepitionId(int frequencyOfRepitionId){
+        this.frequencyOfRepitionId=frequencyOfRepitionId;
+    }
+    public int getFrequencyOfRepitionId(){
+        return frequencyOfRepitionId;
+    }
+    public void setNoOfDose(String[] noOfDose){
+        this.noOfDose=noOfDose;
+    }
+    public String[] getNoOfDose(){
+        return  noOfDose;
+    }
+    public void setDuration(String duration){
+        this.duration=duration;
+    }
+    public String getDuration(){
+        return  duration;
+    }
+
 }

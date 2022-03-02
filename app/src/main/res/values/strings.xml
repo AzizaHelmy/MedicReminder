@@ -29,15 +29,7 @@
         <item>once a day</item>
         <item>twice daily</item>
         <item>Three times a day</item>
-        <item>four times a day</item>
-        <item>five times a day</item>
-        <item>six times a day</item>
-        <item>seven times a day</item>
-        <item>eight times a day</item>
-        <item>nine times a day</item>
-        <item>ten times a day</item>
-        <item>eleven times a day</item>
-        <item>tweleve times a day</item>
+
 
     </string-array>
     \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -88,7 +80,7 @@
     <string name="whileeating">while eating</string>
     <string name="doesnotmatter">does not matter</string>
     <string name="refillamount">Enter the quantity of medication you have now to receive a reminder to fill the medication</string>
-    <string name="Fillingtheprescription">Filling the prescription></string>
+    <string name="Fillingtheprescription">Filling the prescription</string>
     <string name="Amountofmedicine">Amount of medicine</string>
     <string name="Aremindertofillthemedicine">A reminder to fill the medicine</string>
     <string name="WhenIhaveleft">When I have left</string>

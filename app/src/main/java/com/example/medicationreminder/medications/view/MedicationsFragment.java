@@ -6,6 +6,7 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -95,8 +96,9 @@ public class MedicationsFragment extends Fragment implements MedicsOnClick, Medi
     //========================================================================
     @Override
     public void ItemOnClick(Medication model) {
-        //send args
-        //bundel
+
+Medication medication=new Medication();
+
         Navigation.findNavController(getView()).navigate(R.id.action_medicationsFragment_to_displayMedicineFragment);
         adapterMedics.notifyDataSetChanged();
     }

@@ -1,5 +1,7 @@
 package com.example.medicationreminder.displayMedics.view;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,6 +16,7 @@ import com.example.medicationreminder.Network.FirebaseConnection;
 import com.example.medicationreminder.R;
 import com.example.medicationreminder.addmedication.presenter.AddMedicationPresenter;
 import com.example.medicationreminder.addmedication.presenter.AddMedicationPresenterInterface;
+import com.example.medicationreminder.databinding.FragmentAddMedicationBinding;
 import com.example.medicationreminder.databinding.FragmentDisplayMedicineBinding;
 import com.example.medicationreminder.db.ConcereteLocalSource;
 import com.example.medicationreminder.displayMedics.presenter.DisplayMedicationPresenter;
@@ -29,7 +32,7 @@ public class displayMedicineFragment extends Fragment implements DisplayMedicati
 Medication medication;
 FragmentDisplayMedicineBinding binding;
     public displayMedicineFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -38,15 +41,22 @@ FragmentDisplayMedicineBinding binding;
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-       displayMedicationPresenterInterface =new DisplayMedicationPresenter(getActivity(), Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())),this);
+//       displayMedicationPresenterInterface =new DisplayMedicationPresenter(getActivity(), Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())),this);
+
 
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        binding = FragmentDisplayMedicineBinding.inflate(getLayoutInflater(), container, false);
+        displayMedicationPresenterInterface =new DisplayMedicationPresenter(getActivity(), Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())),this);
 
-        return inflater.inflate(R.layout.fragment_display_medicine, container, false);
+        View view = binding.getRoot();
+        displayData();
+        return view;
+
+
     }
 
     @Override
@@ -55,13 +65,17 @@ FragmentDisplayMedicineBinding binding;
     }
 
   public void displayData(){
-        medication=new Medication();
-        binding.medicineTxt.setText(medication.getMedicine_Name());
+
+     Medication medication=new Medication("sb","19/2/22","55","33");
+      Log.e(TAG, "displayData:asdfghjka "+medication.getMedicine_Name());
+     binding.medicineTxt.setText(medication.getMedicine_Name());
       Log.i("display",""+medication.getMedicine_Name());
+      binding.duration.setText(medication.getDuration());
+      Log.i("display",""+medication.getDuration());
       binding.timedate.setText(medication.getStratingDate());
       Log.i("display",""+medication.getStratingDate());
-      binding.refilltime.setText(medication.getRefilTime());
-      Log.i("display","salmaaaaaaaa"+medication.getStratingDate());
+     binding.refilltime.setText(medication.getRefilTime());
+      Log.i("display","salma"+medication.getStratingDate());
       binding.medicineIcon.setId(medication.getIcon());
       binding.drugAmount.setText(medication.getDrugAmount());
       binding.leftdrug.setText(medication.getLeftDrug());
