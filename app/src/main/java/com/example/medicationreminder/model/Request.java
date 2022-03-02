@@ -7,6 +7,7 @@ public class Request {
     private String reciverEmail;
     private String senderEmail;
     private String senderImg;
+    private List<Medication> medication;
 
     public String getSenderImg() {
         return senderImg;
@@ -24,7 +25,6 @@ public class Request {
         this.medication = medication;
     }
 
-    private List<Medication> medication;
 
     public List<Medication> getMedication() {
         return medication;

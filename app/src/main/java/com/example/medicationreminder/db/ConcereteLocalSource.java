@@ -1,6 +1,9 @@
 package com.example.medicationreminder.db;
 
+import static com.example.medicationreminder.medications.view.MedicationsFragment.TAG;
+
 import android.content.Context;
+import android.util.Log;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
@@ -19,7 +22,7 @@ public class ConcereteLocalSource implements LocalSource {
     private ConcereteLocalSource(Context context) {
         AppDataBase db = AppDataBase.getInstance(context.getApplicationContext());
         drugDao = db.drugDao();
-        storedMedics = drugDao.getAllMedics();
+        //storedMedics = drugDao.getAllMedics();
         displayedDrug=drugDao.displayDrug();
     }
 
@@ -74,6 +77,55 @@ public class ConcereteLocalSource implements LocalSource {
 
     @Override
     public LiveData<List<Medication>> getAllMedics() {
-        return storedMedics;
+        return drugDao.getAllMedics();
     }
+
+    @Override
+    public void addRequest(String reciverEmail) {
+
+    }
+
+    @Override
+    public boolean isReminder(String medicine_Name) {
+       return getFav(medicine_Name);
+    }
+//=======================================================
+
+    public boolean getFav(String medicine_Name) {
+
+        Reminder reminder =new Reminder();
+        reminder.setName(medicine_Name);
+        Log.e(TAG, "getFav: after"+reminder.isFlag());
+
+        Thread th=new Thread(reminder);
+        th.start();
+        try {
+            th.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Log.e(TAG, "getFav:befor "+reminder.isFlag());
+        return  reminder.isFlag();
+    }
+
+    public class Reminder implements Runnable {
+        private boolean flag=false;
+
+        private String medicName;
+
+        @Override
+        public void run() {
+            flag =drugDao.isReminder(medicName) ;
+        }
+        public void setName(String name) {
+            this.medicName = name;
+        }
+        public boolean isFlag() {
+            return flag;
+        }
+
+
+    }
+
+
 }

@@ -1,22 +1,22 @@
-package com.example.medicationreminder.healthTakers.presenter;
+package com.example.medicationreminder.healthTakers.request.presenter;
 
 import android.content.Context;
 
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 
-import com.example.medicationreminder.healthTakers.view.HealthTakersInterface;
+import com.example.medicationreminder.healthTakers.request.view.HealthTakersInterface;
 import com.example.medicationreminder.model.Medication;
 import com.example.medicationreminder.model.RepositoryInterface;
 
 import java.util.List;
 
-public class HealthTakerPresenter implements HealthTakerPresenterInterface {
+public class RequestPresenter implements RequestPresenterInterface {
     Context context;
     RepositoryInterface repositoryInterface;
     HealthTakersInterface healthTakersInterface;
 
-    public HealthTakerPresenter(Context context, RepositoryInterface repositoryInterface, HealthTakersInterface healthTakersInterface) {
+    public RequestPresenter(Context context, RepositoryInterface repositoryInterface, HealthTakersInterface healthTakersInterface) {
         this.context = context;
         this.repositoryInterface = repositoryInterface;
         this.healthTakersInterface = healthTakersInterface;

@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
@@ -17,7 +16,6 @@ public class Medication implements Serializable {
     @PrimaryKey
     @NonNull
     private  String medicine_Name;
-
     private boolean isRemindered;
     private String medicineType;
     private int frequencyOfRepitionId;

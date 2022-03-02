@@ -23,7 +23,8 @@ public class Repository  implements RepositoryInterface{
     Context context;
     FirebaseConnectionInterface firebaseConnection;
     LocalSource localSource;
-    private static Repository repository=null;
+    private static Repository repository = null;
+    private DrugDao drugDao;
 
     public Repository(Context context, FirebaseConnectionInterface firebaseConnection, LocalSource localSource) {
         this.context = context;
@@ -108,9 +109,33 @@ public class Repository  implements RepositoryInterface{
         return localSource.getAllMedics();
     }
 
+    //=========================================
+    @Override
+    public void addRequest(Request request) {
+       // getInfo();
+//        Request request = new Request(senderName, reciverEmail, senderEmail, senderImg, medics);      //  Request healthTake = new Request(senderName, reciverEmail, senderEmail, senderImg, medications);
+//        FirebaseDatabase.getInstance().getReference("Request").push().setValue(request);
+        // Toast.makeText(, "Invitation Sent Successfully", Toast.LENGTH_SHORT).show();
+
+        firebaseConnection.addRequest(request);
+    }
+
+    //===================================================================
+    @Override
+    public boolean cheackUser(String userEmail) {
+        return firebaseConnection.cheackUser(userEmail);
+    }
+
+    @Override
+    public void setMyDelegate(FirebaseConnectionDelegated myDelegate) {
+        firebaseConnection.setMyDelegate(myDelegate);
+    }
+
+
+    //==============================================================
     @Override
     public boolean isReminder(String medicName) {
-        return false;
+      return   localSource.isReminder(medicName);
     }
 
     @Override
@@ -132,20 +157,6 @@ public class Repository  implements RepositoryInterface{
 //        return  reminder.isFlag();
 //    }
 
-//    public class Reminder implements Runnable {
-//        private boolean flag=false;
-//        private String medicName;
-//
-//        @Override
-//        public void run() {
-//            flag = repository.isReminder(medicName);
-//        }
-//        public void setName(String name) {
-//            this.medicName = name;
-//        }
-//        public boolean isFlag() {
-//            return flag;
-//        }
-//    }
+
 
 }

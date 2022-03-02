@@ -1,13 +1,16 @@
-package com.example.medicationreminder.healthTakers.view;
+package com.example.medicationreminder.healthTakers.addTaker.view;
 
 import static com.example.medicationreminder.register.view.RegisterActivity.SHARD_NAME;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
@@ -21,15 +24,14 @@ import com.example.medicationreminder.Network.FirebaseConnection;
 import com.example.medicationreminder.R;
 import com.example.medicationreminder.databinding.FragmentAddHealthTakerBinding;
 import com.example.medicationreminder.db.ConcereteLocalSource;
-import com.example.medicationreminder.healthTakers.presenter.HealthTakerPresenter;
-import com.example.medicationreminder.healthTakers.presenter.HealthTakerPresenterInterface;
+import com.example.medicationreminder.healthTakers.addTaker.presenter.AddTakerPresenter;
+import com.example.medicationreminder.healthTakers.addTaker.presenter.AddTakerPresenterInterface;
 import com.example.medicationreminder.model.Request;
 import com.example.medicationreminder.model.Medication;
 import com.example.medicationreminder.model.Repository;
 import com.example.medicationreminder.register.view.RegisterActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -39,15 +41,16 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class AddHealthTakerFragment extends Fragment implements HealthTakersInterface {
+public class AddHealthTakerFragment extends Fragment implements AddTakerInterface {
     FragmentAddHealthTakerBinding binding;
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-    SharedPreferences sharedPreferences;
-    String senderName;
+    public static int REQUEST_COUNTER = 0;
+    AddTakerPresenterInterface addTakerPresenterInterface;
+    List<Medication> medications;
+    ProgressDialog progressDialog;
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
     String senderEmail;
-    String reciverEmail;
-    String senderImg;
-    HealthTakerPresenterInterface healthTakerPresenter;
 
     public AddHealthTakerFragment() {
         // Required empty public constructor
@@ -56,7 +59,14 @@ public class AddHealthTakerFragment extends Fragment implements HealthTakersInte
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        medications = new ArrayList<>();
+        OnBackPressedCallback pressedCallback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Navigation.findNavController(getView()).navigate(R.id.homeFragment2);
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, pressedCallback);
     }
 
     //===============================================================
@@ -82,9 +92,9 @@ public class AddHealthTakerFragment extends Fragment implements HealthTakersInte
                              Bundle savedInstanceState) {
         binding = FragmentAddHealthTakerBinding.inflate(getLayoutInflater(), container, false);
         View view = binding.getRoot();
-        healthTakerPresenter = new HealthTakerPresenter(getContext(), Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())), this);
-        //insert();
-        healthTakerPresenter.getAllMedics(getViewLifecycleOwner());
+        progressDialog = new ProgressDialog(getContext());
+        addTakerPresenterInterface = new AddTakerPresenter(getContext(), Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())), this);
+        addTakerPresenterInterface.getMedicList(getViewLifecycleOwner());
         return view;
     }
 
@@ -96,22 +106,14 @@ public class AddHealthTakerFragment extends Fragment implements HealthTakersInte
             @Override
             public void onClick(View view) {
                 if (cheachEmail()) {
-
-                    Toast.makeText(getActivity(), "find", Toast.LENGTH_SHORT).show();
-                    sharedPreferences = getActivity().getSharedPreferences(SHARD_NAME, Context.MODE_PRIVATE);
-                    senderName = sharedPreferences.getString(RegisterActivity.USER_NAME, "anoynmous");
-                    senderEmail = sharedPreferences.getString(RegisterActivity.EMAIL, "anoynmous@gmail.com");
-                    reciverEmail = binding.emailEt.getText().toString();
-                    senderImg = "https://firebasestorage.googleapis.com/v0/b/profile-34740.appspot.com/o/shopImages%2Fshopcover1.jpg?alt=media";
-                    Log.e("TAG", "onClick: " + reciverEmail);
-                    List<Medication> medications = new ArrayList<>();
-                    medications.add(new Medication("Tuskkan"));
-                    medications.add(new Medication("Reyt"));
-                    medications.add(new Medication("posdtr"));
-
-                    Request healthTake = new Request(senderName, reciverEmail, senderEmail, senderImg, medications);
-                    FirebaseDatabase.getInstance().getReference("Request").push().setValue(healthTake);
-                    Toast.makeText(getContext(), "Invitation Sent Successfully", Toast.LENGTH_SHORT).show();
+                    //  shawingDialog();
+                    preferences = getContext().getSharedPreferences(SHARD_NAME, Context.MODE_PRIVATE);
+                    senderEmail = preferences.getString(RegisterActivity.EMAIL, "anoynmous@gmail.com");
+                    if(senderEmail.equals(binding.emailEt.getText().toString())){
+                        Toast.makeText(getContext(), "you can't send invitation to your self!", Toast.LENGTH_SHORT).show();
+                    }else{
+                        addTakerPresenterInterface.checkUser(binding.emailEt.getText().toString());
+                    }
                     Navigation.findNavController(view).navigate(R.id.action_addHealthTakerFragment_to_healthTakersFragment);
 
 
@@ -130,8 +132,16 @@ public class AddHealthTakerFragment extends Fragment implements HealthTakersInte
             //if this email find in firebase(query in user )=>send invitation
             //else:
             //this user is not exist do you need to send invitation to him by email?
-
         });
+    }
+
+    private void shawingDialog() {
+        progressDialog.setTitle("Cheacking Email");
+        progressDialog.setMessage("Please wait while we are cheacking this email in our system.");
+        progressDialog.show();
+        //progressDialog.set
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setCanceledOnTouchOutside(false);
     }
 
     //================================================================
@@ -155,13 +165,23 @@ public class AddHealthTakerFragment extends Fragment implements HealthTakersInte
         return true;
     }
 
+    //=======================================================
     @Override
     public void getMedics(List<Medication> medics) {
-
+        //get the list from db by presenter and push it
+        medications = medics;
     }
 
     @Override
-    public void insert() {
-
+    public void onSuccess(boolean result) {
+        if (result) {//exist , installed the app
+            addTakerPresenterInterface.addRequest(binding.emailEt.getText().toString());
+            Toast.makeText(getContext(), "Invitation Sent Successfully", Toast.LENGTH_SHORT).show();
+        }else{
+            //intent to  send by email
+          //  Log.e("TAG", "onSuccess: ", );
+            Toast.makeText(getContext(), " user not found ", Toast.LENGTH_SHORT).show();
+        }
     }
+    //=======================================================
 }

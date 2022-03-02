@@ -19,11 +19,11 @@ import android.widget.ImageView;
 import com.example.medicationreminder.Network.FirebaseConnection;
 import com.example.medicationreminder.R;
 
-import com.example.medicationreminder.databinding.FragmentMedicationsBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.medicationreminder.databinding.FragmentMedicationsBinding;
 import com.example.medicationreminder.db.ConcereteLocalSource;
 import com.example.medicationreminder.medications.presenter.MedicationPresenter;
 import com.example.medicationreminder.medications.presenter.MedicsPresenter;
@@ -49,9 +49,10 @@ public class MedicationsFragment extends Fragment implements MedicsOnClick, Medi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentMedicationsBinding.inflate(getLayoutInflater(), container, false);
         View view = binding.getRoot();
-        setUpRecyclerView();
+
         medicsPresenter = new MedicationPresenter(getContext(), Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())), this);
         medicsPresenter.getMedics(getViewLifecycleOwner());
+        setUpRecyclerView();
         return view;
     }
 
@@ -87,9 +88,10 @@ public class MedicationsFragment extends Fragment implements MedicsOnClick, Medi
     private void setUpRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        // layoutManager.setReverseLayout(true);
         binding.rvMedics.setLayoutManager(layoutManager);
         Log.e(TAG, "showMedics: " + list);
-        adapterMedics = new MedicsAdapter(getContext(), list, this, Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())));
+        adapterMedics = new MedicsAdapter(getContext(), list, this, medicsPresenter);
         binding.rvMedics.setAdapter(adapterMedics);
     }
 
@@ -105,12 +107,14 @@ Medication medication=new Medication();
 
     @Override
     public void alarmOnClick(Medication medic, ImageView view) {
+        medicsPresenter.suspendReminder(medic);
 
     }
 
     //=========================================================================
     @Override
     public void showMedics(List<Medication> medications) {
+
         adapterMedics.setList(medications);
         cheackMedic(medications);
         adapterMedics.notifyDataSetChanged();

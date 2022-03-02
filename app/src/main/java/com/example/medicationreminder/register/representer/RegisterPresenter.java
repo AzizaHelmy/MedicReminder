@@ -39,5 +39,10 @@ public class RegisterPresenter implements RegisterPresentationInterFace, Firebas
               registerInterFace.registerFailed(errorMessage);
     }
 
+  @Override
+  public void onSuccess(Boolean result) {
+
+  }
+
 
 }

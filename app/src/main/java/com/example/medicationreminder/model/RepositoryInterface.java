@@ -9,7 +9,6 @@ import com.example.medicationreminder.Network.FirebaseConnectionDelegated;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.Task;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface RepositoryInterface {
@@ -34,4 +33,9 @@ public interface RepositoryInterface {
     public LiveData<List<Medication>> getMedics(LifecycleOwner owner);
     public boolean isReminder(String medicName);
 public  void deleteMedic(Medication medication);
+    //============================For Invitation=================================
+    void addRequest(Request reciverEmail);
+    boolean cheackUser(String userEmail);
+    public void setMyDelegate(FirebaseConnectionDelegated myDelegate);
+
 }

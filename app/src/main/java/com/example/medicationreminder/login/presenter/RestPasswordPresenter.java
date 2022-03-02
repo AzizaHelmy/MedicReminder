@@ -34,4 +34,9 @@ public class RestPasswordPresenter implements RestPasswordPresenterInterface , F
         restPasswordViewInterface.loginFailed(errorMessage);
 
     }
+
+    @Override
+    public void onSuccess(Boolean result) {
+
+    }
 }

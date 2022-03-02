@@ -1,4 +1,4 @@
-package com.example.medicationreminder.healthTakers.view;
+package com.example.medicationreminder.healthTakers.request.view;
 
 import android.widget.ImageView;
 

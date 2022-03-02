@@ -2,6 +2,7 @@ package com.example.medicationreminder.Network;
 
 import android.app.Activity;
 
+import com.example.medicationreminder.model.Request;
 import com.example.medicationreminder.model.User;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.Task;
@@ -13,5 +14,7 @@ public interface FirebaseConnectionInterface {
     public void signWithGoogle(Activity activity);
     public void firebaseAuthWithGoogle(Activity activity, Task<GoogleSignInAccount> task, FirebaseConnectionDelegated firebaseConnectionDelegated) ;
     public boolean restPassword(String emil,FirebaseConnectionDelegated firebaseConnectionDelegated) ;
-
+    boolean cheackUser(String userEmail);
+    public void addRequest(Request reciverEmail);
+    public void setMyDelegate(FirebaseConnectionDelegated myDelegate);
     }
