@@ -39,6 +39,7 @@
         android:layout_marginTop="33dp"
         android:layout_width="match_parent"
         android:layout_height="650dp"
+
         android:id="@+id/rv_taker"
         tools:listitem=""
         app:layout_constraintTop_toTopOf="parent"
