@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface HomeViewInterface {
 
-   public  void insert();
    public LiveData<List<Medication >> selectAllDrugsForHome(String day, LifecycleOwner owner);
    public LiveData<List<Medication >> selectAllDrugsForHome1( LifecycleOwner owner);
 

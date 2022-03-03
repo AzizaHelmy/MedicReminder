@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -38,13 +39,13 @@ public class ReminderWorkerDrugs extends Worker {
 
         time = getInputData().getLong("alarm",0);
         name = getInputData().getString("medName");
-//        dose = getInputData().getInt("dose", 0);
-//        food = getInputData().getString("medFood");
-        list = getInputData().getLongArray("list");
 
+        list = getInputData().getLongArray("list");
+        final Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE));
+        r.play();
         showNotification(context, 123, name, "you have " +  " dose should be taken " , null);
 
-        return null;
+        return Result.success();
     }
       private  void showReminderWindow(){
 
@@ -87,9 +88,9 @@ public class ReminderWorkerDrugs extends Worker {
                     .setVibrate(new long[]{0,1000,500,1000})
                     .setSound(defaultSoundUri)
                     .setDefaults(NotificationCompat.DEFAULT_ALL)
-                    .setPriority(NotificationCompat.PRIORITY_HIGH)
-                    .setSmallIcon(R.drawable.ic_launcher_foreground)
-                    .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher_foreground));
+                    .setPriority(NotificationCompat.PRIORITY_HIGH);
+                  //  .setSmallIcon(R.drawable.ic_launcher_foreground)
+                  //  .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher_foreground));
 
             if(pendingIntent != null)
                 builder.setContentIntent(pendingIntent);
@@ -103,8 +104,8 @@ public class ReminderWorkerDrugs extends Worker {
             NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, "App_Location");
 
             notificationBuilder.setAutoCancel(true)
-                    .setSmallIcon(R.drawable.ic_launcher_foreground)
-                    .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher_foreground))
+                   .setSmallIcon(R.drawable.alarm)
+//                    .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher_foreground))
                     .setPriority(Notification.PRIORITY_MAX) // this is deprecated in API 26 but you can still use for below 26. check below update for 26 API
                     .setContentTitle(title)
                     .setContentText(content)

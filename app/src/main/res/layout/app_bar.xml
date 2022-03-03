@@ -12,22 +12,24 @@
           android:background="@color/app_color"
           app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
           app:contentScrim="?attr/colorPrimary"
+
           app:statusBarScrim="?attr/colorPrimaryVariant">
 
           <com.google.android.material.appbar.MaterialToolbar
 
-          app:layout_collapseMode="pin"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:gravity="center_vertical"
-              android:layout_gravity="center_vertical"
+              android:layout_gravity="top"
              >
-              <ImageView
+              <de.hdodenhof.circleimageview.CircleImageView
+                  xmlns:app="http://schemas.android.com/apk/res-auto"
+
                   android:id="@+id/user_image_toolbar"
                   android:layout_width="50dp"
                   android:layout_height="50dp"
-                  android:layout_marginBottom="12dp"
-                    android:layout_marginEnd="16dp"
+                  android:layout_marginBottom="32dp"
+                  android:layout_gravity="center_vertical"
+                  android:layout_marginEnd="16dp"
                   android:onClick="openDrawer"
                   android:src="@drawable/user_icon" />
 
@@ -37,6 +39,8 @@
                   android:layout_height="wrap_content"
                   android:textColor="@color/white"
                   android:textSize="16sp"
+                  android:layout_marginBottom="16dp"
+
                   android:layout_marginStart="16dp"
                   android:onClick="openDrawer"
                   android:text="Doaa Essam" />

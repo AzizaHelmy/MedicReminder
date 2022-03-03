@@ -10,6 +10,7 @@
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
     <string name="addbutt">addMedic</string>
+    <string name="logout">Exit</string>
 
     <string name="web_client">541607280272-ici76tipfj9bu9sh9brq33cd4qda9jls.apps.googleusercontent.com</string>
     <string name="registerbtn">Sign Up</string>

@@ -19,7 +19,7 @@ public interface RepositoryInterface {
     public void signIn(User user, Activity activity, FirebaseConnectionDelegated firebaseConnectionDelegated);
 
     FirebaseUser isUserSignIn();
-
+    void signOut();
     public void signWithGoogle(Activity activity);
     public void firebaseAuthWithGoogle(Activity activity, Task<GoogleSignInAccount> task, FirebaseConnectionDelegated firebaseConnectionDelegated) ;
     public boolean restPassword(String emil,FirebaseConnectionDelegated firebaseConnectionDelegated) ;

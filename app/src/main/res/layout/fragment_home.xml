@@ -60,7 +60,7 @@
 
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="8dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/card"
 
@@ -80,8 +80,8 @@
         fab:menu_shadowRadius="4dp"
         fab:menu_shadowXOffset="1dp"
         fab:menu_shadowYOffset="3dp"
-        fab:menu_colorNormal="#DA4336"
-        fab:menu_colorPressed="#E75043"
+        fab:menu_colorNormal="@color/app_color"
+        fab:menu_colorPressed="#9C27B0"
         fab:menu_colorRipple="#99FFFFFF"
         fab:menu_animationDelayPerItem="50"
         fab:menu_icon="@drawable/fab_add"
@@ -117,6 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="openAddHelthTaker"
+            android:src="@drawable/icon_health"
 
             fab:fab_size="mini"
             fab:fab_label="Add Health Taker" />
@@ -124,7 +125,8 @@
             android:id="@+id/btn_addMedicine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="openAddMedicine"
+
+                android:background="@color/app_color"
             fab:fab_size="mini"
             fab:fab_label="Add medicine" />
 

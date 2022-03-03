@@ -8,7 +8,14 @@
         android:id="@+id/homeFragment2"
         android:name="com.example.medicationreminder.home.view.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment2_to_addMedicationFragment"
+            app:destination="@id/addMedicationFragment" />
+        <action
+            android:id="@+id/action_homeFragment2_to_addHealthTakerFragment"
+            app:destination="@id/addHealthTakerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/medicationsFragment"
         android:name="com.example.medicationreminder.medications.view.MedicationsFragment"
@@ -63,7 +70,7 @@
         tools:layout="@layout/fragment_display_medicine" />
     <fragment
         android:id="@+id/updateMedicationFragment"
-        android:name="com.example.medicationreminder.updateMedicationFragment"
+        android:name="com.example.medicationreminder.updatemedication.view.updateMedicationFragment"
         android:label="fragment_update_medication"
         tools:layout="@layout/fragment_update_medication" />
 </navigation>

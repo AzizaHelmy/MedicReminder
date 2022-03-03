@@ -33,8 +33,9 @@ public class DailyWorker extends Worker {
 
         if (drugTimes!=null) {
             for (long drugTime : drugTimes) {
-
-                long delayTime = drugTime / 1000l-currentTime / 1000l ;
+                Log.e(TAG, "doWork:doaa "+drugTime);
+                Log.e(TAG, "doWork:calender time "+drugTime/1000l);
+                long delayTime = drugTime/1000l-currentTime/1000l ;
                 Log.e(TAG, "doWork:calender time "+delayTime/1000l);
                 OneTimeWorkRequest createRequest = new OneTimeWorkRequest.Builder(ReminderWorkerDrugs.class)
                         .addTag(medName).setInputData(

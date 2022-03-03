@@ -93,7 +93,7 @@
                 android:layout_marginEnd="50dp"
                 android:layout_marginBottom="37dp"
                 app:backgroundTint="#3F51B5"
-                android:background="@drawable/input_design"
+                android:background="@drawable/button_background"
                 android:text="Invite"
                 app:layout_constraintTop_toBottomOf="@+id/email_layout"
                 app:layout_constraintBottom_toBottomOf="parent"

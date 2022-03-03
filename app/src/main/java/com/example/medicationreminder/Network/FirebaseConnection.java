@@ -61,7 +61,6 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
     @SuppressLint("RestrictedApi")
     public FirebaseConnection() {
         mAuth = FirebaseAuth.getInstance();
-        //sharedPreferences=getSharedPreferences(SHARD_NAME,this.MODE_PRIVATE);
 
         preferences =getApplicationContext().getSharedPreferences(SHARD_NAME, Context.MODE_PRIVATE);
         editor = preferences.edit();
@@ -100,7 +99,7 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
 
     @Override
     public FirebaseUser isUserSignIn() {
-        Log.e(TAG, "isUserSignIn: ");
+
         if (currentUser != null) {
             return currentUser;
         }
@@ -195,8 +194,10 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Log.e(TAG, "onComplete: " + task.getResult().getUser().getEmail());
                                 currentUser = mAuth.getCurrentUser();
+                                editor.putString(USER_NAME, currentUser.getDisplayName());
+                                editor.putString(EMAIL, currentUser.getEmail());
+//                               getUser(mAuth.getUid());
                                 firebaseConnectionDelegated.onCompleteResultSuccess(currentUser);
                                 //  googleSingInClient.signOut();
 
@@ -245,16 +246,23 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
         return false;
     }
 
-       public  void getUser(String id){
+    @Override
+    public void singOut() {
+        mAuth.signOut();
+    }
+
+    public  void getUser(String id){
+        Log.e(TAG, "getUser: ");
          UserDao.getUser(id, new OnCompleteListener<DataSnapshot>() {
               @Override
              public void onComplete(@NonNull Task<DataSnapshot> task) {
                  if (task.isSuccessful()) {
                      User currentUser =task.getResult().getValue(User.class);
                      editor.putString(USER_NAME, currentUser.getUserName());
+                     Log.e(TAG, "onComplete: "+currentUser.getUserName());
                      editor.putString(EMAIL, currentUser.getUserEmail());
-
-                     editor.apply();
+                      editor.commit();
+                     editor .apply();
 
                  }
                  else {
@@ -262,6 +270,8 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
              }
 
          });
+
+
        }
 
 }

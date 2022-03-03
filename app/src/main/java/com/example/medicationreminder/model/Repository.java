@@ -109,6 +109,11 @@ public class Repository  implements RepositoryInterface{
     }
 
     @Override
+    public void signOut() {
+        firebaseConnection.singOut();
+    }
+
+    @Override
     public boolean isReminder(String medicName) {
         return false;
     }
