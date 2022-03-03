@@ -43,23 +43,18 @@ public class MainActivity extends AppCompatActivity {
         badgeDrawable.setVisible(true);
         badgeDrawable.setNumber(AddHealthTakerFragment.REQUEST_COUNTER);
 
-
-        @SuppressLint("IdleBatteryChargingConstraints")
-        Constraints constraints = new Constraints.Builder()
-                //.setRequiresDeviceIdle(true)
-                .setRequiresCharging(true)
-                .build();
-        PeriodicWorkRequest refillReminderRequest =
-                null;
-        //if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-        refillReminderRequest = new PeriodicWorkRequest
-                .Builder(RefillReminderWorker.class, 5, TimeUnit.MINUTES)
-                .setConstraints(constraints)
-                // .setInitialDelay(diff,TimeUnit.MILLISECONDS )
-                .build();
-        // }
-        WorkManager.getInstance(getBaseContext()).enqueue(refillReminderRequest);
-//////////////////////////////////////////////
+//==============================================
+//        @SuppressLint("IdleBatteryChargingConstraints")
+//        Constraints constraints = new Constraints.Builder()
+//                .setRequiresCharging(true)
+//                .build();
+//        PeriodicWorkRequest refillReminderRequest = new PeriodicWorkRequest
+//                .Builder(RefillReminderWorker.class, 1, TimeUnit.DAYS)
+//                .setConstraints(constraints)
+//                // .setInitialDelay(diff,TimeUnit.MILLISECONDS )
+//                .build();
+//        WorkManager.getInstance(getBaseContext()).enqueue(refillReminderRequest);
+//==========================================================
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
         bottomNavigationView = findViewById(R.id.bottom_nav_view);
@@ -74,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-/////////////////////////////////////
+///========================================================
         drawerLayout=findViewById(R.id.drawerLayout);
         Toolbar toolbar=findViewById(R.id.toolbar);
 

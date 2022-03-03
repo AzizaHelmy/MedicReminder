@@ -16,7 +16,6 @@ import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 import java.util.Objects;
-
 public class RefillReminderWorker extends Worker {
 
     private static final String CHANNEL_ID = "MEDIC_CHANNEL";

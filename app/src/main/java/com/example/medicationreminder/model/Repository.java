@@ -111,14 +111,14 @@ public class Repository implements RepositoryInterface {
         return localSource.getAllMedics();
     }
 
+    @Override
+    public boolean isReminder(String medicName) {
+        return false;
+    }
+
     //=========================================
     @Override
     public void addRequest(Request request) {
-       // getInfo();
-//        Request request = new Request(senderName, reciverEmail, senderEmail, senderImg, medics);      //  Request healthTake = new Request(senderName, reciverEmail, senderEmail, senderImg, medications);
-//        FirebaseDatabase.getInstance().getReference("Request").push().setValue(request);
-        // Toast.makeText(, "Invitation Sent Successfully", Toast.LENGTH_SHORT).show();
-
         firebaseConnection.addRequest(request);
     }
 
@@ -133,17 +133,13 @@ public class Repository implements RepositoryInterface {
         firebaseConnection.setMyDelegate(myDelegate);
     }
 
-
-    //==============================================================
-    @Override
-    public boolean isReminder(String medicName) {
-      return   localSource.isReminder(medicName);
-    }
-
     @Override
     public void deleteMedic(Medication medication) {
         localSource.deleteDrug(medication);
     }
+
+    //==============================================================
+
 
 //    @Override
 //    public boolean isReminder(String medicName) {
@@ -159,6 +155,7 @@ public class Repository implements RepositoryInterface {
 //        return  reminder.isFlag();
 //    }
 
+    }
 
 
-}
+

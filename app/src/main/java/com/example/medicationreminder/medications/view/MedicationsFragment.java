@@ -1,14 +1,17 @@
 package com.example.medicationreminder.medications.view;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.work.Constraints;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,11 +22,13 @@ import android.widget.ImageView;
 import com.example.medicationreminder.Network.FirebaseConnection;
 import com.example.medicationreminder.R;
 
-import com.example.medicationreminder.databinding.FragmentMedicationsBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import com.example.medicationreminder.RefillReminderWorker;
+import com.example.medicationreminder.databinding.FragmentMedicationsBinding;
 import com.example.medicationreminder.db.ConcereteLocalSource;
 import com.example.medicationreminder.medications.presenter.MedicationPresenter;
 import com.example.medicationreminder.medications.presenter.MedicsPresenter;
@@ -35,7 +40,7 @@ public class MedicationsFragment extends Fragment implements MedicsOnClick, Medi
 
     FragmentMedicationsBinding binding;
     MedicsAdapter adapterMedics;
-    List<Medication> list;
+    List<Medication> list = new ArrayList<>();
     MedicsPresenter medicsPresenter;
     public static final String TAG = "TAG";
 
@@ -49,9 +54,10 @@ public class MedicationsFragment extends Fragment implements MedicsOnClick, Medi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentMedicationsBinding.inflate(getLayoutInflater(), container, false);
         View view = binding.getRoot();
-        setUpRecyclerView();
+
         medicsPresenter = new MedicationPresenter(getContext(), Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())), this);
         medicsPresenter.getMedics(getViewLifecycleOwner());
+        setUpRecyclerView();
         return view;
     }
 
@@ -66,6 +72,19 @@ public class MedicationsFragment extends Fragment implements MedicsOnClick, Medi
 
             }
         });
+        @SuppressLint("IdleBatteryChargingConstraints")
+        Constraints constraints = new Constraints.Builder()
+                //.setRequiresDeviceIdle(true)
+                .setRequiresCharging(true)
+                .build();
+        PeriodicWorkRequest refillReminderRequest = new PeriodicWorkRequest
+                .Builder(RefillReminderWorker.class, 1, TimeUnit.DAYS)
+                //.setConstraints(constraints)
+                // .setInitialDelay(diff,TimeUnit.MILLISECONDS )
+                .build();
+        // }
+        WorkManager.getInstance(getContext()).enqueue(refillReminderRequest);
+
     }
 
     //==========================================================
@@ -87,30 +106,35 @@ public class MedicationsFragment extends Fragment implements MedicsOnClick, Medi
     private void setUpRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        // layoutManager.setReverseLayout(true);
         binding.rvMedics.setLayoutManager(layoutManager);
         Log.e(TAG, "showMedics: " + list);
-        medicsPresenter = new MedicationPresenter(getContext(), Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())), this);
-        medicsPresenter.getMedics(getViewLifecycleOwner());
+        adapterMedics = new MedicsAdapter(getContext(), list, this, medicsPresenter);
+        binding.rvMedics.setAdapter(adapterMedics);
     }
 
     //========================================================================
     @Override
-    public void ItemOnClick(Medication model) {
-
-        Medication medication=new Medication();
-
-        Navigation.findNavController(getView()).navigate(R.id.action_medicationsFragment_to_displayMedicineFragment);
+    public void ItemOnClick(Medication model, int position) {
+        //send args
+        // bundel
+        Medication clickedTask = list.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("medic", clickedTask);
+        Navigation.findNavController(getView()).navigate(R.id.action_medicationsFragment_to_displayMedicineFragment, bundle);
         adapterMedics.notifyDataSetChanged();
     }
 
     @Override
     public void alarmOnClick(Medication medic, ImageView view) {
+        medicsPresenter.suspendReminder(medic);
 
     }
 
     //=========================================================================
     @Override
     public void showMedics(List<Medication> medications) {
+        list = medications;
         adapterMedics.setList(medications);
         cheackMedic(medications);
         adapterMedics.notifyDataSetChanged();

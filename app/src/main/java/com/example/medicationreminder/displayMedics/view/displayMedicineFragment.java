@@ -77,10 +77,16 @@ public class displayMedicineFragment extends Fragment implements DisplayMedicati
         binding.editImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                //Medication clicedItem=new Medication(binding.medicineTxt.getText().toString(),binding.strengthTxt.getText().toString(),binding.duration.getText().toString(),binding.drugAmount.getText().toString(),binding.leftdrug.getText().toString());
-//                Bundle bundle=new Bundle();
-//                bundle.putSerializable("edite", (Serializable) clicedItem);
-                //Navigation.findNavController(view).navigate(R.id.action_displayMedicineFragment_to_updateMedicationFragment,bundle);
+                Medication clicedItem=new Medication(binding.medicineTxt.getText().toString(),binding.strengthTxt.getText().toString(),binding.duration.getText().toString(),binding.drugAmount.getText().toString(),binding.leftdrug.getText().toString());
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("edite", (Serializable) clicedItem);
+                Navigation.findNavController(view).navigate(R.id.action_displayMedicineFragment_to_updateMedicationFragment,bundle);
+            }
+        });
+        binding.suspend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.suspend.setImageResource(R.drawable.reme);
             }
         });
         return view;
@@ -99,17 +105,18 @@ public class displayMedicineFragment extends Fragment implements DisplayMedicati
              medication = (Medication) args.getSerializable("medic");
             binding.medicineTxt.setText(medication.getMedicine_Name());
             binding.strengthTxt.setText(medication.getStrength());
-           // binding.duration.setText(medication.getDuration());
+          binding.duration.setText(medication.getDuration());
             binding.medicineIcon.setId(medication.getIcon());
-            binding.drugAmount.setText(medication.getDrugAmount());
-            binding.leftdrug.setText(medication.getLeftDrug());
+            binding.drugAmount.setText(medication.getDrugAmount()+" have");
+            binding.leftdrug.setText(medication.getLeftDrug()+" Left");
 //         binding.number1.setText(medication.getNoOfDose()[0]);
 //         binding.number2.setText(medication.getNoOfDose()[1]);
 //            binding.number2.setText(medication.getNoOfDose()[2]);
             binding.timer1.setText(medication.getDrugs()[0]);
             binding.timer2.setText(medication.getDrugs()[1]);
             binding.timer3.setText(medication.getDrugs()[2]);
-
+            binding.medicineIcon.setImageResource(medication.getIcon());
+binding.instructions.setText(medication.getInstructions());
         }
 
 

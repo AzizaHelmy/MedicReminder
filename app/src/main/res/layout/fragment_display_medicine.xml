@@ -269,6 +269,25 @@
             app:layout_constraintTop_toBottomOf="@+id/drug_amount"
             app:layout_constraintStart_toStartOf="@id/drug_amount"
             tools:layout_editor_absoluteY="399dp" />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_marginTop="15dp"
+    android:id="@+id/use"
+    android:textStyle="bold"
+    app:layout_constraintStart_toStartOf="@id/leftdrug"
+    app:layout_constraintTop_toBottomOf="@id/leftdrug"
+    android:layout_height="wrap_content"
+    android:textSize="21sp"
+    android:textColor="@color/black"
+    android:text="how to use?"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="before eating"
+            android:id="@+id/instructions"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="@id/use"
+            app:layout_constraintTop_toBottomOf="@+id/use"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
