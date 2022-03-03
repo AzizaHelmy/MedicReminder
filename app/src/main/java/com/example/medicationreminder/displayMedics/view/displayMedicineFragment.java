@@ -112,9 +112,9 @@ public class displayMedicineFragment extends Fragment implements DisplayMedicati
 //         binding.number1.setText(medication.getNoOfDose()[0]);
 //         binding.number2.setText(medication.getNoOfDose()[1]);
 //            binding.number2.setText(medication.getNoOfDose()[2]);
-            binding.timer1.setText(medication.getDrugs()[0]);
-            binding.timer2.setText(medication.getDrugs()[1]);
-            binding.timer3.setText(medication.getDrugs()[2]);
+//            binding.timer1.setText(medication.getDrugs()[0]);
+//            binding.timer2.setText(medication.getDrugs()[1]);
+//            binding.timer3.setText(medication.getDrugs()[2]);
             binding.medicineIcon.setImageResource(medication.getIcon());
 binding.instructions.setText(medication.getInstructions());
         }

@@ -10,7 +10,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public interface LoginPresenterInterface {
     public void login(User user, Activity activity);
-    boolean   isUserSignIn();
+    FirebaseUser   isUserSignIn();
+    public  void autologin(FirebaseUser currentUser);
     public void signWithGoogle(Activity activity);
     public void firebaseAuthWithGoogle(Activity activity, Task<GoogleSignInAccount> task) ;
 

@@ -3,9 +3,13 @@ package com.example.medicationreminder.Network;
 import static android.content.ContentValues.TAG;
 
 import static com.example.medicationreminder.register.view.RegisterActivity.SHARD_NAME;
+import static com.example.medicationreminder.register.view.RegisterActivity.USER_NAME;
+import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 
+import android.content.Context;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -37,6 +41,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -63,6 +68,14 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
     FirebaseConnectionDelegated connectionDelegated;
     boolean flag = false;
 
+    @SuppressLint("RestrictedApi")
+    public FirebaseConnection() {
+        mAuth = FirebaseAuth.getInstance();
+
+        preferences = getApplicationContext().getSharedPreferences(SHARD_NAME, Context.MODE_PRIVATE);
+        editor = preferences.edit();
+    }
+
     public static FirebaseConnection getFirebaseConnection() {
         if (getInstance == null) {
             getInstance = new FirebaseConnection();
@@ -73,7 +86,7 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
     @Override
     public void registerNewUser(User user, Activity activity, FirebaseConnectionDelegated firebaseConnectionDelegated) {
 
-        mAuth = FirebaseAuth.getInstance();
+
         mAuth.createUserWithEmailAndPassword(user.getUserEmail(), user.getPassword())
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -82,41 +95,36 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
                             user.setUserId(task.getResult().getUser().getUid());
                             addUser(user, firebaseConnectionDelegated);
                             currentUser = mAuth.getCurrentUser();
+                            getUser(mAuth.getUid());
                             firebaseConnectionDelegated.onCompleteResultSuccess(currentUser);
                         } else {
-                            Log.e(TAG, "onComplete: " + task.getException().getLocalizedMessage());
                             firebaseConnectionDelegated.onFailureResult(task.getException().getLocalizedMessage());
-
-
                         }
                     }
                 });
     }
 
-
     @Override
-    public boolean isUserSignIn() {
+    public FirebaseUser isUserSignIn() {
+
         if (currentUser != null) {
-            return true;
+            return currentUser;
         }
 
-        return false;
+        return null;
     }
 
-
     public void addUser(User user, FirebaseConnectionDelegated firebaseConnectionDelegated) {
-        Log.e(TAG, "addUser: ");
-        database = FirebaseDatabase.getInstance();
-        myRef = database.getReference(USER_REF);
-        myRef.child(user.getUserId()).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+
+        UserDao.addUser(user, new OnCompleteListener<Void>() {
             @Override
-            public void onSuccess(Void unused) {
-                sendEmailValidation();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                firebaseConnectionDelegated.onFailureResult(e.getLocalizedMessage());
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    sendEmailValidation();
+
+                } else {
+                    firebaseConnectionDelegated.onFailureResult(task.getException().getMessage());
+                }
             }
         });
 
@@ -125,16 +133,15 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
 
     @Override
     public void signIn(User user, Activity activity, FirebaseConnectionDelegated firebaseConnectionDelegated) {
-        Log.e(TAG, "signIn: " + user.getUserEmail());
-        Log.e(TAG, "signIn: " + user.getUserEmail());
-        mAuth = FirebaseAuth.getInstance();
 
+        mAuth = FirebaseAuth.getInstance();
         mAuth.signInWithEmailAndPassword(user.getUserEmail(), user.getPassword())
                 .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         currentUser = authResult.getUser();
-                        Log.d(TAG, "signInWithEmail:success");
+                        getUser(mAuth.getUid());
+
                         firebaseConnectionDelegated.onCompleteResultSuccess(currentUser);
 
                     }
@@ -191,9 +198,11 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Log.e(TAG, "onComplete: " + task.getResult().getUser().getEmail());
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                firebaseConnectionDelegated.onCompleteResultSuccess(user);
+                                currentUser = mAuth.getCurrentUser();
+                                editor.putString(USER_NAME, currentUser.getDisplayName());
+                                editor.putString(RegisterActivity.EMAIL, currentUser.getEmail());
+//                               getUser(mAuth.getUid());
+                                firebaseConnectionDelegated.onCompleteResultSuccess(currentUser);
                                 //  googleSingInClient.signOut();
 
 
@@ -251,20 +260,10 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
-                    flag=true;
-                    //call cheack mail
-
-                    //check if this email is my email!! ==> how to send to your self !!
-//                    if (snapshot.getValue().equals(senderEmail)) {
-//                        //how??
-//                    }
-//                    //else==>send invitation
-//
-//                } else {
+                    flag = true;
 
                 }
                 connectionDelegated.onSuccess(flag);
-
             }
 
             @Override
@@ -279,33 +278,41 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
     //=====================================================
     @Override
     public void addRequest(Request request) {
-        getInfo();
-        //request = new Request(senderName, reciverEmail, senderEmail, senderImg, medics);      //  Request healthTake = new Request(senderName, reciverEmail, senderEmail, senderImg, medications);
         FirebaseDatabase.getInstance().getReference("Request").push().setValue(request);
-        // Toast.makeText(, "Invitation Sent Successfully", Toast.LENGTH_SHORT).show();
     }
 
+    //========================================================
     @Override
     public void setMyDelegate(FirebaseConnectionDelegated myDelegate) {
-        connectionDelegated=myDelegate;
+        connectionDelegated = myDelegate;
     }
 
     //==============================================================
-    private void getInfo() {
-//        sharedPreferences = co.getSharedPreferences(SHARD_NAME, Context.MODE_PRIVATE);
-//        senderName = sharedPreferences.getString(RegisterActivity.USER_NAME, "anoynmous");
-//        senderEmail = sharedPreferences.getString(RegisterActivity.EMAIL, "anoynmous@gmail.com");
-//        senderImg = "https://firebasestorage.googleapis.com/v0/b/medical-reminder-c0a4c.appspot.com/o/mateo-avila-chinchilla-x_8oJhYU31k-unsplash.jpg?alt=media&token=9f6c259e-aace-42ab-8549-f36505939740";
+    @Override
+    public void singOut() {
+        mAuth.signOut();
     }
 
-    private void shawingDialog() {
-        progressDialog.setTitle("Cheacking Email");
-        progressDialog.setMessage("Please wait while we are cheacking this email in our system.");
-//        progressDialog.show();
-        //progressDialog.set
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setCanceledOnTouchOutside(false);
-    }
+    public void getUser(String id) {
+        Log.e(TAG, "getUser: ");
+        UserDao.getUser(id, new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()) {
+                    User currentUser = task.getResult().getValue(User.class);
+                    editor.putString(USER_NAME, currentUser.getUserName());
+                    Log.e(TAG, "onComplete: " + currentUser.getUserName());
+                    editor.putString(RegisterActivity.EMAIL, currentUser.getUserEmail());
+                    editor.commit();
+                    editor.apply();
 
+                } else {
+                }
+            }
+
+        });
+
+
+    }
 
 }

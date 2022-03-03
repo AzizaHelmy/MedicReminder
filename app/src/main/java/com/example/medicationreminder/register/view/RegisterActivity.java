@@ -118,27 +118,27 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
 
     public boolean isValidPassword() {
 
-//        final String PASSWORD_PATTERN = "String = \"(?=.*[0-9a-zA-Z]).{8,}\"";
-//        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
-//        Matcher matcher = pattern.matcher(binding.password.getEditText().getText().toString());
-//
-//        if (binding.password.getEditText().getText().toString().isEmpty()) {
-//            binding.password.setError("Required*");
-//
-//
-//            return false;
-//        } else if (matcher.matches() == false) {
-//            binding.password.setError("password too week");
-//
-//
-//            return false;
+        final String PASSWORD_PATTERN = "String = \"(?=.*[0-9a-zA-Z]).{8,}\"";
+        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
+        Matcher matcher = pattern.matcher(binding.password.getEditText().getText().toString());
 
-//        }
-//        else {
-//            binding.email.setError("");
+        if (binding.password.getEditText().getText().toString().isEmpty()) {
+            binding.password.setError("Required*");
+
+
+            return false;
+        } else if (binding.password.getEditText().getText().length()<6) {
+            binding.password.setError("password too week");
+
+
+            return false;
+
+        }
+        else {
+            binding.email.setError("");
 
             return true;
-    //    }
+      }
 
 
     }

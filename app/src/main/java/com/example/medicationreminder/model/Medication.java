@@ -16,6 +16,7 @@ public class Medication implements Serializable {
     @PrimaryKey
     @NonNull
     private  String medicine_Name;
+
     private boolean isRemindered;
     private String medicineType;
     private int frequencyOfRepitionId;

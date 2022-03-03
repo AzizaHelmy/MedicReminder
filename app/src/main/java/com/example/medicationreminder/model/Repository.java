@@ -11,27 +11,25 @@ import androidx.lifecycle.LiveData;
 
 import com.example.medicationreminder.Network.FirebaseConnectionDelegated;
 import com.example.medicationreminder.Network.FirebaseConnectionInterface;
-import com.example.medicationreminder.db.DrugDao;
 import com.example.medicationreminder.db.LocalSource;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class Repository implements RepositoryInterface {
+public class Repository  implements RepositoryInterface{
 
     Context context;
     FirebaseConnectionInterface firebaseConnection;
     LocalSource localSource;
     private static Repository repository = null;
-    private DrugDao drugDao;
 
     public Repository(Context context, FirebaseConnectionInterface firebaseConnection, LocalSource localSource) {
         this.context = context;
         this.firebaseConnection = firebaseConnection;
         this.localSource = localSource;
-        //drugDao = repository.drugDao;
-       // localSource=
     }
 
     public static Repository getRepository(Context context, FirebaseConnectionInterface firebaseConnection, LocalSource localSource) {
@@ -42,18 +40,17 @@ public class Repository implements RepositoryInterface {
     }
 
     @Override
-    public void registerNewUser(User user, Activity activity, FirebaseConnectionDelegated firebaseConnectionDelegated) {
-        Log.e(TAG, "registerNewUser:repository ");
-        firebaseConnection.registerNewUser(user, activity, firebaseConnectionDelegated);
+    public void registerNewUser(User user, Activity activity , FirebaseConnectionDelegated firebaseConnectionDelegated) {
+        firebaseConnection.registerNewUser(user,activity ,firebaseConnectionDelegated);
     }
 
     @Override
     public void signIn(User user, Activity activity, FirebaseConnectionDelegated firebaseConnectionDelegated) {
-        firebaseConnection.signIn(user, activity, firebaseConnectionDelegated);
+        firebaseConnection.signIn(user,activity,firebaseConnectionDelegated);
     }
 
     @Override
-    public boolean isUserSignIn() {
+    public FirebaseUser isUserSignIn() {
         return firebaseConnection.isUserSignIn();
     }
 
@@ -112,6 +109,11 @@ public class Repository implements RepositoryInterface {
     }
 
     @Override
+    public void signOut() {
+        firebaseConnection.singOut();
+    }
+
+    @Override
     public boolean isReminder(String medicName) {
         return false;
     }
@@ -155,7 +157,20 @@ public class Repository implements RepositoryInterface {
 //        return  reminder.isFlag();
 //    }
 
-    }
+//    public class Reminder implements Runnable {
+//        private boolean flag=false;
+//        private String medicName;
+//
+//        @Override
+//        public void run() {
+//            flag = repository.isReminder(medicName);
+//        }
+//        public void setName(String name) {
+//            this.medicName = name;
+//        }
+//        public boolean isFlag() {
+//            return flag;
+//        }
+//    }
 
-
-
+}

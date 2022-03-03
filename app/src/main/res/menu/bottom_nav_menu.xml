@@ -8,7 +8,7 @@
         android:title="@string/home" />
     <item
         android:id="@+id/medicationsFragment"
-        android:icon="@drawable/icon_medi"
+        android:icon="@drawable/drug_icon"
         android:title="@string/medications" />
     <item
         android:id="@+id/healthTakersFragment"

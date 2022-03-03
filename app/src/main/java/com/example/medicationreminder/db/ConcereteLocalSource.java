@@ -5,6 +5,7 @@ import static com.example.medicationreminder.medications.view.MedicationsFragmen
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
@@ -63,7 +64,14 @@ public class ConcereteLocalSource implements LocalSource {
 
     @Override
     public void editeDrug(Medication medication) {
-     drugDao.updateDrug(medication);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                drugDao.updateDrug(medication);
+                //Toast.makeText(ConcereteLocalSource.class, "Deleted", Toast.LENGTH_SHORT).show();
+            }
+        }).start();
     }
 
 

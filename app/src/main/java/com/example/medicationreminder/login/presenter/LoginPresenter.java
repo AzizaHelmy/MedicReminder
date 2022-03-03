@@ -19,7 +19,7 @@ public class LoginPresenter implements LoginPresenterInterface,FirebaseConnectio
 
     Context context;
     RepositoryInterface repositoryInterface;
-   LoginViewInterface loginViewInterface;
+    LoginViewInterface loginViewInterface;
 
     public LoginPresenter(Context context, RepositoryInterface repositoryInterface, LoginViewInterface loginViewInterface) {
         this.context = context;
@@ -29,13 +29,14 @@ public class LoginPresenter implements LoginPresenterInterface,FirebaseConnectio
 
     @Override
     public void login(User user, Activity activity) {
-         repositoryInterface.signIn(user,activity,this);
+        Log.e(TAG, "login:   presenter ");
+        repositoryInterface.signIn(user,activity,this);
     }
 
     @Override
     public void onCompleteResultSuccess(FirebaseUser user) {
-
-             loginViewInterface.successLogin(user);
+        Log.e(TAG, "onCompleteResultSuccess: ");
+        loginViewInterface.successLogin(user);
 
 
     }
@@ -52,7 +53,8 @@ public class LoginPresenter implements LoginPresenterInterface,FirebaseConnectio
     }
 
     @Override
-    public boolean isUserSignIn() {
+    public FirebaseUser isUserSignIn() {
+        Log.e(TAG, "isUserSignIn: presentr");
         return  repositoryInterface.isUserSignIn();
     }
 
@@ -64,9 +66,11 @@ public class LoginPresenter implements LoginPresenterInterface,FirebaseConnectio
 
     @Override
     public void firebaseAuthWithGoogle(Activity activity, Task<GoogleSignInAccount> task) {
-           repositoryInterface.firebaseAuthWithGoogle(activity,task,this);
+        repositoryInterface.firebaseAuthWithGoogle(activity,task,this);
     }
 
+    @Override
+    public void autologin(FirebaseUser currentUser) {
 
-
+    }
 }

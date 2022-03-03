@@ -11,7 +11,7 @@
         android:id="@+id/butt_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="77dp"
+        android:layout_marginBottom="57dp"
         android:background="@drawable/input_design"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

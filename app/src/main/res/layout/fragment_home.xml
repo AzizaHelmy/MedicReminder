@@ -31,6 +31,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="3"
+
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+
                 android:background="#FFFF"
 
 
@@ -50,31 +53,17 @@
 
     </androidx.cardview.widget.CardView>
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        app:lottie_autoPlay="true"
-        app:lottie_rawRes="@raw/noresultfound"
-        app:lottie_loop="true"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:lottie_speed="1" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/day_recycler"
 
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="32dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/card"
 
-        tools:layout_editor_absoluteX="5dp"
         tools:listitem="@layout/day_drags" />
     <com.github.clans.fab.FloatingActionMenu
         android:id="@+id/menu"
@@ -91,8 +80,8 @@
         fab:menu_shadowRadius="4dp"
         fab:menu_shadowXOffset="1dp"
         fab:menu_shadowYOffset="3dp"
-        fab:menu_colorNormal="#DA4336"
-        fab:menu_colorPressed="#E75043"
+        fab:menu_colorNormal="@color/app_color"
+        fab:menu_colorPressed="#9C27B0"
         fab:menu_colorRipple="#99FFFFFF"
         fab:menu_animationDelayPerItem="50"
         fab:menu_icon="@drawable/fab_add"
@@ -119,24 +108,27 @@
         fab:menu_openDirection="up"
         fab:layout_constraintBottom_toBottomOf="@id/day_recycler"
         fab:menu_backgroundColor="@android:color/transparent"
-        fab:menu_fab_label="your_label_here"
+
 
         fab:layout_constraintEnd_toEndOf="parent">
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/medication_item"
+            android:id="@+id/btn_healthTracker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="openAddHelthTaker"
+            android:src="@drawable/icon_health"
 
             fab:fab_size="mini"
-            fab:fab_label="" />
+            fab:fab_label="Add Health Taker" />
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/menu_item"
+            android:id="@+id/btn_addMedicine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
+                android:background="@color/app_color"
             fab:fab_size="mini"
-            fab:fab_label="Menu item 1" />
+            fab:fab_label="Add medicine" />
 
     </com.github.clans.fab.FloatingActionMenu>
 

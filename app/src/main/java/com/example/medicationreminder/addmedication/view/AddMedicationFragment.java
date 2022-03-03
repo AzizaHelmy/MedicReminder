@@ -5,16 +5,24 @@ import static android.content.ContentValues.TAG;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -44,11 +52,18 @@ import com.example.medicationreminder.databinding.FragmentAddMedicationBinding;
 import com.example.medicationreminder.db.ConcereteLocalSource;
 import com.example.medicationreminder.model.Medication;
 import com.example.medicationreminder.model.Repository;
+import com.example.medicationreminder.workmanger.DailyWorker;
+import com.example.medicationreminder.workmanger.ReminderWorkerDrugs;
 
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 
 public class AddMedicationFragment extends Fragment implements OnDialogClickListener, AddMedicationViewInterface {
@@ -58,25 +73,33 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
     String frequencyRepition;
     ArrayList<String> days;
     String [] doses;
-    String []  times=new String[3];
     Medication medication;
     String dailyOrCertain;
     String duration;
     String noOfDays;
-
-
+    int workerYear;
+    int workerMonth;
+    int workerDay;
+    DatePicker workerDatePicker;
     int frequncyid;
     AddMedicationPresenterInterface addMedicationPresenterInterface;
-
+   String []drugs;
+   long[]longDrugs;
+    int count=-1;
+    SharedPreferences sharedPreferences;
     public AddMedicationFragment() {
 
-    }
+       }
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         days = new ArrayList<>();
+
+
+
+
         addMedicationPresenterInterface = new AddMedicationPresenter(getActivity(), Repository.getRepository(getContext(), FirebaseConnection.getFirebaseConnection(), ConcereteLocalSource.getInstance(getContext())), this);
         OnBackPressedCallback pressedCallback = new OnBackPressedCallback(true) {
             @Override
@@ -96,7 +119,7 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         binding.twoTimeaday.setVisibility(View.GONE);
         binding.threeTimeaday.setVisibility(View.GONE);
         //============================================
-        binding.afterLayout3.setEnabled(false);
+       binding.afterLayout3.setEnabled(false);
         TextWatcher textWatcher3=new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -111,14 +134,10 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
             @Override
             public void afterTextChanged(Editable editable) {
                 if (binding.timerTxtone.getText().length() > 0&&binding.timerTxttwo.getText().length() > 0&&binding.timerTxtthree.getText().length() > 0) {
-//                    times[0]= (String) binding.timerTxtone.getText();
-//                    times[1]=binding.timerTxttwo.getText().toString();
-//                    times[2]=binding.timerTxtthree.getText().toString();
-//                    Log.i("times","times"+times[0]+times[1]+times[2]);
                     binding.afterLayout3.setEnabled(true);
                 } else if(binding.timerTxtone.getText().length() == 0||binding.timerTxttwo.getText().length() == 0||binding.timerTxtthree.getText().length()== 0)
                     binding.afterLayout3.setEnabled(false);
-
+                Toast.makeText(getContext() ,"fill the time", Toast.LENGTH_SHORT).show();
             }
 
 
@@ -139,16 +158,10 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
             @Override
             public void afterTextChanged(Editable editable) {
                 if (binding.timerTxtone.getText().length() > 0&&binding.timerTxttwo.getText().length() > 0) {
-//                    times[0]= (String) binding.timerTxtone.getText();
-//                    times[1]=binding.timerTxttwo.getText().toString();
-//                    times[2]="";
-                    Log.i("times","times"+times[0]+times[1]+times[2]);
-
-
                     binding.afterLayout3.setEnabled(true);
                 } else if(binding.timerTxtone.getText().length() == 0||binding.timerTxttwo.getText().length() == 0)
                     binding.afterLayout3.setEnabled(false);
-
+                Toast.makeText(getContext() ,"fill the time", Toast.LENGTH_SHORT).show();
             }
 
 
@@ -170,13 +183,9 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
             public void afterTextChanged(Editable editable) {
                 if (binding.timerTxtone.getText().length() > 0) {
                     binding.afterLayout3.setEnabled(true);
-//                   // times[0]= (String) binding.timerTxtone.getText();
-//                    times[1]="";
-//                    times[2]="";
-                    Log.i("times","times"+times[0]+times[1]+times[2]);
                 } else
                     binding.afterLayout3.setEnabled(false);
-
+                Toast.makeText(getContext() ,"fill the time", Toast.LENGTH_SHORT).show();
             }
 
 
@@ -324,6 +333,8 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
                 frequencyRepition = adapterView.getSelectedItem().toString();
                 Log.i("salmaaa", "" + frequencyRepition);
                 if (frequencyRepition == adapterView.getItemAtPosition(1).toString()) {
+                    drugs=new String[1];
+                    longDrugs=new  long[1];
                     binding.timerTxtone.setText("");
                     binding.afterLayout3.setEnabled(false);
                     binding.timerTxtone.addTextChangedListener(textWatcher1);
@@ -332,7 +343,8 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
                     binding.threeTimeaday.setVisibility(View.GONE);
                     Log.i("spinnerr", "the first item is" + adapterView.getItemAtPosition(1).toString() + frequencyRepition);
                 } else if (frequencyRepition == adapterView.getItemAtPosition(2).toString()) {
-
+                    drugs=new String[2];
+                    longDrugs=new  long[2];
 
                     binding.timerTxttwo.setText("");
                     binding.afterLayout3.setEnabled(false);
@@ -343,6 +355,9 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
                     binding.threeTimeaday.setVisibility(View.GONE);
 
                 } else if (frequencyRepition == adapterView.getItemAtPosition(3).toString()) {
+                    drugs=new String[3];
+                    longDrugs=new  long[3];
+
                     binding.timerTxtthree.setText("");
                     binding.afterLayout3.setEnabled(false);
                     binding.timerTxtthree.addTextChangedListener(textWatcher3);
@@ -406,16 +421,17 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
             @Override
             public void onClick(View view) {
                 addMedicationPresenterInterface.insert(saveData());
+                callWorkManger(saveData().getMedicine_Name(),getContext());
                 Navigation.findNavController(view).navigate(R.id.action_addMedicationFragment_to_medicationsFragment2);
             }
         });
-        binding.doneBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addMedicationPresenterInterface.insert(saveData());
-                Navigation.findNavController(view).navigate(R.id.action_addMedicationFragment_to_medicationsFragment2);
-            }
-        });
+//        binding.doneBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                addMedicationPresenterInterface.insert(saveData());
+//                Navigation.findNavController(view).navigate(R.id.action_addMedicationFragment_to_medicationsFragment2);
+//            }
+//        });
 
         return binding.getRoot();
 
@@ -503,7 +519,7 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         binding.vaccine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iconId = R.drawable.vaccine;
+                iconId = binding.vaccine.getId();
 
             }
         });
@@ -524,10 +540,11 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         binding.doneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e(TAG, "onClick: ");
+
                 addMedicationPresenterInterface.insert(saveData());
+                callWorkManger(saveData().getMedicine_Name(),getContext());
                 Navigation.findNavController(view).navigate(R.id.action_addMedicationFragment_to_medicationsFragment2);
-                Log.i("tag", "what is your problem");
+
             }
         });
         //============================================================================
@@ -555,17 +572,24 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
             }
         });
         //======================================================================
+
+        //==================================================================
         binding.timerTxttwo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openTimerPickerDialoug(binding.timerTxttwo);
+
+                openTimerPickerDialoug( binding.timerTxttwo);
+
+
             }
         });
-        //==================================================================
         binding.timerTxtthree.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openTimerPickerDialoug(binding.timerTxtthree);
+
+//                drugs[2]=binding.timerTxtone.getText().toString();
+
             }
         });
         //=======================================================================
@@ -624,6 +648,30 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
 
     }
 
+    private void callWorkManger(String medName, Context context) {
+
+        WorkRequest createRequest =
+                new PeriodicWorkRequest.Builder(DailyWorker.class,
+                        24, TimeUnit.HOURS)
+                        .setInputData(
+                                new Data.Builder()
+                                        .putLongArray("drugTimes",longDrugs)
+                                        .putString("medName", medName)
+                                       // .putInt("dose", medication.getMedDetails().get(0).getDose())
+                                       // .putString("medFood",medName)
+                                        .build()
+                        )
+                        .addTag(medName)
+                        .build();
+
+        WorkManager.getInstance(context).enqueue(createRequest);
+
+
+
+
+
+    }
+
     //======================================================================
     @Override
     public void onDestroy() {
@@ -633,9 +681,20 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
 
     //=======================================================================
     public void openTimerPickerDialoug(TextView timerTxt) {
+
+           count++;
         TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(workerDatePicker.getYear(), workerDatePicker.getMonth(), workerDatePicker.getDayOfMonth(),
+                        timePicker.getCurrentHour(), timePicker.getCurrentMinute(), 0);
+                long startTime = calendar.getTimeInMillis();
+
+
+                longDrugs[count]=startTime;
+
                 timerHour = hourOfDay;
                 timerMinute = minute;
                 String time = timerHour + ":" + timerMinute;
@@ -644,6 +703,8 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
                     Date date = simpleDateFormat.parse(time);
                     SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("hh:mm:aa");
                     timerTxt.setText(simpleDateFormat1.format(date));
+                     drugs[count]=timerTxt.getText().toString();
+
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -661,6 +722,8 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
             public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
                 timerHour = hourOfDay;
                 timerMinute = minute;
+
+
                 String time = timerHour + ":" + timerMinute;
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
                 try {
@@ -700,6 +763,12 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
+
+
+
+
+                workerDatePicker=datePicker;
                 month = month + 1;
                 String date = day + "/" + month + "/" + year;
                 binding.selectdate.setText(date);
@@ -721,7 +790,6 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
 
     @Override
     public void chooseRefillAmount(String amount) {
-        Log.e(TAG, "chooseRefillAmount: ");
         binding.selectAmountRefill.setText(amount);
 
     }
@@ -743,54 +811,47 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         medication.setStatus("Active");
         medication.setRemindered(true);
         medication.setMedicine_Name(binding.medName.getText().toString());
-        Log.i("med", "" + binding.medName.getText().toString());
-        Log.i("salasoka", "hdjhwjq");
         medication.setStrength(binding.PresstoadjustTxt.getText().toString());
-        Log.i("med", "" + binding.PresstoadjustTxt.getText().toString());
-//        medication.setNoOfDose(doses);
-//        Log.i("med", "" + doses);
+        medication.setNoOfDose(doses);
+        medication.setDrugAmount(binding.numberTxtone.getText().toString());
         medication.setStratingDate(binding.selectdate.getText().toString());
-        Log.i("med", "" + binding.selectdate.getText().toString());
         medication.setDaily(binding.isdaily.isChecked());
-        Log.i("med", "" + binding.isdaily.isChecked());
         medication.setDuration(duration);
-
         medication.setDrugAmount(binding.amountofdrug.getText().toString());
-        Log.i("med", "" + binding.amountofdrug.getText().toString());
         medication.setLeftDrug(binding.selectAmountRefill.getText().toString());
-        Log.i("med", "" + binding.selectAmountRefill.getText().toString());
         medication.setFrequencyOfRepitionId(frequncyid);
-        Log.i("med", "" + frequncyid);
         medication.setNoOfDays(binding.noOfdaysEdite.getText().toString());
-        Log.i("med", "" + binding.noOfdaysEdite.getText().toString());
         medication.setRefilTime(binding.selectRefillTime.getText().toString());
-        Log.i("med", binding.selectRefillTime.getText().toString());
         if (binding.beforeeatingRadio.isChecked()) {
             medication.setInstructions(binding.beforeeatingRadio.getText().toString());
-            Log.i("med", binding.beforeeatingRadio.getText().toString());
         }
         if (binding.aftereatingRadio.isChecked()) {
             medication.setInstructions(binding.aftereatingRadio.getText().toString());
-            Log.i("med", binding.aftereatingRadio.getText().toString());
         }
         if (binding.whileeatingRadio.isChecked()) {
             medication.setInstructions(binding.whileeatingRadio.getText().toString());
-            Log.i("med", binding.whileeatingRadio.getText().toString());
         }
-        Log.e(TAG, "saveData: " + medication.getMedicine_Name());
 
-        medication.setDrugs(times);
-        Log.i("nnnn","time"+times);
+        medication.setDrugs(drugs);
+
         medication.setRefillReminder(binding.isRefillReminderd.isChecked());
-        Log.i("med", "" + binding.isRefillReminderd.isChecked());
         medication.setDays(days);
-        Log.i("med", "" + days);
         medication.setIcon(iconId);
-        Log.i("med", "iconId:" + iconId);
         medication.setFrequencyOfrepition(frequencyRepition);
         return medication;
     }
 
+    public void insertFirebase() {
+        sharedPreferences = getActivity().getSharedPreferences("sharedName", Context.MODE_PRIVATE);
+    }
+    private static long parseDate(String text)
+            throws ParseException
+    {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm a",
+                Locale.US);
+        dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return dateFormat.parse(text).getTime();
+    }
 //    public void insertFirebase() {
 //        sharedPreferences = getActivity().getSharedPreferences("sharedName", Context.MODE_PRIVATE);
 //

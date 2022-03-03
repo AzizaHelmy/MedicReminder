@@ -16,6 +16,7 @@ import android.view.View;
 
 import com.example.medicationreminder.MainActivity;
 import com.example.medicationreminder.Network.FirebaseConnection;
+import com.example.medicationreminder.R;
 import com.example.medicationreminder.databinding.ActivityLoginBinding;
 import com.example.medicationreminder.db.ConcereteLocalSource;
 import com.example.medicationreminder.login.restPassword.r.RestPassword;
@@ -29,10 +30,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class LoginActivity extends AppCompatActivity implements LoginViewInterface{
        ActivityLoginBinding binding;
     LoginPresenterInterface loginPresenterInterface;
     FirebaseUser currentUser=null;
+    public static String CURRENT_USER="current_user";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,21 +56,24 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
         Log.e(TAG, "onActivityResult: ");
         if (requestCode == FirebaseConnection.RC_SIGN_IN) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-//            Log.d("DOAA",""+task.getResult().getEmail());
            loginPresenterInterface. firebaseAuthWithGoogle(this,task);
-           successLogin(null);
+
         }}
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        if (loginPresenterInterface.isUserSignIn()){
-            Log.e(TAG, "onStart: if");
+        if (loginPresenterInterface.isUserSignIn()!=null){
+            currentUser=loginPresenterInterface.isUserSignIn();
             Intent intent=new Intent(this, MainActivity.class);
-
+            intent.putExtra(CURRENT_USER,currentUser);
+            Log.e(TAG, "onStart: "+currentUser.getDisplayName() );
             startActivity(intent);
             finish();
+        }
+        else {
+
+
         }
 
 
@@ -75,7 +84,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
         Log.e(TAG, "loginFailed: "+errorMessage.toString());
         AlertDialog alertDialog = new AlertDialog.Builder(this)
 
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setIcon(R.drawable.app_icon)
 
                 .setTitle("Medical Reminder")
 
@@ -94,12 +103,13 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
     public void successLogin(FirebaseUser user) {
         binding.progressBar.setVisibility(View.GONE);
          currentUser=user;
+
         Intent intent=new Intent(this, MainActivity.class);
-        intent.putExtra("currentUser",user);
+        intent.putExtra(CURRENT_USER,user);
         startActivity(intent);
         finish();
 
-       // Toast.makeText(this, "done", Toast.LENGTH_SHORT).show();
+
     }
 
     private boolean validateEmail() {
@@ -122,27 +132,25 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
 
     public boolean isValidPassword() {
 
-//        final String PASSWORD_PATTERN = "String = \"(?=.*[0-9a-zA-Z]).{8,}\"";
-//        Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
-//        Matcher matcher = pattern.matcher(binding.password.getEditText().getText().toString());
-//
-//        if (binding.password.getEditText().getText().toString().isEmpty()) {
-//            binding.password.setError("Required*");
-//
-//
-//            return false;
-//        } else if (matcher.matches() == false) {
-//            binding.password.setError("password too week");
-//
-//
-//            return false;
 
-//        }
-//        else {
-//            binding.email.setError("");
+
+        if (binding.loginPassword.getEditText().getText().toString().isEmpty()) {
+            binding.loginPassword.getEditText().setError("Required*");
+
+
+            return false;
+        } else if (binding.loginPassword.getEditText().getText().length()<6) {
+            binding.loginPassword.setError("must be 6 number at least");
+
+
+            return false;
+
+        }
+        else {
+            binding.loginPassword.setError("");
 
         return true;
-        //    }
+         }
 
 
     }
@@ -166,6 +174,7 @@ public class LoginActivity extends AppCompatActivity implements LoginViewInterfa
     }
     public void onLoginClick(View view) {
        if(validLoginData()) {
+           binding.progressBar.setVisibility(view.VISIBLE);
            User newUser = new User();
            newUser.setUserEmail(binding.loginEmail.getEditText().getText().toString());
            newUser.setPassword(binding.loginPassword.getEditText().getText().toString());

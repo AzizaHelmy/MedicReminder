@@ -55,7 +55,7 @@ public class DayAdapter extends RecyclerView.Adapter<DayAdapter.ItemViewHolder> 
         );
         layoutManager.setInitialPrefetchItemCount(hoursModel.getMedicationList().size());
 
-     MedicineAdapter medicineAdapter = new MedicineAdapter(hoursModel.getMedicationList());
+       MedicineAdapter medicineAdapter = new MedicineAdapter(hoursModel.getMedicationList(),content);
 
         itemViewHolder.drugs_recycler.setLayoutManager(layoutManager);
         itemViewHolder.drugs_recycler.setAdapter(medicineAdapter);
