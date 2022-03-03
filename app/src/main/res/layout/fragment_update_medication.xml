@@ -18,7 +18,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@color/white"
-            android:elevation="15dp"
             android:orientation="vertical">
 
             <TextView
@@ -26,6 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/blue"
+                android:layout_marginBottom="15dp"
                 android:textSize="18dp"
                 android:layout_marginLeft="10dp"
                 android:text="@string/medicineName" />
@@ -40,6 +40,7 @@
         </LinearLayout>
 
 
+
         <LinearLayout
             android:id="@+id/remindertimes_layout"
             android:layout_width="match_parent"
@@ -49,7 +50,7 @@
             android:elevation="15dp"
             android:orientation="vertical">
 
-            <Switch
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -71,40 +72,114 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:entries="@array/time" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/noOftimesLayout">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:id="@+id/oneTimeaday"
+                        android:layout_height="wrap_content">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="22dp"
-                        android:layout_margin="10dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginEnd="16dp"
-                        android:hint="selectTime"
-                        android:textColor="@color/blue"
-                        android:layout_marginBottom="20dp"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="22dp"
+                            android:layout_margin="10dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:hint="selectTime"
+                            android:textColor="@color/blue"
+                            android:layout_marginBottom="20dp"
 
-                        android:id="@+id/timer_txtone"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                            android:id="@+id/timer_txtone"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/number_txtone"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:layout_margin="10dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginTop="8dp"
-                        android:textColor="@color/blue"
-                        android:hint="select number"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        <TextView
+                            android:id="@+id/number_txtone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_margin="10dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@color/blue"
+                            android:hint="select number"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:id="@+id/twoTimeaday"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="22dp"
+                            android:layout_margin="10dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:hint="selectTime"
+                            android:textColor="@color/blue"
+                            android:layout_marginBottom="20dp"
+
+                            android:id="@+id/timer_txttwo"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/number_txttwo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_margin="10dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@color/blue"
+                            android:hint="select number"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:id="@+id/threeTimeaday"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="22dp"
+                            android:layout_margin="10dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:hint="selectTime"
+                            android:textColor="@color/blue"
+                            android:layout_marginBottom="20dp"
+
+                            android:id="@+id/timer_txtthree"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/number_txtthree"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_margin="10dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="8dp"
+                            android:textColor="@color/blue"
+                            android:hint="select number"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
@@ -167,6 +242,14 @@
                 android:id="@+id/noOfdaysEdite"
                 android:hint="enter number of days"
                 android:inputType="number"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="When?"
+                android:layout_margin="10dp"
+                android:textSize="20dp"
+                android:textColor="@color/blue"
+                />
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -250,7 +333,6 @@
 
             </LinearLayout>
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -262,7 +344,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
                 android:textColor="@color/blue"
                 android:textSize="18dp"
                 android:text="@string/medicinesymbol"/>
@@ -458,7 +539,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:textColor="@color/blue"
-                android:id="@+id/isReminderd"
+                android:id="@+id/isRefillReminderd"
                 android:textSize="18dp"
                 android:text="@string/Aremindertofillthemedicine"/>
             <LinearLayout

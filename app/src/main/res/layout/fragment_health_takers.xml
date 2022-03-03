@@ -38,6 +38,7 @@
         android:layout_marginTop="77dp"
         android:layout_width="match_parent"
         android:layout_height="650dp"
+
         android:id="@+id/rv_taker"
         tools:listitem="@layout/health_taker_item"
         app:layout_constraintTop_toTopOf="parent"

@@ -117,11 +117,11 @@ public class RequestFragment extends Fragment implements TakerOnClick {
                         List<Medication>medications=model.getMedication();
                       //  Toast.makeText(getContext(), "Name " + model.getMedication().get(0).getMedicine_Name(), Toast.LENGTH_SHORT).show();
                         Bundle bundle = new Bundle();
-                        bundle.putString("medo",model.getMedication().get(0).getMedicine_Name());
+                        //bundle.putString("medo",model.getMedication().get(0).getMedicine_Name());
                         bundle.putSerializable("Medics", (Serializable) medications);
 
                         Navigation.findNavController(view).navigate(R.id.action_healthTakersFragment_to_patientMedicsListFragment,bundle);
-                        Log.e("TAG", "Medic Name: " + model.getMedication().get(0).getMedicine_Name());
+                       // Log.e("TAG", "Medic Name: " + model.getMedication().get(0).getMedicine_Name());
                     }
                 });
                 holder.imgCancel.setOnClickListener(new View.OnClickListener() {

@@ -21,6 +21,11 @@ public class DisplayMedicationPresenter implements DisplayMedicationPresenterInt
 
 
     @Override
+    public void deleteMedic(Medication medication) {
+        repo.deleteMedic(medication);
+    }
+
+    @Override
     public LiveData<List<Medication>> displayDrug(LifecycleOwner owner) {
         repo.displayDrug().observe(owner, new Observer<List<Medication>>() {
             @Override

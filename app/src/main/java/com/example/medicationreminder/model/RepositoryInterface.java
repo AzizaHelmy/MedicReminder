@@ -19,28 +19,20 @@ public interface RepositoryInterface {
     boolean isUserSignIn();
 
     public void signWithGoogle(Activity activity);
-
-    public void firebaseAuthWithGoogle(Activity activity, Task<GoogleSignInAccount> task, FirebaseConnectionDelegated firebaseConnectionDelegated);
-
-    public boolean restPassword(String emil, FirebaseConnectionDelegated firebaseConnectionDelegated);
-
-    public void insertMed(Medication medication);
-
+    public void firebaseAuthWithGoogle(Activity activity, Task<GoogleSignInAccount> task, FirebaseConnectionDelegated firebaseConnectionDelegated) ;
+    public boolean restPassword(String emil,FirebaseConnectionDelegated firebaseConnectionDelegated) ;
+    public  void insertMed(Medication medication);
     public LiveData<List<Medication>> selectAllDrugsForHome(String day, LifecycleOwner owner);
-
     public LiveData<List<Medication>> selectAllDrugsForHome1(LifecycleOwner owner);
-
     LiveData<List<Medication>> displayDrug();
-
-    public void updateDrug(Medication medication);
+    public  void updateDrug(Medication medication);
     //public void displayMed(Medication medication);
 
     public List<Medication> selectAllDrugsForHome(String day);
-
     //========================For Medics===========================
     public LiveData<List<Medication>> getMedics(LifecycleOwner owner);
-
     public boolean isReminder(String medicName);
+public  void deleteMedic(Medication medication);
     //============================For Invitation=================================
     void addRequest(Request reciverEmail);
     boolean cheackUser(String userEmail);

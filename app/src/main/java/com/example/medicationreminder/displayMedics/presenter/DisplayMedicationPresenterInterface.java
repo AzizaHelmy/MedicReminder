@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface DisplayMedicationPresenterInterface {
    // public void displayDrug(Medication medication);
-
+public void deleteMedic(Medication medication);
    LiveData<List<Medication>> displayDrug(LifecycleOwner owner);
 }

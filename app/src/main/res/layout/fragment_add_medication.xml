@@ -54,7 +54,7 @@
             android:elevation="15dp"
             android:orientation="vertical">
 
-            <Switch
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
@@ -246,6 +246,14 @@
                 android:id="@+id/noOfdaysEdite"
                 android:hint="enter number of days"
                 android:inputType="number"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="When?"
+                android:layout_margin="10dp"
+                android:textSize="20dp"
+                android:textColor="@color/blue"
+                />
             <RadioGroup
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -555,7 +563,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:textColor="@color/blue"
-                android:id="@+id/isReminderd"
+                android:id="@+id/isRefillReminderd"
                 android:textSize="18dp"
                 android:text="@string/Aremindertofillthemedicine"/>
             <LinearLayout
