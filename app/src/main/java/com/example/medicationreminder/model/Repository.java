@@ -11,14 +11,14 @@ import androidx.lifecycle.LiveData;
 
 import com.example.medicationreminder.Network.FirebaseConnectionDelegated;
 import com.example.medicationreminder.Network.FirebaseConnectionInterface;
+import com.example.medicationreminder.db.DrugDao;
 import com.example.medicationreminder.db.LocalSource;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.Task;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Repository  implements RepositoryInterface{
+public class Repository implements RepositoryInterface {
 
     Context context;
     FirebaseConnectionInterface firebaseConnection;
@@ -30,24 +30,26 @@ public class Repository  implements RepositoryInterface{
         this.context = context;
         this.firebaseConnection = firebaseConnection;
         this.localSource = localSource;
+        //drugDao = repository.drugDao;
+       // localSource=
     }
 
-    public static Repository getRepository(Context context, FirebaseConnectionInterface firebaseConnection, LocalSource localSource){
-        if (repository==null){
-            repository=new Repository(context,firebaseConnection,localSource);
+    public static Repository getRepository(Context context, FirebaseConnectionInterface firebaseConnection, LocalSource localSource) {
+        if (repository == null) {
+            repository = new Repository(context, firebaseConnection, localSource);
         }
         return repository;
     }
 
     @Override
-    public void registerNewUser(User user, Activity activity , FirebaseConnectionDelegated firebaseConnectionDelegated) {
+    public void registerNewUser(User user, Activity activity, FirebaseConnectionDelegated firebaseConnectionDelegated) {
         Log.e(TAG, "registerNewUser:repository ");
-        firebaseConnection.registerNewUser(user,activity ,firebaseConnectionDelegated);
+        firebaseConnection.registerNewUser(user, activity, firebaseConnectionDelegated);
     }
 
     @Override
     public void signIn(User user, Activity activity, FirebaseConnectionDelegated firebaseConnectionDelegated) {
-        firebaseConnection.signIn(user,activity,firebaseConnectionDelegated);
+        firebaseConnection.signIn(user, activity, firebaseConnectionDelegated);
     }
 
     @Override
@@ -64,17 +66,17 @@ public class Repository  implements RepositoryInterface{
     @Override
     public void firebaseAuthWithGoogle(Activity activity, Task<GoogleSignInAccount> task, FirebaseConnectionDelegated firebaseConnectionDelegated) {
         Log.e(TAG, "firebaseAuthWithGoogle:auth repo ");
-             firebaseConnection.firebaseAuthWithGoogle(activity,task,firebaseConnectionDelegated);
+        firebaseConnection.firebaseAuthWithGoogle(activity, task, firebaseConnectionDelegated);
     }
 
     @Override
-    public boolean restPassword(String emil,FirebaseConnectionDelegated firebaseConnectionDelegated) {
-      return    firebaseConnection.restPassword(emil,firebaseConnectionDelegated);
+    public boolean restPassword(String emil, FirebaseConnectionDelegated firebaseConnectionDelegated) {
+        return firebaseConnection.restPassword(emil, firebaseConnectionDelegated);
     }
 
     @Override
     public void insertMed(Medication medication) {
-            localSource.insertDrug(medication);
+        localSource.insertDrug(medication);
     }
 
     @Override
@@ -89,13 +91,13 @@ public class Repository  implements RepositoryInterface{
 
 
     @Override
-    public LiveData<List<Medication>>selectAllDrugsForHome(String day , LifecycleOwner owner) {
-      return   localSource.selectAllDrugs(day);
+    public LiveData<List<Medication>> selectAllDrugsForHome(String day, LifecycleOwner owner) {
+        return localSource.selectAllDrugs(day);
     }
 
     @Override
     public LiveData<List<Medication>> selectAllDrugsForHome1(LifecycleOwner owner) {
-        return  localSource.selectAllDrugs1();
+        return localSource.selectAllDrugs1();
     }
 
     @Override
