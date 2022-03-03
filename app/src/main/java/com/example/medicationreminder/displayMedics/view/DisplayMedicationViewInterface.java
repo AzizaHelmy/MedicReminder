@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface DisplayMedicationViewInterface {
     LiveData<List<Medication>> displayDrug();
+
 }

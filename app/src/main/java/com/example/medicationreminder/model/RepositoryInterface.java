@@ -33,5 +33,5 @@ public interface RepositoryInterface {
     //========================For Medics===========================
     public LiveData<List<Medication>> getMedics(LifecycleOwner owner);
     public boolean isReminder(String medicName);
-
+public  void deleteMedic(Medication medication);
 }

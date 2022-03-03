@@ -10,7 +10,7 @@ import androidx.room.TypeConverters;
 import com.example.medicationreminder.model.Converters;
 import com.example.medicationreminder.model.Medication;
 
-@Database(entities = {Medication.class},version=8)
+@Database(entities = {Medication.class},version=9)
 @TypeConverters({Converters.class})
 public abstract class AppDataBase extends RoomDatabase {
     private  static AppDataBase instance=null;

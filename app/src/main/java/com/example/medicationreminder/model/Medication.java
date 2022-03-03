@@ -7,11 +7,12 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity(tableName = "medications")
-public class Medication {
+public class Medication implements Serializable {
     private String drugAdder;
     @PrimaryKey
     @NonNull
@@ -111,7 +112,13 @@ public class Medication {
         this.drugs = drugs;
         this.drugAmount = drugAmount;
     }
-
+public Medication(String medicine_Name,String strength,String duration,String drugAmount,String leftDrug){
+        this.medicine_Name=medicine_Name;
+        this.strength=strength;
+        this.duration=duration;
+        this.drugAmount=drugAmount;
+        this.leftDrug=leftDrug;
+}
     public String getDrugAdder() {
         return drugAdder;
     }

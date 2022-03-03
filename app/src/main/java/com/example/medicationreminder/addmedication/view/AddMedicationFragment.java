@@ -57,7 +57,8 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
     int timerHour, timerMinute;
     String frequencyRepition;
     ArrayList<String> days;
-    String [] doses;
+  //  String [] doses;
+  //  String []  times=new String[3];
     Medication medication;
     String dailyOrCertain;
     String duration;
@@ -65,7 +66,6 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
 
 
     int frequncyid;
-    SharedPreferences sharedPreferences;
     AddMedicationPresenterInterface addMedicationPresenterInterface;
 
     public AddMedicationFragment() {
@@ -111,10 +111,14 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
             @Override
             public void afterTextChanged(Editable editable) {
                 if (binding.timerTxtone.getText().length() > 0&&binding.timerTxttwo.getText().length() > 0&&binding.timerTxtthree.getText().length() > 0) {
+//                    times[0]= (String) binding.timerTxtone.getText();
+//                    times[1]=binding.timerTxttwo.getText().toString();
+//                    times[2]=binding.timerTxtthree.getText().toString();
+//                    Log.i("times","times"+times[0]+times[1]+times[2]);
                     binding.afterLayout3.setEnabled(true);
                 } else if(binding.timerTxtone.getText().length() == 0||binding.timerTxttwo.getText().length() == 0||binding.timerTxtthree.getText().length()== 0)
                     binding.afterLayout3.setEnabled(false);
-                Toast.makeText(getContext() ,"fill the time", Toast.LENGTH_SHORT).show();
+
             }
 
 
@@ -135,10 +139,16 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
             @Override
             public void afterTextChanged(Editable editable) {
                 if (binding.timerTxtone.getText().length() > 0&&binding.timerTxttwo.getText().length() > 0) {
+                    times[0]= (String) binding.timerTxtone.getText();
+                    times[1]=binding.timerTxttwo.getText().toString();
+                    times[2]="";
+                    Log.i("times","times"+times[0]+times[1]+times[2]);
+
+
                     binding.afterLayout3.setEnabled(true);
                 } else if(binding.timerTxtone.getText().length() == 0||binding.timerTxttwo.getText().length() == 0)
                     binding.afterLayout3.setEnabled(false);
-                Toast.makeText(getContext() ,"fill the time", Toast.LENGTH_SHORT).show();
+
             }
 
 
@@ -160,9 +170,13 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
             public void afterTextChanged(Editable editable) {
                 if (binding.timerTxtone.getText().length() > 0) {
                     binding.afterLayout3.setEnabled(true);
+                    times[0]= (String) binding.timerTxtone.getText();
+                    times[1]="";
+                    times[2]="";
+                    Log.i("times","times"+times[0]+times[1]+times[2]);
                 } else
                     binding.afterLayout3.setEnabled(false);
-                Toast.makeText(getContext() ,"fill the time", Toast.LENGTH_SHORT).show();
+
             }
 
 
@@ -560,7 +574,7 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
             public void onClick(View view) {
                 Log.e(TAG, "onClick: " + "erroe");
                 openNumberPicker();
-                doses[0]=binding.numberTxtone.getText().toString();
+               // doses[0]=binding.numberTxtone.getText().toString();
             }
         });
         //======================================================================
@@ -568,7 +582,7 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
             @Override
             public void onClick(View view) {
                 openNumberPicker();
-                doses[1]=binding.numberTxttwo.getText().toString();
+               //  doses[1]=binding.numberTxttwo.getText().toString();
             }
         });
         //======================================================================
@@ -576,7 +590,7 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
             @Override
             public void onClick(View view) {
                 openNumberPicker();
-                doses[2]=binding.numberTxtthree.getText().toString();
+               // doses[2]=binding.numberTxtthree.getText().toString();
             }
         });
         //======================================================================
@@ -765,7 +779,8 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         }
         Log.e(TAG, "saveData: " + medication.getMedicine_Name());
 
-
+medication.setDrugs(times);
+Log.i("nnnn","time"+times);
         medication.setRefillReminder(binding.isRefillReminderd.isChecked());
         Log.i("med", "" + binding.isRefillReminderd.isChecked());
         medication.setDays(days);
@@ -776,8 +791,8 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         return medication;
     }
 
-    public void insertFirebase() {
-        sharedPreferences = getActivity().getSharedPreferences("sharedName", Context.MODE_PRIVATE);
-
-    }
+//    public void insertFirebase() {
+//        sharedPreferences = getActivity().getSharedPreferences("sharedName", Context.MODE_PRIVATE);
+//
+//    }
 }

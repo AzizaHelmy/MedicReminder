@@ -60,10 +60,14 @@
         android:id="@+id/displayMedicineFragment"
         android:name="com.example.medicationreminder.displayMedics.view.displayMedicineFragment"
         android:label="fragment_display_medicine"
-        tools:layout="@layout/fragment_display_medicine" />
+        tools:layout="@layout/fragment_display_medicine" >
+        <action
+            android:id="@+id/action_displayMedicineFragment_to_updateMedicationFragment"
+            app:destination="@id/updateMedicationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/updateMedicationFragment"
-        android:name="com.example.medicationreminder.updateMedicationFragment"
+        android:name="com.example.medicationreminder.updatemedication.view.UpdateMedicationFragment"
         android:label="fragment_update_medication"
         tools:layout="@layout/fragment_update_medication" />
 </navigation>

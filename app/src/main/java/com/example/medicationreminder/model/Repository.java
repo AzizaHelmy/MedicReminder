@@ -113,6 +113,11 @@ public class Repository  implements RepositoryInterface{
         return false;
     }
 
+    @Override
+    public void deleteMedic(Medication medication) {
+        localSource.deleteDrug(medication);
+    }
+
 //    @Override
 //    public boolean isReminder(String medicName) {
 //        Reminder reminder =new Reminder();
