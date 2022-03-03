@@ -747,8 +747,8 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         Log.i("salasoka", "hdjhwjq");
         medication.setStrength(binding.PresstoadjustTxt.getText().toString());
         Log.i("med", "" + binding.PresstoadjustTxt.getText().toString());
-        medication.setNoOfDose(doses);
-        Log.i("med", "" + doses);
+//        medication.setNoOfDose(doses);
+//        Log.i("med", "" + doses);
         medication.setStratingDate(binding.selectdate.getText().toString());
         Log.i("med", "" + binding.selectdate.getText().toString());
         medication.setDaily(binding.isdaily.isChecked());
