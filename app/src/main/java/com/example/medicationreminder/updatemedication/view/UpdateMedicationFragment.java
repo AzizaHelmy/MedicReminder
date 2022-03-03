@@ -33,7 +33,7 @@ public class UpdateMedicationFragment extends Fragment implements UpdateMedicati
     String frequencyRepition;
     int frequncyid;
     UpdateMedicationPresenterInterface updateMedicationPresenterInterface;
-Medication medication;
+    Medication medication;
     FragmentUpdateMedicationBinding binding;
     public UpdateMedicationFragment() {
         // Required empty public constructor
@@ -112,11 +112,11 @@ Medication medication;
             medication = (Medication) args.getSerializable("edite");
             binding.medName.setText(medication.getMedicine_Name());
             binding.PresstoadjustTxt.setText(medication.getStrength());
-           // binding.numberTxtone.setText(medication.getNoOfDose()[0]);
+            // binding.numberTxtone.setText(medication.getNoOfDose()[0]);
 //            binding.selectdate.setText(medication.getStratingDate());
 //            binding.isdaily.setChecked(medication.isDaily());
-          binding.amountofdrug.setText(medication.getDrugAmount());
-          binding.selectAmountRefill.setText(medication.getLeftDrug());
+            binding.amountofdrug.setText(medication.getDrugAmount());
+            binding.selectAmountRefill.setText(medication.getLeftDrug());
 //            binding.noOfdaysEdite.setText(medication.getNoOfDays());
 //            binding.selectRefillTime.setText(medication.getRefilTime());
 

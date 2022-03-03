@@ -5,7 +5,6 @@ import static com.example.medicationreminder.medications.view.MedicationsFragmen
 import android.content.Context;
 import android.util.Log;
 
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 
 import com.example.medicationreminder.model.Medication;
@@ -87,11 +86,11 @@ public class ConcereteLocalSource implements LocalSource {
 
     @Override
     public boolean isReminder(String medicine_Name) {
-       return getFav(medicine_Name);
+       return getReminder(medicine_Name);
     }
 //=======================================================
 
-    public boolean getFav(String medicine_Name) {
+    public boolean getReminder(String medicine_Name) {
 
         Reminder reminder =new Reminder();
         reminder.setName(medicine_Name);

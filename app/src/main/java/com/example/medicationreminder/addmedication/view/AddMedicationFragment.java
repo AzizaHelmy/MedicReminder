@@ -70,7 +70,7 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
 
     public AddMedicationFragment() {
 
-       }
+    }
 
 
     @Override
@@ -96,7 +96,7 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         binding.twoTimeaday.setVisibility(View.GONE);
         binding.threeTimeaday.setVisibility(View.GONE);
         //============================================
-       binding.afterLayout3.setEnabled(false);
+        binding.afterLayout3.setEnabled(false);
         TextWatcher textWatcher3=new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -471,7 +471,8 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         binding.respirator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iconId = binding.respirator.getId();
+                iconId = R.drawable.respirator;
+
 
             }
         });
@@ -479,7 +480,7 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         binding.transfusion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iconId = binding.transfusion.getId();
+                iconId = R.drawable.transfusion;
 
             }
         });
@@ -487,19 +488,14 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         binding.pill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iconId = binding.pill.getId();
-
+                iconId = R.drawable.pill;
             }
         });
         //=======================================================================
         binding.ointment.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.Q)
             @Override
             public void onClick(View view) {
                 iconId =  R.drawable.ointment;
-
-
-              //  Log.e(TAG, "onClick:salma salma "+ binding.ointment.getSourceLayoutResId());
 
             }
         });
@@ -578,7 +574,7 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
             public void onClick(View view) {
                 Log.e(TAG, "onClick: " + "erroe");
                 openNumberPicker();
-               // doses[0]=binding.numberTxtone.getText().toString();
+                // doses[0]=binding.numberTxtone.getText().toString();
             }
         });
         //======================================================================
@@ -586,7 +582,7 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
             @Override
             public void onClick(View view) {
                 openNumberPicker();
-               //  doses[1]=binding.numberTxttwo.getText().toString();
+                //  doses[1]=binding.numberTxttwo.getText().toString();
             }
         });
         //======================================================================
@@ -594,7 +590,7 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
             @Override
             public void onClick(View view) {
                 openNumberPicker();
-               // doses[2]=binding.numberTxtthree.getText().toString();
+                // doses[2]=binding.numberTxtthree.getText().toString();
             }
         });
         //======================================================================
@@ -647,7 +643,7 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
                 try {
                     Date date = simpleDateFormat.parse(time);
                     SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("hh:mm:aa");
-                    binding.timerTxtone.setText(simpleDateFormat1.format(date));
+                    timerTxt.setText(simpleDateFormat1.format(date));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -783,8 +779,8 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         }
         Log.e(TAG, "saveData: " + medication.getMedicine_Name());
 
-medication.setDrugs(times);
-Log.i("nnnn","time"+times);
+        medication.setDrugs(times);
+        Log.i("nnnn","time"+times);
         medication.setRefillReminder(binding.isRefillReminderd.isChecked());
         Log.i("med", "" + binding.isRefillReminderd.isChecked());
         medication.setDays(days);
