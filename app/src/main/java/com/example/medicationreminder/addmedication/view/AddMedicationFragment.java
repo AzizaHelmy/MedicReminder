@@ -57,8 +57,8 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
     int timerHour, timerMinute;
     String frequencyRepition;
     ArrayList<String> days;
-  //  String [] doses;
-  //  String []  times=new String[3];
+    String [] doses;
+    String []  times=new String[3];
     Medication medication;
     String dailyOrCertain;
     String duration;
@@ -139,9 +139,9 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
             @Override
             public void afterTextChanged(Editable editable) {
                 if (binding.timerTxtone.getText().length() > 0&&binding.timerTxttwo.getText().length() > 0) {
-                    times[0]= (String) binding.timerTxtone.getText();
-                    times[1]=binding.timerTxttwo.getText().toString();
-                    times[2]="";
+//                    times[0]= (String) binding.timerTxtone.getText();
+//                    times[1]=binding.timerTxttwo.getText().toString();
+//                    times[2]="";
                     Log.i("times","times"+times[0]+times[1]+times[2]);
 
 
@@ -170,9 +170,9 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
             public void afterTextChanged(Editable editable) {
                 if (binding.timerTxtone.getText().length() > 0) {
                     binding.afterLayout3.setEnabled(true);
-                    times[0]= (String) binding.timerTxtone.getText();
-                    times[1]="";
-                    times[2]="";
+//                   // times[0]= (String) binding.timerTxtone.getText();
+//                    times[1]="";
+//                    times[2]="";
                     Log.i("times","times"+times[0]+times[1]+times[2]);
                 } else
                     binding.afterLayout3.setEnabled(false);
@@ -754,7 +754,7 @@ public class AddMedicationFragment extends Fragment implements OnDialogClickList
         medication.setDaily(binding.isdaily.isChecked());
         Log.i("med", "" + binding.isdaily.isChecked());
         medication.setDuration(duration);
-        Log.i("doaa",duration);
+
         medication.setDrugAmount(binding.amountofdrug.getText().toString());
         Log.i("med", "" + binding.amountofdrug.getText().toString());
         medication.setLeftDrug(binding.selectAmountRefill.getText().toString());
