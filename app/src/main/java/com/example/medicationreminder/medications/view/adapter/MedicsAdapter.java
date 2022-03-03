@@ -72,7 +72,7 @@ public class MedicsAdapter extends RecyclerView.Adapter<MedicsAdapter.MedicsType
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onClick.ItemOnClick(model);
+                onClick.ItemOnClick(model,position);
             }
         });
         binding.tvMedicName.setText(model.getMedicine_Name());

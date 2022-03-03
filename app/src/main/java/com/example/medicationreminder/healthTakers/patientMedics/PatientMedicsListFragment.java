@@ -96,7 +96,7 @@ public class PatientMedicsListFragment extends Fragment implements MedicsOnClick
     }
 
     @Override
-    public void ItemOnClick(Medication medic) {
+    public void ItemOnClick(Medication medic,int position) {
 
     }
 

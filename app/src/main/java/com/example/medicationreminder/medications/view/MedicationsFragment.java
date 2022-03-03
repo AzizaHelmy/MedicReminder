@@ -1,5 +1,6 @@
 package com.example.medicationreminder.medications.view;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -8,6 +9,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.work.Constraints;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,7 +25,9 @@ import com.example.medicationreminder.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import com.example.medicationreminder.RefillReminderWorker;
 import com.example.medicationreminder.databinding.FragmentMedicationsBinding;
 import com.example.medicationreminder.db.ConcereteLocalSource;
 import com.example.medicationreminder.medications.presenter.MedicationPresenter;
@@ -66,6 +72,19 @@ public class MedicationsFragment extends Fragment implements MedicsOnClick, Medi
 
             }
         });
+        @SuppressLint("IdleBatteryChargingConstraints")
+        Constraints constraints = new Constraints.Builder()
+                //.setRequiresDeviceIdle(true)
+                .setRequiresCharging(true)
+                .build();
+        PeriodicWorkRequest refillReminderRequest = new PeriodicWorkRequest
+                .Builder(RefillReminderWorker.class, 5, TimeUnit.MINUTES)
+                //.setConstraints(constraints)
+                // .setInitialDelay(diff,TimeUnit.MILLISECONDS )
+                .build();
+        // }
+        WorkManager.getInstance(getContext()).enqueue(refillReminderRequest);
+
     }
 
     //==========================================================
@@ -96,10 +115,13 @@ public class MedicationsFragment extends Fragment implements MedicsOnClick, Medi
 
     //========================================================================
     @Override
-    public void ItemOnClick(Medication model) {
+    public void ItemOnClick(Medication model,int position) {
         //send args
         //bundel
-        Navigation.findNavController(getView()).navigate(R.id.action_medicationsFragment_to_displayMedicineFragment);
+        Medication clickedTask = list.get(position);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("medic", clickedTask);
+        Navigation.findNavController(getView()).navigate(R.id.action_medicationsFragment_to_displayMedicineFragment,bundle);
         adapterMedics.notifyDataSetChanged();
     }
 
