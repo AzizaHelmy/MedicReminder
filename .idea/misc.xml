@@ -21,11 +21,13 @@
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/activity_register_acivity.xml" value="0.1814814814814815" />
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/fragment_add_health_taker.xml" value="0.1814814814814815" />
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/fragment_add_medication.xml" value="0.175" />
-        <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/fragment_health_takers.xml" value="0.18" />
+        <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/fragment_display_medicine.xml" value="0.1" />
+        <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/fragment_health_takers.xml" value="0.22" />
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/fragment_medications.xml" value="0.22" />
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/fragment_more.xml" value="0.20416666666666666" />
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/fragment_patient_medics_list.xml" value="0.1675213675213675" />
+        <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/fragment_update_medication.xml" value="0.15925925925925927" />
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/header_rv.xml" value="0.20416666666666666" />
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/health_taker_item.xml" value="0.25" />
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/inactive_medic_item.xml" value="0.20416666666666666" />
@@ -35,6 +37,9 @@
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/medic_patient.xml" value="0.1675213675213675" />
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/medic_rv.xml" value="0.11153846153846154" />
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/nav_header_main.xml" value="0.1814814814814815" />
+        <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/numberpicker_layout.xml" value="0.15925925925925927" />
+        <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/refillagaindialoug.xml" value="0.15925925925925927" />
+        <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/refilldialouug.xml" value="0.15925925925925927" />
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/layout/strengthdialoug.xml" value="0.1814814814814815" />
         <entry key="..\:/sours/ITI_Android/MedicationReminder/app/src/main/res/menu/bottom_nav_menu.xml" value="0.20416666666666666" />
       </map>

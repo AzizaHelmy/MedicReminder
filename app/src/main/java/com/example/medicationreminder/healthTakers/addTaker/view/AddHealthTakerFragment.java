@@ -2,9 +2,13 @@ package com.example.medicationreminder.healthTakers.addTaker.view;
 
 import static com.example.medicationreminder.register.view.RegisterActivity.SHARD_NAME;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -109,66 +113,46 @@ public class AddHealthTakerFragment extends Fragment implements AddTakerInterfac
                     //  shawingDialog();
                     preferences = getContext().getSharedPreferences(SHARD_NAME, Context.MODE_PRIVATE);
                     senderEmail = preferences.getString(RegisterActivity.EMAIL, "anoynmous@gmail.com");
-                    if(senderEmail.equals(binding.emailEt.getText().toString())){
-                        Toast.makeText(getContext(), "you can't send invitation to your self!", Toast.LENGTH_SHORT).show();
-                    }else{
+                    if (senderEmail.equals(binding.emailEt.getText().toString())) {
+                        shawingAlertDialoge(view);
+                    } else {
                         addTakerPresenterInterface.checkUser(binding.emailEt.getText().toString());
                     }
-                    Navigation.findNavController(view).navigate(R.id.action_addHealthTakerFragment_to_healthTakersFragment);
-
-
-                    // }else{//not a user
-                    //dialoge to ask the user to send an email to him
-
-                    //}
-                    //  }
 
                 } else {
 
                 }
             }
-            //dialoge =>progress to user
-            //cheack:
-            //if this email find in firebase(query in user )=>send invitation
-            //else:
-            //this user is not exist do you need to send invitation to him by email?
         });
     }
 
-    private void shawingDialog() {
-        progressDialog.setTitle("Cheacking Email");
-        progressDialog.setMessage("Please wait while we are cheacking this email in our system.");
-        progressDialog.show();
-        //progressDialog.set
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        progressDialog.setCanceledOnTouchOutside(false);
+    //=========================================================================
+    private void shawingAlertDialoge(View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Warning !!");
+        builder.setMessage("you can't send invitation to your self !\n\n Try Again?");
+        builder.setIcon(R.drawable.warning);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                binding.emailEt.setText("");
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Navigation.findNavController(view).navigate(R.id.action_addHealthTakerFragment_to_healthTakersFragment);
+
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 
     //================================================================
-    private boolean cheackUser() {
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        database.getReference("user").child("userEmail")
-                .addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for (DataSnapshot dsp : snapshot.getChildren()) {
-                            if (dsp.getValue().equals(binding.emailEt.getText().toString())) {
-                                Toast.makeText(getActivity(), "find", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
-        return true;
-    }
-
-    //=======================================================
     @Override
     public void getMedics(List<Medication> medics) {
-        //get the list from db by presenter and push it
         medications = medics;
     }
 
@@ -177,11 +161,43 @@ public class AddHealthTakerFragment extends Fragment implements AddTakerInterfac
         if (result) {//exist , installed the app
             addTakerPresenterInterface.addRequest(binding.emailEt.getText().toString());
             Toast.makeText(getContext(), "Invitation Sent Successfully", Toast.LENGTH_SHORT).show();
-        }else{
-            //intent to  send by email
-          //  Log.e("TAG", "onSuccess: ", );
+            Navigation.findNavController(getView()).navigate(R.id.action_addHealthTakerFragment_to_healthTakersFragment);
+
+        } else {
+            shawingDialogeForIntent();
             Toast.makeText(getContext(), " user not found ", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    //==================================================
+    private void shawingDialogeForIntent() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Warning !!");
+        builder.setMessage("User not found ..\nDo you need to send The Invitation by Gmail?");
+        builder.setIcon(R.drawable.sad);
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //intent for gmail
+//                final Intent intent = new Intent(Intent.ACTION_VIEW)
+//                        .setType("plain/text")
+//                        .setData(Uri.parse("test@gmail.com"))
+//                        .setPackage("com.google.android.gm")
+//                        .putExtra(Intent.EXTRA_EMAIL, new String[]{"test@gmail.com"})
+//                        .putExtra(Intent.EXTRA_SUBJECT, "test")
+//                        .putExtra(Intent.EXTRA_TEXT, "hello. this is a message sent from my demo app :-)");
+//                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                binding.emailEt.setText("");
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
     //=======================================================
 }

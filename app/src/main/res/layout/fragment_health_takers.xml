@@ -35,7 +35,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:lottie_speed="1" />
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="57dp"
+        android:layout_marginTop="77dp"
         android:layout_width="match_parent"
         android:layout_height="650dp"
 
@@ -43,4 +43,20 @@
         tools:listitem="@layout/health_taker_item"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/floatingActionButton" />
+
+    <TextView
+        android:id="@+id/dependent_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dependent Medics List"
+        android:fontFamily="monospace"
+        android:textSize="17sp"
+        android:layout_marginStart="27dp"
+        android:textColor="@color/purple_500"
+        android:layout_marginTop="41dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="35dp"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

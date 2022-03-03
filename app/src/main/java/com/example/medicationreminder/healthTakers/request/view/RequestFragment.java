@@ -52,6 +52,7 @@ public class RequestFragment extends Fragment implements TakerOnClick {
     FirebaseRecyclerAdapter<Request, RequestViewHolder> firebaseRecyclerAdapter;
     SharedPreferences sharedPreferences;
     String myEmail;
+    TextView dependentLise;
     Request requests = new Request();
     ConstraintLayout requsetLayout;
     List<Request> requestList = new ArrayList<>();
@@ -86,6 +87,12 @@ public class RequestFragment extends Fragment implements TakerOnClick {
                 Navigation.findNavController(view).navigate(R.id.action_healthTakersFragment_to_addHealthTakerFragment);
             }
         });
+        binding.dependentTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Navigation.findNavController(view).navigate(R.id.action_healthTakersFragment_to_patientMedicsListFragment);
+            }
+        });
     }
 
     //====================================================================
@@ -108,7 +115,7 @@ public class RequestFragment extends Fragment implements TakerOnClick {
                     public void onClick(View view) {
                         //onOkClicked(model, holder.imgAccept);
                         List<Medication>medications=model.getMedication();
-                        Toast.makeText(getContext(), "Name " + model.getMedication().get(0).getMedicine_Name(), Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(getContext(), "Name " + model.getMedication().get(0).getMedicine_Name(), Toast.LENGTH_SHORT).show();
                         Bundle bundle = new Bundle();
                         bundle.putString("medo",model.getMedication().get(0).getMedicine_Name());
                         bundle.putSerializable("Medics", (Serializable) medications);
@@ -135,13 +142,12 @@ public class RequestFragment extends Fragment implements TakerOnClick {
 //                              // firebaseRecyclerAdapter.getRef(position).get();
 //                            }
 //                        }).show();
-
                         firebaseRecyclerAdapter.getRef(position).removeValue();
                     }
                 });
                 Glide.with(getContext()).load(model.getSenderImg()).placeholder(R.drawable.profileuser).into(holder.imgSender);
                 Log.e("TAG", "onBindViewHolder: " + model.getSenderName());
-                // Log.e("TAG", "Medication: " + model.getMedication().get(1).getMedicine_Name());
+
             }
 
             @NonNull
@@ -160,7 +166,6 @@ public class RequestFragment extends Fragment implements TakerOnClick {
         recyclerOptions = new FirebaseRecyclerOptions.Builder<Request>()
                 .setQuery(query, Request.class)
                 .build();
-        // layoutManager = new LinearLayoutManager(getActivity());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         layoutManager.setReverseLayout(true);

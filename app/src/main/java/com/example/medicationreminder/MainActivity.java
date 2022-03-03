@@ -10,7 +10,11 @@ import androidx.navigation.NavDestination;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.work.Constraints;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 
@@ -18,6 +22,8 @@ import com.example.medicationreminder.healthTakers.addTaker.view.AddHealthTakerF
 import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
@@ -38,6 +44,21 @@ public class MainActivity extends AppCompatActivity {
         badgeDrawable.setNumber(AddHealthTakerFragment.REQUEST_COUNTER);
 
 
+        @SuppressLint("IdleBatteryChargingConstraints")
+        Constraints constraints = new Constraints.Builder()
+                //.setRequiresDeviceIdle(true)
+                .setRequiresCharging(true)
+                .build();
+        PeriodicWorkRequest refillReminderRequest =
+                null;
+        //if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+        refillReminderRequest = new PeriodicWorkRequest
+                .Builder(RefillReminderWorker.class, 5, TimeUnit.MINUTES)
+                .setConstraints(constraints)
+                // .setInitialDelay(diff,TimeUnit.MILLISECONDS )
+                .build();
+        // }
+        WorkManager.getInstance(getBaseContext()).enqueue(refillReminderRequest);
 //////////////////////////////////////////////
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();

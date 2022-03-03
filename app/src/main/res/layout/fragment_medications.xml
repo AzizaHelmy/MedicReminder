@@ -30,9 +30,9 @@
         tools:listitem="@layout/medic_item_rv" />
     <ImageView
         android:id="@+id/empty_iv"
-        android:layout_width="220dp"
-        android:layout_height="263dp"
-        android:layout_marginTop="176dp"
+        android:layout_width="210dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="160dp"
         android:layout_marginEnd="96dp"
         android:scaleType="fitCenter"
         android:visibility="gone"
