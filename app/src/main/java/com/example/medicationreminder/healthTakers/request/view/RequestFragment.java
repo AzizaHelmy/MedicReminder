@@ -56,7 +56,7 @@ public class RequestFragment extends Fragment implements TakerOnClick {
     Request requests = new Request();
     ConstraintLayout requsetLayout;
     List<Request> requestList = new ArrayList<>();
-
+    List<Medication>requestMedics=new ArrayList<>();
     public RequestFragment() {
         // Required empty public constructor
     }
@@ -108,20 +108,17 @@ public class RequestFragment extends Fragment implements TakerOnClick {
 
             @Override
             protected void onBindViewHolder(@NonNull RequestViewHolder holder, @SuppressLint("RecyclerView") int position, @NonNull Request model) {
-                // requestList= (List<Request>) model;
                 holder.tvName.setText(model.getSenderName());
                 holder.imgAccept.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //onOkClicked(model, holder.imgAccept);
-                        List<Medication>medications=model.getMedication();
+                        requestMedics=model.getMedication();
                       //  Toast.makeText(getContext(), "Name " + model.getMedication().get(0).getMedicine_Name(), Toast.LENGTH_SHORT).show();
                         Bundle bundle = new Bundle();
-                        bundle.putString("medo",model.getMedication().get(0).getMedicine_Name());
-                        bundle.putSerializable("Medics", (Serializable) medications);
-
+                       // bundle.putString("medo",model.getMedication().get(0).getMedicine_Name());
+                        bundle.putSerializable("Medics", (Serializable) requestMedics);
                         Navigation.findNavController(view).navigate(R.id.action_healthTakersFragment_to_patientMedicsListFragment,bundle);
-                        Log.e("TAG", "Medic Name: " + model.getMedication().get(0).getMedicine_Name());
+                       // Log.e("TAG", "Medic Name: " + model.getMedication().get(0).getMedicine_Name());
                     }
                 });
                 holder.imgCancel.setOnClickListener(new View.OnClickListener() {

@@ -63,7 +63,7 @@ public class AddTakerPresenter implements AddTakerPresenterInterface, FirebaseCo
     @Override
     public void addRequest(String reciverEmail) {
         getInfo();
-        //speak with repo==> i'm filed!!
+        //speak with repo==> i'm Failed!!
         // repositoryInterface.addRequest(reciverEmail);
         Request request = new Request(senderName, reciverEmail, senderEmail, senderImg, medics);      //  Request healthTake = new Request(senderName, reciverEmail, senderEmail, senderImg, medications);
         FirebaseDatabase.getInstance().getReference("Request").push().setValue(request);

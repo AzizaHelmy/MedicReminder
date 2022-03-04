@@ -54,20 +54,11 @@ public class MedicsAdapter extends RecyclerView.Adapter<MedicsAdapter.MedicsType
     public void onBindViewHolder(@NonNull MedicsTypeViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Medication model = medics.get(position);
 
-
-        Log.e(TAG, "onBindViewHolder:dddddddddddddd "+medicationPresenter.isReminder(model.getMedicine_Name()));
-
-//        if(model.getStatus().equals("Active")){
-//            binding.imgAlarm.setImageResource(R.drawable.reminder);
-//        }else{
-//            binding.imgAlarm.setImageResource(R.drawable.alarm);
-//
-//        }
         if (medicationPresenter.isReminder(model.getMedicine_Name())) {
             Log.e(TAG, "onBindViewHolder:zzzzzzzzzz "+medicationPresenter.isReminder(model.getMedicine_Name()));
             binding.imgAlarm.setImageResource(R.drawable.reme);
         } else {
-            binding.imgAlarm.setImageResource(R.drawable.alarm);
+            binding.imgAlarm.setImageResource(R.drawable.bell);
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

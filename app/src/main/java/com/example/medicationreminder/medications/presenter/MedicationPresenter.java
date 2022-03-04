@@ -31,7 +31,6 @@ public class MedicationPresenter implements MedicsPresenter {
         repositoryInterface.getMedics(owner).observe(owner, new Observer<List<Medication>>() {
             @Override
             public void onChanged(List<Medication> medications) {
-                //Log.e(TAG, "onChanged:salma  "+ medications.get(medications.size()));
                 medicsInterface.showMedics(medications);
 
             }

@@ -1,4 +1,4 @@
-package com.example.medicationreminder;
+package com.example.medicationreminder.workmanger;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -14,6 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
+
+import com.example.medicationreminder.MainActivity;
+import com.example.medicationreminder.R;
 
 import java.util.Objects;
 public class RefillReminderWorker extends Worker {

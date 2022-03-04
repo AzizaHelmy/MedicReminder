@@ -18,6 +18,7 @@ import com.example.medicationreminder.databinding.ActivityRegisterAcivityBinding
 
 
 import com.example.medicationreminder.db.ConcereteLocalSource;
+import com.example.medicationreminder.login.view.LoginActivity;
 import com.example.medicationreminder.model.Repository;
 import com.example.medicationreminder.model.User;
 import com.example.medicationreminder.register.representer.RegisterPresentationInterFace;
@@ -77,20 +78,21 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
     }
 
     public boolean isValidUsername() {
-        String regex = "^[a-zA-Z0-9]\\w{5,10}+([_ -]?[a-zA-Z0-9])*$";
-        Pattern p = Pattern.compile(regex);
-        Matcher m = p.matcher(binding.userName.getEditText().getText());
+//        String regex = "^[a-zA-Z0-9]\\w{5,10}+([_ -]?[a-zA-Z0-9])*$";
+//        Pattern p = Pattern.compile(regex);
+//        Matcher m = p.matcher(binding.userName.getEditText().getText());
 
         if (binding.userName.getEditText().getText().toString().isEmpty()) {
-            binding.userName.setError("uer name cant be empty");
+            binding.userName.setError("Required *");
             return false;
-        } else if (m.matches() == false) {
-            binding.userName.setError("user name  must contain 5 to 10 letter");
+//        } else if (m.matches() == false) {
+//            binding.userName.setError("user name  must contain 5 to 10 letter");
+//
+//
+//            return false;
 
-
-            return false;
-
-        } else {
+        }
+        else {
             binding.userName.setError("");
 
             return true;
@@ -283,7 +285,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
 
             @Override
             public void afterTextChanged(Editable s) {
-                binding.userName.setError("");
+                binding.confirmPassword.setError("");
             }
         });
 
@@ -291,4 +293,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
     }
 
 
+    public void openLogin(View view) {
+        Intent intent=new Intent(RegisterActivity.this, LoginActivity.class);
+         startActivity(intent);
+    }
 }

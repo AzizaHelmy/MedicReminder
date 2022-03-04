@@ -4,7 +4,7 @@
 
     <item
 
-        android:id="@+id/logout"
+        android:id="@+id/logOut"
         android:icon="@drawable/logout_icon"
         android:title="@string/logout"
         />

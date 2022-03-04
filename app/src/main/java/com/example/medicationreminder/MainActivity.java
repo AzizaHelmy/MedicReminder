@@ -33,9 +33,11 @@ import com.example.medicationreminder.Network.FirebaseConnection;
 import com.example.medicationreminder.databinding.ActivityMainBinding;
 import com.example.medicationreminder.db.ConcereteLocalSource;
 import com.example.medicationreminder.db.LocalSource;
+import com.example.medicationreminder.healthTakers.addTaker.view.AddHealthTakerFragment;
 import com.example.medicationreminder.login.view.LoginActivity;
 import com.example.medicationreminder.model.Repository;
 import com.example.medicationreminder.register.view.RegisterActivity;
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseUser;
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity  {
     ImageView userImage;
     String saveUserImage;
     Repository repository;
+    BadgeDrawable badgeDrawable;
     private ActivityMainBinding binding;
 
     @Override
@@ -65,6 +68,7 @@ public class MainActivity extends AppCompatActivity  {
         ////////////////////////////////////
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
+
         NavigationUI.setupWithNavController(binding.bottomNavView, navController);
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
@@ -76,7 +80,6 @@ public class MainActivity extends AppCompatActivity  {
                 }
             }
         });
-
 //////////////////////////////////////////////
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
@@ -93,7 +96,9 @@ public class MainActivity extends AppCompatActivity  {
         });
 /////////////////////////////////////
 
-
+//        badgeDrawable=bottomNavigationView.getOrCreateBadge(R.id.healthTakersFragment);
+//        badgeDrawable.setVisible(true);
+//        badgeDrawable.setNumber(AddHealthTakerFragment.REQUEST_COUNTER);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph())
                 .setOpenableLayout(binding.drawerLayout)
                 .build();
@@ -101,15 +106,19 @@ public class MainActivity extends AppCompatActivity  {
         NavigationUI.setupWithNavController(binding.navigationView, navController);
         View headerView = binding.navigationView.getHeaderView(0);
         headerContent(headerView);
-        binding. navigationView.getMenu().findItem(R.id.logout).setOnMenuItemClickListener(menuItem -> {
+        binding. navigationView.getMenu().findItem(R.id.logOut).setOnMenuItemClickListener(menuItem -> {
             repository.signOut();
             editor.clear();
             editor.commit();
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//            startActivity(intent);
             finish();
             return  true;
         });
+//        binding. navigationView.getMenu().findItem(R.id.dependent).setOnMenuItemClickListener(menuItem -> {
+//           // Navigation.findNavController(view).navigate(R.id.);
+//            return  true;
+      //  });
 
 
     }

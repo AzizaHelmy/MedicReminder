@@ -27,13 +27,14 @@ import com.example.medicationreminder.medications.view.adapter.MedicsAdapter;
 import com.example.medicationreminder.model.Medication;
 import com.example.medicationreminder.model.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
 public class PatientMedicsListFragment extends Fragment implements MedicsOnClick, MedicsInterface {
     FragmentPatientMedicsListBinding binding;
     PatientMedicsAdapter adapterMedics;
-    List<Medication> list;
+    List<Medication> list=new ArrayList<>();
     MedicsPresenter medicsPresenter;
     ImageView empty;
 

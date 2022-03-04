@@ -102,25 +102,35 @@ public class displayMedicineFragment extends Fragment implements DisplayMedicati
     public void displayData() {
         Bundle args = getArguments();
         if (args != null) {
-             medication = (Medication) args.getSerializable("medic");
+            medication = (Medication) args.getSerializable("medic");
             binding.medicineTxt.setText(medication.getMedicine_Name());
             binding.strengthTxt.setText(medication.getStrength());
-          binding.duration.setText(medication.getDuration());
+            binding.duration.setText(medication.getDuration());
             binding.medicineIcon.setId(medication.getIcon());
-            binding.drugAmount.setText(medication.getDrugAmount()+" have");
-            binding.leftdrug.setText(medication.getLeftDrug()+" Left");
+            binding.drugAmount.setText(medication.getDrugAmount() + " have");
+            binding.leftdrug.setText(medication.getLeftDrug() + " Left");
 //         binding.number1.setText(medication.getNoOfDose()[0]);
 //         binding.number2.setText(medication.getNoOfDose()[1]);
+//
 //            binding.number2.setText(medication.getNoOfDose()[2]);
-//            binding.timer1.setText(medication.getDrugs()[0]);
+//            if (medication.getDrugs().length == 1) {
+//                binding.timer1.setText(medication.getDrugs()[0]);
+//            } else if (medication.getDrugs().length == 2) {
+//                binding.timer1.setText(medication.getDrugs()[0]);
+//            }
+//
 //            binding.timer2.setText(medication.getDrugs()[1]);
-//            binding.timer3.setText(medication.getDrugs()[2]);
-            binding.medicineIcon.setImageResource(medication.getIcon());
-binding.instructions.setText(medication.getInstructions());
-        }
+//        } else if (medication.getDrugs().length == 3) {
+            //      binding.timer1.setText(medication.getDrugs()[0]);
 
+//        binding.timer2.setText(medication.getDrugs()[1]);
+//        binding.timer3.setText(medication.getDrugs()[2]);}
+
+            binding.medicineIcon.setImageResource(medication.getIcon());
+            binding.instructions.setText(medication.getInstructions());
+        }
+    }
 
     }
 
 
-}

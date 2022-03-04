@@ -290,6 +290,7 @@ public class FirebaseConnection implements FirebaseConnectionInterface {
     //==============================================================
     @Override
     public void singOut() {
+
         mAuth.signOut();
     }
 
